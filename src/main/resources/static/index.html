@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header.html :: header}">
+    <title>Hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<div class="container">
+    <div th:replace="~{fragments/nav.html :: navFrament}" />
+</div>
+
+<div class="img-container">
+    <div class="img-wrapper">
+        <img src="/img/test5.jpeg" class="img-fluid">
+        <p class="img-explain">그림 설명</p>
+    </div>
+</div>
+
+<script src="/js/bootstrap.js"></script>
+<script src="/js/bootstrap.bundle.js"></script>
+<script src="/js/bootstrap.esm.js"></script>
+</body>
+</html>

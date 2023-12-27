@@ -2,8 +2,9 @@ package com.choimyeongheon.portfolio.domain.home.service;
 
 import com.choimyeongheon.portfolio.domain.home.domain.HomeImage;
 import com.choimyeongheon.portfolio.domain.home.repository.HomeImageRepository;
+import com.choimyeongheon.portfolio.web.dto.HomeImageMapper;
+import com.choimyeongheon.portfolio.web.dto.HomeImageRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,14 +14,17 @@ import org.springframework.transaction.annotation.Transactional;
 public class HomeImageService {
 
     private final HomeImageRepository homeImageRepository;
-
-    @Value("${portfolio.upload.path}")
-    private String uploadPath;
+    private final HomeImageMapper homeImageMapper;
 
     @Transactional
-    public Long createHomeImage(HomeImage homeImage) {
-        HomeImage savedImage = homeImageRepository.save(homeImage);
+    public Long createHomeImage(HomeImageRequest request) {
+        HomeImage savedImage = homeImageRepository.save(homeImageMapper.toEntity(request));
         return savedImage.getId();
+    }
+
+    public HomeImage findById(Long id) {
+        return homeImageRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException());
     }
 
 }

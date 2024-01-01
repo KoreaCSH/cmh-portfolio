@@ -650,23 +650,52 @@ progress {
 
 .admin-wrapper {
   position: absolute;
-  width: auto;
+  width: 70%;
   height: 60vh;
   text-align: center;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   display: flex;
+  border: 2px solid black;
 }
 
 .left-nav {
   /*flex: auto;*/
-  width: 300px;
+  width: 20%;
+  border-right: 2px solid black;
+}
+
+.home-image-wrapper {
+  /*flex: auto;*/
+  width: 80%;
+  /*padding: 3%;*/
+  /*overflow: auto;*/
 }
 
 .home-image-table {
-  /*flex: auto;*/
-  width: 1200px;
+  padding: 3%;
+  overflow: auto;
+  height: 90%;
+}
+
+.home-image-button-wrapper {
+  display: flex;
+  justify-content: right;
+  height: 10%;
+  border-top: 2px solid black;
+  text-align: right;
+  padding-right: 3%;
+}
+
+.home-image-save {
+  /*display: inline-block;*/
+  margin: auto 1.5% auto 0;
+}
+
+.home-image-delete {
+  /*display: inline-block;*/
+  margin: auto 0;
 }
 
 .lead {
@@ -3971,9 +4000,10 @@ textarea.form-control-lg {
 
 .nav-pills {
   --bs-nav-pills-border-radius: var(--bs-border-radius);
-  --bs-nav-pills-link-active-color: #fff;
+  --bs-nav-pills-link-active-color: #0f2f44;
   /*--bs-nav-pills-link-active-bg: #2c3e50;*/
-  --bs-nav-pills-link-active-bg: rgba(78, 135, 208, 0.7);
+  /*--bs-nav-pills-link-active-bg: rgba(78, 135, 208, 0.7);*/
+  --bs-nav-pills-link-active-bg: #d6eaf8;
 }
 .nav-pills .nav-link {
   border-radius: var(--bs-nav-pills-border-radius);

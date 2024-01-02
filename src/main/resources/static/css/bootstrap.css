@@ -643,7 +643,6 @@ progress {
   /*align-items: center;*/
   /*height: 90vh;*/
   /*width: 70%;*/
-  border: 1px solid black;
   min-height: 100vh;
   position: relative;
 }
@@ -696,6 +695,43 @@ progress {
 .home-image-delete {
   /*display: inline-block;*/
   margin: auto 0;
+}
+
+.home-image-save-container {
+  min-height: 100vh;
+  position: relative;
+}
+
+.home-image-save-wrapper {
+  position: absolute;
+  width: 50%;
+  height: 60vh;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid black;
+  display: flex;
+}
+
+.home-image-saved {
+  width: 50%;
+  border-right: 2px solid black;
+}
+
+.home-image-save-form {
+  width: 50%;
+}
+
+.home-image-save-input {
+  /*height: 90%;*/
+}
+
+.home-image-save-btn {
+  /*height: 10%;*/
+}
+
+.form-group {
+  padding: 3%;
 }
 
 .lead {

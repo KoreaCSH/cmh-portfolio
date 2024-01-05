@@ -21,13 +21,13 @@
           <p>리스트</p>
       </div>
       <div class="home-image-save-form">
-        <form class="home-image-form">
+        <form th:action="@{/admin/home/save}" th:object="${request}" method="post" enctype="multipart/form-data" class="home-image-form">
           <div class="home-image-save-input">
             <div class="form-group">
               <label for="formFile" class="form-label mt-4">홈 이미지로 저장할 파일</label>
-              <input class="form-control" type="file" id="formFile">
+              <input class="form-control" type="file" id="formFile" accept="image/*" th:field="*{homeImage}">
               <label class="form-label mt-4">Title</label>
-              <input type="text" class="form-control" placeholder="Title">
+              <input type="text" th:field="*{title}" class="form-control" placeholder="Title">
             </div>
           </div>
           <div class="home-image-save-btn-wrapper">

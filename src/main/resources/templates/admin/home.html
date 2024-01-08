@@ -40,7 +40,8 @@
             <tbody>
               <tr class="table-light" th:each="homeImage : ${homeImages}">
                 <th scope="row" ><input class="form-check-input" type="checkbox" value=""></th>
-                <td th:text="${homeImage.id}">Column content</td>
+<!--                <td th:text="${homeImage.id}">Column content</td>-->
+                <td><img th:src="'/admin/home/display?fileName='+${homeImage.fileName}" class="img-fluid" style="width: 50px"></td>
                 <td th:text="${homeImage.title}">Column content</td>
               </tr>
             </tbody>

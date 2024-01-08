@@ -2,12 +2,19 @@ package com.choimyeongheon.portfolio.web.home.dto;
 
 import com.choimyeongheon.portfolio.domain.home.domain.HomeImage;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.UUID;
 
 @Component
 public class HomeImageMapper {
@@ -17,7 +24,7 @@ public class HomeImageMapper {
 
     public HomeImage toEntity(HomeImageRequest request) {
         String originName = request.getHomeImage().getOriginalFilename();
-        String fileName = originName.substring(originName.lastIndexOf("\\") + 1);
+        String fileName = UUID.randomUUID() + "_" + originName.substring(originName.lastIndexOf("\\") + 1);
         String path = uploadPath + File.separator + fileName;
         Path savePath = Paths.get(path);
         try {
@@ -32,6 +39,19 @@ public class HomeImageMapper {
                 .path(path)
                 .title(request.getTitle())
                 .build();
+    }
+
+    public ResponseEntity<Resource> toResource(String fileName) throws IOException {
+
+        // Resource 가 무엇인지
+        Resource resource = new FileSystemResource(uploadPath + File.separator + fileName);
+        Path filePath = Paths.get(uploadPath + File.separator + fileName);
+
+        // Exception 대응 추가
+        HttpHeaders header = new HttpHeaders();
+        header.add("Content-type", Files.probeContentType(filePath));
+
+        return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
     }
 
 }

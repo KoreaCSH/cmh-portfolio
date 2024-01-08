@@ -2,14 +2,21 @@ package com.choimyeongheon.portfolio.web.admin;
 
 import com.choimyeongheon.portfolio.domain.home.domain.HomeImage;
 import com.choimyeongheon.portfolio.domain.home.service.HomeImageService;
+import com.choimyeongheon.portfolio.web.home.dto.HomeImageMapper;
 import com.choimyeongheon.portfolio.web.home.dto.HomeImageRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 @Controller
@@ -17,6 +24,7 @@ import java.util.List;
 public class AdminController {
 
     private final HomeImageService homeImageService;
+    private final HomeImageMapper homeImageMapper;
 
     @GetMapping("/admin/home")
     public String admin(Model model) {
@@ -45,6 +53,12 @@ public class AdminController {
         homeImageService.createHomeImage(request);
 
         return "redirect:/admin/home";
+    }
+
+    @GetMapping("/admin/home/display")
+    public ResponseEntity<Resource> display(@RequestParam("fileName") String fileName) throws IOException {
+
+        return homeImageMapper.toResource(fileName);
     }
 
 }

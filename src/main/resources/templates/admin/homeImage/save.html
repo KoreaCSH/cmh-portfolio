@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header.html :: header}">
+  <title>Hello</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+  <div>
+    <div th:replace="~{fragments/nav.html :: navFrament}" />
+  </div>
+
+  <div class="home-image-save-container">
+    <div class="home-image-save-wrapper">
+      <div class="home-image-saved">
+          <p>리스트</p>
+      </div>
+      <div class="home-image-save-form">
+        <form th:action="@{/admin/home/save}" th:object="${request}" method="post" enctype="multipart/form-data" class="home-image-form validation-form" novalidate>
+          <div class="home-image-save-input">
+            <div class="form-group">
+              <label for="formFile" class="form-label mt-4">홈 이미지로 저장할 파일</label>
+              <input class="form-control" type="file" id="formFile" accept="image/*" th:field="*{homeImage}" required>
+              <div class="invalid-feedback">
+                Please select the home-image
+              </div>
+              <label class="form-label mt-4">Title</label>
+              <input type="text" th:field="*{title}" class="form-control" placeholder="Title" required>
+              <div class="invalid-feedback">
+                Please write the title
+              </div>
+            </div>
+          </div>
+          <div class="home-image-save-btn-wrapper">
+            <button type="submit" class="btn btn-success home-image-save-btn">저장</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-footer">ALL IMAGES AND SITE CONTENT © CHOI MYEONGHEON</div>
+
+  <script>
+    window.addEventListener('load', () => {
+      const forms = document.getElementsByClassName('validation-form');
+
+      Array.prototype.filter.call(forms, (form) => {
+        form.addEventListener('submit', function (event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  </script>
+  <script src="/js/bootstrap.js"></script>
+  <script src="/js/bootstrap.bundle.js"></script>
+  <script src="/js/bootstrap.esm.js"></script>
+</body>
+</html>

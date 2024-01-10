@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header.html :: header}">
+  <title>Hello</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <style>
+    .admin-container .admin-wrapper .left-nav .nav-pills .nav-item .nav-link.active {
+      background-color: dodgerblue; !important;
+    }
+  </style>
+</head>
+<body>
+
+<div>
+  <div th:replace="~{fragments/nav.html :: navFrament}" />
+</div>
+
+<div class="admin-container">
+  <div class="admin-wrapper">
+    <div class="left-nav">
+      <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+          <a class="nav-link active" href="/admin/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/works">Works</a>
+        </li>
+      </ul>
+    </div>
+    <div class="home-image-wrapper">
+      <form th:action="@{/admin/home/delete}" th:object="${request}" method="post" style="height: 100%">
+        <div class="home-image-table">
+          <table class="table table-hover">
+            <thead>
+            <tr class="table-dark">
+              <th></th>
+              <th scope="col">Image</th>
+              <th scope="col">Title</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="table-light" th:each="homeImage, itemStat : *{homeImageDeletionDtoList}">
+              <th><input type="checkbox" th:field="*{homeImageDeletionDtoList[__${itemStat.index}__].deleted}" class="form-check-input"></th>
+              <td><img th:src="'/admin/home/display?fileName='+${homeImage.fileName}" class="img-fluid" style="width: 50px"></td>
+              <td th:text="${homeImage.title}"></td>
+              <td style="display: none"><input type="hidden" th:field="*{homeImageDeletionDtoList[__${itemStat.index}__].id}"></td>
+              <td style="display: none"><input type="hidden" th:field="*{homeImageDeletionDtoList[__${itemStat.index}__].fileName}"></td>
+              <td style="display: none"><input type="hidden" th:field="*{homeImageDeletionDtoList[__${itemStat.index}__].title}"></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="home-image-button-wrapper">
+          <div class="home-image-save">
+            <a class="btn btn-secondary" href="/admin/home">이전</a>
+          </div>
+          <div class="home-image-delete">
+            <button type="submit" class="btn btn-danger">삭제</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="home-footer">ALL IMAGES AND SITE CONTENT © CHOI MYEONGHEON</div>
+
+<script src="/js/bootstrap.js"></script>
+<script src="/js/bootstrap.bundle.js"></script>
+<script src="/js/bootstrap.esm.js"></script>
+</body>
+</html>

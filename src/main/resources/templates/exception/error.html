@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header.html :: header}">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<div class="error-text" id="error-text" th:text="${message}"></div>
+
+<script>
+  const message = document.getElementById("error-text").innerText;
+  alert(message);
+  history.go(-1);
+</script>
+
+</body>
+</html>

@@ -14,4 +14,7 @@ public interface HomeImageRepository extends JpaRepository<HomeImage, Long> {
     @Query("delete from HomeImage h where h.id in :ids")
     void deleteAllByIds(@Param("ids") List<Long> ids);
 
+    @Query("select h from HomeImage h order by RAND() limit 1")
+    List<HomeImage> findRandomly();
+
 }

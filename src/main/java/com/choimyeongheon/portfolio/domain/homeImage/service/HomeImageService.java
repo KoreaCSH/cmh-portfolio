@@ -2,11 +2,15 @@ package com.choimyeongheon.portfolio.domain.homeImage.service;
 
 import com.choimyeongheon.portfolio.domain.homeImage.domain.HomeImage;
 import com.choimyeongheon.portfolio.domain.homeImage.repository.HomeImageRepository;
+import com.choimyeongheon.portfolio.global.exception.CustomException;
+import com.choimyeongheon.portfolio.global.exception.ErrorType;
 import com.choimyeongheon.portfolio.web.admin.homeImage.dto.HomeImageMapper;
 import com.choimyeongheon.portfolio.web.admin.homeImage.dto.HomeImageRequest;
+import com.choimyeongheon.portfolio.web.admin.homeImage.dto.HomeImageResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -24,19 +28,26 @@ public class HomeImageService {
         return savedImage.getId();
     }
 
-    // 삭제 로직 추가
-
     public HomeImage findById(Long id) {
         return homeImageRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException());
+                .orElseThrow(() -> new CustomException(ErrorType.HOME_IMAGE_NOT_FOUND));
     }
 
     public List<HomeImage> findAll() {
         return homeImageRepository.findAll();
     }
 
+    public HomeImageResponse findRandomly() {
+        HomeImage homeImage = homeImageRepository.findRandomly().get(0);
+        return homeImageMapper.toResponse(homeImage);
+    }
+
     @Transactional
     public void deleteAllByIds(List<Long> ids) {
+        if(CollectionUtils.isEmpty(ids)) {
+            throw new CustomException(ErrorType.EMPTY_DELETION_LIST);
+        }
+
         homeImageRepository.deleteAllByIds(ids);
     }
 

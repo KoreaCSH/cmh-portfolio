@@ -20,4 +20,5 @@ public class HomeImageDeletionDto {
         this.title = title;
         this.isDeleted = false;
     }
+
 }

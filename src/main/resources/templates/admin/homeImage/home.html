@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="~{fragments/header.html :: header}">
+  <title>Hello</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <style>
+    .admin-container .admin-wrapper .left-nav .nav-pills .nav-item .nav-link.active {
+      background-color: dodgerblue; !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div>
+    <div th:replace="~{fragments/nav.html :: navFrament}" />
+  </div>
+
+  <div class="admin-container">
+    <div class="admin-wrapper">
+      <div class="left-nav">
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="/admin/home-images">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/works">Works</a>
+          </li>
+        </ul>
+      </div>
+      <div class="home-image-wrapper">
+        <div class="home-image-table">
+          <table class="table table-hover">
+            <thead>
+            <tr class="table-dark">
+              <th scope="col">Image</th>
+              <th scope="col">Title</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="table-light" th:each="homeImage : ${homeImages}" data-bs-toggle="modal" data-bs-target="#homeImageUpdateModal">
+              <td><img th:src="'/admin/home-images/display?fileName='+${homeImage.fileName}" class="img-fluid" id="home-image" style="width: 4rem"></td>
+              <td th:text="${homeImage.title}"></td>
+              <td th:text="${homeImage.fileName}" style="display: none"></td>
+              <td th:text="${homeImage.id}" style="display: none"></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="home-image-button-wrapper">
+          <div class="home-image-save">
+            <a class="btn btn-success" href="/admin/home-images/save">저장</a>
+          </div>
+          <div class="home-image-delete">
+            <a class="btn btn-danger" href="/admin/home-images/delete">삭제</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="homeImageUpdateModal" tabindex="-1" aria-labelledby="homeImageUpdateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="homeImageUpdateModalLabel">New message</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form th:action="@{/admin/home-images/update}" th:object="${request}" method="post" class="validation-form" novalidate>
+        <div class="modal-body">
+            <div class="mb-3">
+              <label class="col-form-label">HomeImage:</label>
+              <img class="img-fluid" style="width: 6rem; display: block">
+            </div>
+            <div class="mb-3">
+              <label for="title" class="col-form-label">Title:</label>
+              <input type="text" th:field="*{updatedTitle}" class="form-control" id="title" required>
+              <div class="invalid-feedback">
+                Please write the title
+              </div>
+              <input type="hidden" th:field="*{id}" id="home-image-id">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+          <button type="submit" class="btn btn-primary">수정</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-footer">ALL IMAGES AND SITE CONTENT © CHOI MYEONGHEON</div>
+
+  <script src="/js/bootstrap.js"></script>
+  <script src="/js/bootstrap.bundle.js"></script>
+  <script src="/js/bootstrap.esm.js"></script>
+  <script>
+    // Modal 에 데이터 전달하는 로직
+    const homeImageUpdateModal = document.getElementById('homeImageUpdateModal');
+    homeImageUpdateModal.addEventListener('show.bs.modal', event => {
+      const tr = event.relatedTarget;
+      const title = tr.cells[1].innerHTML;
+      const fileName = tr.cells[2].innerHTML;
+      const id = tr.cells[3].innerHTML;
+
+      const modalTitle = homeImageUpdateModal.querySelector('.modal-title');
+      const modalBodyInputTitle = homeImageUpdateModal.querySelector('.modal-body #title');
+      const modalHomeImage = homeImageUpdateModal.querySelector('.modal-body img');
+      const modalBodyInputId = homeImageUpdateModal.querySelector('.modal-body #home-image-id');
+
+      modalTitle.textContent = `Information of ${title}`;
+      modalBodyInputTitle.value = title;
+      modalBodyInputId.value = id;
+      modalHomeImage.src = `/admin/home-images/display?fileName=${fileName}`;
+    })
+
+    // Modal 내 Input Validation 로직
+    window.addEventListener('load', () => {
+      const forms = document.getElementsByClassName('validation-form');
+
+      Array.prototype.filter.call(forms, (form) => {
+        form.addEventListener('submit', function (event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  </script>
+</body>
+</html>

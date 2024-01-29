@@ -620,7 +620,6 @@ progress {
 }
 
 .img-explain {
-  background-color: dodgerblue;
   text-align: center;
 }
 
@@ -682,9 +681,9 @@ progress {
   display: flex;
   justify-content: right;
   height: 10%;
-  border-top: 2px solid black;
   text-align: right;
   padding-right: 3%;
+  padding-bottom: 3%;
 }
 
 .home-image-save {
@@ -704,12 +703,18 @@ progress {
 
 .home-image-save-wrapper {
   position: absolute;
-  width: 50%;
+  width: 70%;
   height: 60vh;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   border: 2px solid black;
+  display: flex;
+  text-align: center;
+}
+
+.home-image-right-wrapper {
+  width: 80%;
   display: flex;
 }
 
@@ -719,6 +724,7 @@ progress {
 }
 
 .home-image-save-form {
+  text-align: left;
   width: 50%;
 }
 
@@ -728,15 +734,19 @@ progress {
 
 .home-image-save-input {
   height: 90%;
-  border-bottom: 2px solid black;
 }
 
 .home-image-save-btn-wrapper {
   display: flex;
   height: 10%;
   padding-right: 3%;
+  padding-bottom: 3%;
   justify-content: right;
   align-items: center;
+}
+
+.error-text {
+  display: none;
 }
 
 .form-group {
@@ -2025,7 +2035,8 @@ progress {
   --bs-table-hover-bg: rgba(var(--bs-emphasis-color-rgb), 0.075);
   width: 100%;
   margin-bottom: 1rem;
-  vertical-align: top;
+  /*vertical-align: top;*/
+  vertical-align: middle;
   border-color: var(--bs-table-border-color);
 }
 .table > :not(caption) > * > * {

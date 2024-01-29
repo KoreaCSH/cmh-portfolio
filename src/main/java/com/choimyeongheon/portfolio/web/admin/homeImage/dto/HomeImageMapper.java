@@ -42,7 +42,7 @@ public class HomeImageMapper {
     }
 
     public HomeImageResponse toResponse(HomeImage homeImage) {
-        return new HomeImageResponse(homeImage.getFileName(), homeImage.getTitle());
+        return new HomeImageResponse(homeImage.getId(), homeImage.getFileName(), homeImage.getTitle());
     }
 
     public ResponseEntity<Resource> toResource(String fileName) throws IOException {

@@ -12,8 +12,8 @@
 
   <div class="img-container">
     <div class="img-wrapper">
-      <img src="/img/test4.jpeg" class="img-fluid">
-      <p class="img-explain">그림 설명</p>
+      <img th:src="'/admin/home/display?fileName='+${response.fileName}" class="img-fluid">
+      <p class="img-explain" th:text="${response.title}"></p>
     </div>
   </div>
 

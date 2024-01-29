@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class HomeImageResponse {
 
+    private Long id;
     private String fileName;
     private String title;
 

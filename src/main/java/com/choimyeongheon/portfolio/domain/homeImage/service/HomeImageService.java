@@ -6,6 +6,8 @@ import com.choimyeongheon.portfolio.global.exception.CustomException;
 import com.choimyeongheon.portfolio.global.exception.ErrorType;
 import com.choimyeongheon.portfolio.web.admin.homeImage.dto.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -74,6 +76,10 @@ public class HomeImageService {
 
         HomeImage homeImage = homeImageRepository.findRandomly().get(0);
         return homeImageMapper.toResponse(homeImage);
+    }
+
+    public ResponseEntity<Resource> display(String fileName) {
+        return homeImageMapper.toResource(fileName);
     }
 
 }

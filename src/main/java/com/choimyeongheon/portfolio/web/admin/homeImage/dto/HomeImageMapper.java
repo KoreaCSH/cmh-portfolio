@@ -1,6 +1,8 @@
 package com.choimyeongheon.portfolio.web.admin.homeImage.dto;
 
 import com.choimyeongheon.portfolio.domain.homeImage.domain.HomeImage;
+import com.choimyeongheon.portfolio.global.exception.CustomException;
+import com.choimyeongheon.portfolio.global.exception.ErrorType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -45,7 +47,7 @@ public class HomeImageMapper {
         return new HomeImageResponse(homeImage.getId(), homeImage.getFileName(), homeImage.getTitle());
     }
 
-    public ResponseEntity<Resource> toResource(String fileName) throws IOException {
+    public ResponseEntity<Resource> toResource(String fileName) {
 
         // Resource 가 무엇인지
         Resource resource = new FileSystemResource(uploadPath + File.separator + fileName);
@@ -53,7 +55,11 @@ public class HomeImageMapper {
 
         // Exception 대응 추가
         HttpHeaders header = new HttpHeaders();
-        header.add("Content-type", Files.probeContentType(filePath));
+        try {
+            header.add("Content-type", Files.probeContentType(filePath));
+        } catch (IOException e) {
+            throw new CustomException(ErrorType.FILE_IO_EXCEPTION);
+        }
 
         return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
     }

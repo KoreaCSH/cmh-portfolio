@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -18,7 +17,6 @@ import java.util.List;
 public class HomeImageController {
 
     private final HomeImageService homeImageService;
-    private final HomeImageMapper homeImageMapper;
 
     @GetMapping("/admin/home-images")
     public String admin(Model model, HomeImageUpdateRequest request) {
@@ -55,12 +53,9 @@ public class HomeImageController {
     }
 
     @GetMapping("/admin/home-images/display")
-    public ResponseEntity<Resource> display(@RequestParam("fileName") String fileName) throws IOException {
+    public ResponseEntity<Resource> display(@RequestParam("fileName") String fileName) {
 
-        // service 객체만 Mapper 를 의존하도록 로직을 변경하자.
-        // 즉, service 객체가 Resource 반환하도록 변경하기.
-
-        return homeImageMapper.toResource(fileName);
+        return homeImageService.display(fileName);
     }
 
     @GetMapping("/admin/home-images/delete")

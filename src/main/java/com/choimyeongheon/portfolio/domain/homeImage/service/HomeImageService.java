@@ -24,7 +24,7 @@ public class HomeImageService {
     private final HomeImageMapper homeImageMapper;
 
     @Transactional
-    public Long createHomeImage(HomeImageRequest request) {
+    public Long createHomeImage(HomeImageSaveRequest request) {
         HomeImage savedImage = homeImageRepository.save(homeImageMapper.toEntity(request));
         return savedImage.getId();
     }

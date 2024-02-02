@@ -24,15 +24,15 @@ public class HomeImageMapper {
     @Value("${portfolio.upload.path}")
     private String uploadPath;
 
-    public HomeImage toEntity(HomeImageRequest request) {
+    public HomeImage toEntity(HomeImageSaveRequest request) {
         String originName = request.getHomeImage().getOriginalFilename();
         String fileName = UUID.randomUUID() + "_" + originName.substring(originName.lastIndexOf("\\") + 1);
         String path = uploadPath + File.separator + fileName;
         Path savePath = Paths.get(path);
         try {
             request.getHomeImage().transferTo(savePath);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (IOException | IllegalStateException e) {
+            throw new CustomException(ErrorType.FILE_UPLOAD_EXCEPTION);
         }
 
         return HomeImage.builder()

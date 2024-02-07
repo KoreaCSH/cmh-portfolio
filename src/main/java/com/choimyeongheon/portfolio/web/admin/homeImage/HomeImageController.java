@@ -29,24 +29,26 @@ public class HomeImageController {
     }
 
     @GetMapping("/admin/home-images/save")
-    public String saveForm(Model model, HomeImageRequest request) {
+    public String saveForm(Model model, HomeImageSaveRequest request) {
+
+        List<HomeImageResponse> homeImages = homeImageService.findAll();
+        model.addAttribute("homeImages", homeImages);
         model.addAttribute("request", request);
+
         return "admin/homeImage/save";
     }
 
     @PostMapping("/admin/home-images/save")
-    public String save(@ModelAttribute("request") @Valid HomeImageRequest request) {
+    public String save(@ModelAttribute("request") @Valid HomeImageSaveRequest request) {
 
-        // homeImageResponse 객체 생성 후 변경 - Entity 를 반환하지 않기
         homeImageService.createHomeImage(request);
-
         return "redirect:/admin/home-images";
     }
 
     @PostMapping("/admin/home-images/update")
     public String update(@ModelAttribute("request") @Valid HomeImageUpdateRequest request) {
 
-        // Post 요청으로 하는 것이 옳은가. Patch 를 해야 하지 않을까
+        // Post 요청으로 하는 것이 옳은가. Patch 요청을 해야 하지 않을까
 
         homeImageService.updateHomeImage(request);
         return "redirect:/admin/home-images";

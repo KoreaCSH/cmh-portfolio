@@ -28,7 +28,7 @@ public class HomeImageController {
         return "admin/homeImage/home";
     }
 
-    @GetMapping("/admin/home-images/save")
+    @GetMapping("/admin/home-images/save-form")
     public String saveForm(Model model, HomeImageSaveRequest request) {
 
         List<HomeImageResponse> homeImages = homeImageService.findAll();
@@ -38,29 +38,23 @@ public class HomeImageController {
         return "admin/homeImage/save";
     }
 
-    @PostMapping("/admin/home-images/save")
+    @PostMapping("/admin/home-images")
     public String save(@ModelAttribute("request") @Valid HomeImageSaveRequest request) {
+
+        // 용량 제한 관련 Exception 처리 필요
 
         homeImageService.createHomeImage(request);
         return "redirect:/admin/home-images";
     }
 
-    @PostMapping("/admin/home-images/update")
+    @PutMapping("/admin/home-images")
     public String update(@ModelAttribute("request") @Valid HomeImageUpdateRequest request) {
-
-        // Post 요청으로 하는 것이 옳은가. Patch 요청을 해야 하지 않을까
 
         homeImageService.updateHomeImage(request);
         return "redirect:/admin/home-images";
     }
 
-    @GetMapping("/admin/home-images/display")
-    public ResponseEntity<Resource> display(@RequestParam("fileName") String fileName) {
-
-        return homeImageService.display(fileName);
-    }
-
-    @GetMapping("/admin/home-images/delete")
+    @GetMapping("/admin/home-images/delete-form")
     public String deleteForm(Model model, HomeImageDeletionRequest request) {
 
         request.setHomeImageDeletionDtoList(homeImageService.findAllDeletionDto());
@@ -69,12 +63,18 @@ public class HomeImageController {
         return "admin/homeImage/delete";
     }
 
-    @PostMapping("/admin/home-images/delete")
+    @DeleteMapping("/admin/home-images")
     public String delete(@ModelAttribute("request") HomeImageDeletionRequest request) {
 
         homeImageService.deleteAllByIds(request.getHomeImageDeletionDtoList());
 
         return "redirect:/admin/home-images";
+    }
+
+    @GetMapping("/admin/home-images/display")
+    public ResponseEntity<Resource> display(@RequestParam("fileName") String fileName) {
+
+        return homeImageService.display(fileName);
     }
 
 }

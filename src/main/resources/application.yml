@@ -21,6 +21,12 @@ spring:
   thymeleaf:
     cache: false
 
+  # form 태그에서 put, delete 등의 요청이 가능하도록 설정
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
   # JPA query parameter log
 logging:
   level:

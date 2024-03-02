@@ -38,6 +38,12 @@ public class WorkService {
     }
 
     // 연도별 조회 - 최신순으로 정렬 (매개변수 WorkDate - YYYY)
+    public List<WorkResponse> findByYearOrderByWorkDateDesc(int year) {
+        return workRepository.findByYearOrderByWorkDateDesc(year)
+                .stream()
+                .map(workMapper::toResponse)
+                .collect(Collectors.toList());
+    }
 
     public Work findById(Long id) {
         return workRepository.findById(id)

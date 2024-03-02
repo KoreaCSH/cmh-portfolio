@@ -35,6 +35,8 @@ class WorkServiceTest {
     WorkSaveRequest request1;
     WorkSaveRequest request2;
     WorkSaveRequest request3;
+    WorkSaveRequest request4;
+    WorkSaveRequest request5;
 
     @Test
     void 이미지_저장_성공() {
@@ -49,7 +51,7 @@ class WorkServiceTest {
     }
 
     @Test
-    void work_최신순으로_조회_성공() {
+    void work_최신순으로_전체조회_성공() {
 
         // 2020
         Long request1Id = workService.createWork(request1);
@@ -65,6 +67,30 @@ class WorkServiceTest {
         Assertions.assertThat(worksByOrderByWorkDateDesc.get(0).getId()).isEqualTo(request3Id);
         Assertions.assertThat(worksByOrderByWorkDateDesc.get(1).getId()).isEqualTo(request1Id);
         Assertions.assertThat(worksByOrderByWorkDateDesc.get(2).getId()).isEqualTo(request2Id);
+    }
+
+    @Test
+    void work_최신순으로_특정연도_조회_성공() {
+
+        // 2020
+        Long request1Id = workService.createWork(request1);
+
+        // 2019
+        Long request2Id = workService.createWork(request2);
+
+        // 2021 - 10
+        Long request3Id = workService.createWork(request3);
+        // 2021 - 11
+        Long request4Id = workService.createWork(request4);
+        // 2021 - 01
+        Long request5Id = workService.createWork(request5);
+
+        List<WorkResponse> worksByYearOrderByWorkDateDesc = workService.findByYearOrderByWorkDateDesc(2021);
+
+        Assertions.assertThat(worksByYearOrderByWorkDateDesc.size()).isEqualTo(3);
+        Assertions.assertThat(worksByYearOrderByWorkDateDesc.get(0).getId()).isEqualTo(request4Id);
+        Assertions.assertThat(worksByYearOrderByWorkDateDesc.get(1).getId()).isEqualTo(request3Id);
+        Assertions.assertThat(worksByYearOrderByWorkDateDesc.get(2).getId()).isEqualTo(request5Id);
     }
 
     @BeforeAll
@@ -101,6 +127,9 @@ class WorkServiceTest {
                 new FileInputStream(filePath));
 
         request3 = new WorkSaveRequest(multipartFile3, title, workDate);
+
+        request4 = new WorkSaveRequest(multipartFile3, title, LocalDate.of(2021, 11, 3));
+        request5 = new WorkSaveRequest(multipartFile3, title, LocalDate.of(2021, 1, 3));
     }
 
 }

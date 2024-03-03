@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header.html :: header}">
+  <title>Hello</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<div>
+  <div th:replace="~{fragments/nav.html :: navFrament}" />
+</div>
+
+<div class="admin-container">
+  <div class="admin-wrapper">
+    <div class="left-nav">
+      <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/home-images">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/admin/works">Works</a>
+        </li>
+      </ul>
+    </div>
+    <div class="home-image-wrapper">
+      <div class="home-image-table">
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <a class="nav-link active" data-bs-toggle="tab" href="#2018" aria-selected="true" role="tab">2018</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" data-bs-toggle="tab" href="#2019" aria-selected="false" role="tab" tabindex="-1">2019</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" data-bs-toggle="tab" href="#2020" aria-selected="false" role="tab" tabindex="-1">2020</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="2018" role="tabpanel">
+          <table class="table table-hover">
+            <thead>
+            <tr class="table-dark">
+              <th scope="col">Image</th>
+              <th scope="col">Title</th>
+              <th scope="col">WorkDate</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="table-light">
+              <td>2018</td>
+              <td>2018</td>
+              <td>2018</td>
+            </tr>
+            </tbody>
+          </table>
+          </div>
+          <div class="tab-pane fade" id="2019" role="tabpanel">
+          <table class="table table-hover">
+            <thead>
+            <tr class="table-dark">
+              <th scope="col">Image</th>
+              <th scope="col">Title</th>
+              <th scope="col">WorkDate</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="table-light">
+              <td>2019</td>
+              <td>2019</td>
+              <td>2019</td>
+            </tr>
+            </tbody>
+          </table>
+          </div>
+          <div class="tab-pane fade" id="2020" role="tabpanel">
+            <table class="table table-hover">
+              <thead>
+              <tr class="table-dark">
+                <th scope="col">Image</th>
+                <th scope="col">Title</th>
+                <th scope="col">WorkDate</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="table-light">
+                <td>2020</td>
+                <td>2020</td>
+                <td>2020</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="home-image-button-wrapper">
+        <div class="home-image-save">
+          <a class="btn btn-success" href="/admin/home-images/save-form">저장</a>
+        </div>
+        <div class="home-image-delete">
+          <a class="btn btn-danger" href="/admin/home-images/delete-form">삭제</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="home-footer">ALL IMAGES AND SITE CONTENT © CHOI MYEONGHEON</div>
+
+<script src="/js/bootstrap.js"></script>
+<script src="/js/bootstrap.bundle.js"></script>
+<script src="/js/bootstrap.esm.js"></script>
+</body>
+</html>

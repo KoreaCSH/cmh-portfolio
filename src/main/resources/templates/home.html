@@ -12,7 +12,7 @@
 
   <div class="img-container">
     <div class="img-wrapper">
-      <img th:src="'/admin/home/display?fileName='+${response.fileName}" class="img-fluid">
+      <img th:src="'/admin/home-images/display?fileName='+${response.fileName}" onerror="this.src='img/test1.jpeg'" class="img-fluid">
       <p class="img-explain" th:text="${response.title}"></p>
     </div>
   </div>

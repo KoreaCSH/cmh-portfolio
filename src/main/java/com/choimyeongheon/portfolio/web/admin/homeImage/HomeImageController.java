@@ -74,6 +74,10 @@ public class HomeImageController {
     @GetMapping("/admin/home-images/display")
     public ResponseEntity<Resource> display(@RequestParam("fileName") String fileName) {
 
+        if (fileName.equals("")) {
+            return null;
+        }
+
         return homeImageService.display(fileName);
     }
 

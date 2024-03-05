@@ -71,11 +71,12 @@ public class HomeImageService {
     }
 
     public HomeImageResponse findRandomly() {
+        List<HomeImage> randomHomeImage = homeImageRepository.findRandomly();
+        if (CollectionUtils.isEmpty(randomHomeImage)) {
+            return new HomeImageResponse(0L, "", "등록한 이미지가 존재하지 않습니다.");
+        }
 
-        // 저장된 HomeImage 가 없을 때 예외 로직 구현
-
-        HomeImage homeImage = homeImageRepository.findRandomly().get(0);
-        return homeImageMapper.toResponse(homeImage);
+        return homeImageMapper.toResponse(randomHomeImage.get(0));
     }
 
     public ResponseEntity<Resource> display(String fileName) {

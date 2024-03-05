@@ -61,7 +61,7 @@ public class HomeImageMapper {
             throw new CustomException(ErrorType.FILE_IO_EXCEPTION);
         }
 
-        return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
+        return new ResponseEntity(resource, header, HttpStatus.OK);
     }
 
 }

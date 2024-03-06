@@ -21,10 +21,10 @@
     <div class="left-nav">
       <ul class="nav nav-pills flex-column">
         <li class="nav-item">
-          <a class="nav-link active" href="/admin/home-images">Home</a>
+          <a class="nav-link" href="/admin/home-images">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/admin/works">Works</a>
+          <a class="nav-link active" href="/admin/works">Works</a>
         </li>
       </ul>
     </div>
@@ -52,13 +52,16 @@
               </div>
               <div>
                 <label class="form-label mt-4">Work Date</label>
-                <input type="text" id="date-picker" class="form-control" aria-label="Search" aria-describedby="basic-addon2" th:value="|${year}-${month}|" th:field="*{workDate}" required>
+                <input type="text" id="date-picker" class="form-control" aria-label="Search" aria-describedby="basic-addon2" th:field="*{workDate}" required>
+                <div class="invalid-feedback">
+                  Please select the Work Date
+                </div>
               </div>
             </div>
           </div>
           <div class="home-image-save-btn-wrapper">
             <div class="home-image-save">
-              <a class="btn btn-secondary" href="/admin/home-images">이전</a>
+              <a class="btn btn-secondary" href="/admin/works">이전</a>
             </div>
             <div class="home-image-delete">
               <button type="submit" class="btn btn-success home-image-save-btn">저장</button>
@@ -95,9 +98,11 @@
     });
   }, false);
 
+  document.querySelector('#date-picker').value = new Date().toISOString().slice(0, 7);
+
   $(document).ready(function() {
     $('#date-picker').datepicker({
-      format: "yyyy-m",
+      format: "yyyy-mm",
       minViewMode: 1,
       language: "ko",
       autoclose: true

@@ -26,53 +26,14 @@
       <div class="home-image-table">
         <ul class="nav nav-tabs" role="tablist">
           <li class="nav-item" role="presentation">
-            <a class="nav-link active" data-bs-toggle="tab" href="#2018" aria-selected="true" role="tab">2018</a>
+            <a class="nav-link active" data-bs-toggle="tab" href="#all" aria-selected="true" role="tab">ALL</a>
           </li>
-          <li class="nav-item" role="presentation">
-            <a class="nav-link" data-bs-toggle="tab" href="#2019" aria-selected="false" role="tab" tabindex="-1">2019</a>
-          </li>
-          <li class="nav-item" role="presentation">
-            <a class="nav-link" data-bs-toggle="tab" href="#2020" aria-selected="false" role="tab" tabindex="-1">2020</a>
+          <li class="nav-item" role="presentation" th:each="workYear : ${workYears}">
+            <a class="nav-link" data-bs-toggle="tab" th:href="'#' + ${workYear.year}" th:text="${workYear.year}" aria-selected="false" role="tab" tabindex="-1">2018</a>
           </li>
         </ul>
         <div class="tab-content">
-          <div class="tab-pane fade show active" id="2018" role="tabpanel">
-          <table class="table table-hover">
-            <thead>
-            <tr class="table-dark">
-              <th scope="col">Image</th>
-              <th scope="col">Title</th>
-              <th scope="col">WorkDate</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr class="table-light">
-              <td>2018</td>
-              <td>2018</td>
-              <td>2018</td>
-            </tr>
-            </tbody>
-          </table>
-          </div>
-          <div class="tab-pane fade" id="2019" role="tabpanel">
-          <table class="table table-hover">
-            <thead>
-            <tr class="table-dark">
-              <th scope="col">Image</th>
-              <th scope="col">Title</th>
-              <th scope="col">WorkDate</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr class="table-light">
-              <td>2019</td>
-              <td>2019</td>
-              <td>2019</td>
-            </tr>
-            </tbody>
-          </table>
-          </div>
-          <div class="tab-pane fade" id="2020" role="tabpanel">
+          <div class="tab-pane fade show active" id="all" role="tabpanel">
             <table class="table table-hover">
               <thead>
               <tr class="table-dark">
@@ -82,11 +43,29 @@
               </tr>
               </thead>
               <tbody>
-              <tr class="table-light">
-                <td>2020</td>
-                <td>2020</td>
-                <td>2020</td>
+              <tr class="table-light" th:each="work : ${works}">
+                <td><img th:src="'/admin/works/display?fileName='+${work.fileName}" class="img-fluid" style="width: 6rem"></td>
+                <td th:text="${work.title}"></td>
+                <td th:text="${work.workDate}"></td>
               </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="2018" role="tabpanel" th:each="workYear : ${workYears}" th:id="${workYear.year}">
+            <table class="table table-hover">
+              <thead>
+                <tr class="table-dark">
+                  <th scope="col">Image</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">WorkDate</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="table-light" th:each="work : ${works}" th:if="${work.getWorkDate().getYear() == workYear.year}">
+                  <td><img th:src="'/admin/home-images/display?fileName='+${work.fileName}" class="img-fluid" style="width: 6rem"></td>
+                  <td th:text="${work.title}"></td>
+                  <td th:text="${work.workDate}"></td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -94,7 +73,7 @@
       </div>
       <div class="home-image-button-wrapper">
         <div class="home-image-save">
-          <a class="btn btn-success" href="/admin/home-images/save-form">저장</a>
+          <a class="btn btn-success" href="/admin/works/save-form">저장</a>
         </div>
         <div class="home-image-delete">
           <a class="btn btn-danger" href="/admin/home-images/delete-form">삭제</a>

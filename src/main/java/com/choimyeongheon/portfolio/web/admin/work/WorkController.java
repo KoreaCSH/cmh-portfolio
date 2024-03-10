@@ -1,6 +1,8 @@
 package com.choimyeongheon.portfolio.web.admin.work;
 
+import com.choimyeongheon.portfolio.domain.work.domain.WorkYear;
 import com.choimyeongheon.portfolio.domain.work.service.WorkService;
+import com.choimyeongheon.portfolio.domain.work.service.WorkYearService;
 import com.choimyeongheon.portfolio.web.admin.work.dto.WorkResponse;
 import com.choimyeongheon.portfolio.web.admin.work.dto.WorkSaveRequest;
 import jakarta.validation.Valid;
@@ -14,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -22,16 +23,14 @@ import java.util.List;
 public class WorkController {
 
     private final WorkService workService;
+    private final WorkYearService workYearService;
 
     @GetMapping("/admin/works")
     public String works(Model model) {
-        List<WorkResponse> works2018 = workService.findByYearOrderByWorkDateDesc(2018);
-        List<WorkResponse> works2019 = workService.findByYearOrderByWorkDateDesc(2019);
-        List<WorkResponse> works2020 = workService.findByYearOrderByWorkDateDesc(2020);
-
-        model.addAttribute("works2018", works2018);
-        model.addAttribute("works2019", works2019);
-        model.addAttribute("works2020", works2020);
+        List<WorkResponse> works = workService.findAllByOrderByWorkDateDesc();
+        List<WorkYear> workYears = workYearService.findAll();
+        model.addAttribute("works", works);
+        model.addAttribute("workYears", workYears);
 
         return "admin/work/works";
     }

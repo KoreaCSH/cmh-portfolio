@@ -28,8 +28,13 @@
           <li class="nav-item" role="presentation">
             <a class="nav-link active" data-bs-toggle="tab" href="#all" aria-selected="true" role="tab">ALL</a>
           </li>
-          <li class="nav-item" role="presentation" th:each="workYear : ${workYears}">
-            <a class="nav-link" data-bs-toggle="tab" th:href="'#' + ${workYear.year}" th:text="${workYear.year}" aria-selected="false" role="tab" tabindex="-1">2018</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Years</a>
+            <ul class="dropdown-menu">
+              <li role="presentation" th:each="workYear : ${workYears}" style="text-align: center">
+                <a class="dropdown-item" data-bs-toggle="tab" th:href="'#' + ${workYear.year}" th:text="${workYear.year}" aria-selected="false" role="tab" tabindex="-1">2018</a>
+              </li>
+            </ul>
           </li>
         </ul>
         <div class="tab-content">
@@ -85,8 +90,6 @@
 
 <div class="home-footer">ALL IMAGES AND SITE CONTENT © CHOI MYEONGHEON</div>
 
-<script src="/js/bootstrap.js"></script>
 <script src="/js/bootstrap.bundle.js"></script>
-<script src="/js/bootstrap.esm.js"></script>
 </body>
 </html>

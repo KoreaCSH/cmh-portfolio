@@ -4,12 +4,16 @@ import com.choimyeongheon.portfolio.domain.work.domain.Work;
 import com.choimyeongheon.portfolio.domain.work.repository.WorkRepository;
 import com.choimyeongheon.portfolio.global.exception.CustomException;
 import com.choimyeongheon.portfolio.global.exception.ErrorType;
-import com.choimyeongheon.portfolio.web.admin.works.dto.WorkMapper;
-import com.choimyeongheon.portfolio.web.admin.works.dto.WorkResponse;
-import com.choimyeongheon.portfolio.web.admin.works.dto.WorkSaveRequest;
+import com.choimyeongheon.portfolio.web.admin.work.dto.WorkDeleteDto;
+import com.choimyeongheon.portfolio.web.admin.work.dto.WorkMapper;
+import com.choimyeongheon.portfolio.web.admin.work.dto.WorkResponse;
+import com.choimyeongheon.portfolio.web.admin.work.dto.WorkSaveRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,9 +49,39 @@ public class WorkService {
                 .collect(Collectors.toList());
     }
 
+    // 수정 - title, workDate 변경 가능
+
+    // 삭제 - 일괄 삭제 가능
+    public List<WorkDeleteDto> findAllDeleteDto() {
+        return workRepository.findAllByOrderByWorkDateDesc()
+                        .stream()
+                        .map(work -> new WorkDeleteDto(work.getId(), work.getFileName(), work.getTitle(), work.getWorkDate()))
+                        .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void deleteAllByIds(List<WorkDeleteDto> workDeleteDtoList) {
+
+        List<Long> deletedWorkIdList = workDeleteDtoList
+                                                    .stream()
+                                                    .filter(WorkDeleteDto::getIsDeleted)
+                                                    .map(WorkDeleteDto::getId)
+                                                    .collect(Collectors.toList());
+
+        if (CollectionUtils.isEmpty(deletedWorkIdList)) {
+            throw new CustomException(ErrorType.EMPTY_DELETION_LIST);
+        }
+
+        workRepository.deleteAllByIds(deletedWorkIdList);
+    }
+
     public Work findById(Long id) {
         return workRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorType.WORK_NOT_FOUND));
+    }
+
+    public ResponseEntity<Resource> display(String fileName) {
+        return workMapper.toResource(fileName);
     }
 
 }

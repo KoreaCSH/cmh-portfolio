@@ -40,7 +40,7 @@ public class HomeImageService {
 
         List<Long> deletedHomeImageIdList = deletedHomeImageList
                                                 .stream()
-                                                .filter(HomeImageDeletionDto::isDeleted)
+                                                .filter(HomeImageDeletionDto::getIsDeleted)
                                                 .map(HomeImageDeletionDto::getId)
                                                 .collect(Collectors.toList());
 

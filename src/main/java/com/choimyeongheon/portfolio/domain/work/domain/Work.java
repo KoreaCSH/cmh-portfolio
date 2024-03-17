@@ -27,6 +27,7 @@ public class Work extends BaseEntity {
     // 이미지 파일의 정보
     private String title;
 
+    @Temporal(TemporalType.DATE)
     private LocalDate workDate;
 
     @Builder
@@ -34,6 +35,11 @@ public class Work extends BaseEntity {
         this.originName = originName;
         this.fileName = fileName;
         this.path = path;
+        this.title = title;
+        this.workDate = workDate;
+    }
+
+    public void updateTitleAndWorkDate(String title, LocalDate workDate) {
         this.title = title;
         this.workDate = workDate;
     }

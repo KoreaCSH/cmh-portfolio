@@ -4,10 +4,7 @@ import com.choimyeongheon.portfolio.domain.work.domain.Work;
 import com.choimyeongheon.portfolio.domain.work.repository.WorkRepository;
 import com.choimyeongheon.portfolio.global.exception.CustomException;
 import com.choimyeongheon.portfolio.global.exception.ErrorType;
-import com.choimyeongheon.portfolio.web.admin.work.dto.WorkDeleteDto;
-import com.choimyeongheon.portfolio.web.admin.work.dto.WorkMapper;
-import com.choimyeongheon.portfolio.web.admin.work.dto.WorkResponse;
-import com.choimyeongheon.portfolio.web.admin.work.dto.WorkSaveRequest;
+import com.choimyeongheon.portfolio.web.admin.work.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
@@ -50,6 +47,13 @@ public class WorkService {
     }
 
     // 수정 - title, workDate 변경 가능
+    @Transactional
+    public void update(WorkUpdateRequest request) {
+        Work findWork = workRepository.findById(request.getId())
+                                      .orElseThrow(() -> new CustomException(ErrorType.IMAGE_NOT_FOUND));
+
+        findWork.updateTitleAndWorkDate(request.getUpdatedTitle(), workMapper.stringToLocalDate(request.getUpdatedWorkDate()));
+    }
 
     // 삭제 - 일괄 삭제 가능
     public List<WorkDeleteDto> findAllDeleteDto() {

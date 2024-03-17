@@ -6,6 +6,7 @@ import com.choimyeongheon.portfolio.domain.work.service.WorkYearService;
 import com.choimyeongheon.portfolio.web.admin.work.dto.WorkDeleteRequest;
 import com.choimyeongheon.portfolio.web.admin.work.dto.WorkResponse;
 import com.choimyeongheon.portfolio.web.admin.work.dto.WorkSaveRequest;
+import com.choimyeongheon.portfolio.web.admin.work.dto.WorkUpdateRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
@@ -24,11 +25,12 @@ public class WorkController {
     private final WorkYearService workYearService;
 
     @GetMapping("/admin/works")
-    public String works(Model model) {
+    public String works(Model model, WorkUpdateRequest request) {
         List<WorkResponse> works = workService.findAllByOrderByWorkDateDesc();
         List<WorkYear> workYears = workYearService.findAll();
         model.addAttribute("works", works);
         model.addAttribute("workYears", workYears);
+        model.addAttribute("request", request);
 
         return "admin/work/works";
     }
@@ -42,6 +44,12 @@ public class WorkController {
     @PostMapping("/admin/works")
     public String save(@ModelAttribute("request") @Valid WorkSaveRequest request) {
         workService.createWork(request);
+        return "redirect:/admin/works";
+    }
+
+    @PutMapping("/admin/works")
+    public String update(@ModelAttribute("request") @Valid WorkUpdateRequest request) {
+        workService.update(request);
         return "redirect:/admin/works";
     }
 

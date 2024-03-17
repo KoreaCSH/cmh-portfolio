@@ -37,10 +37,7 @@ public class WorkMapper {
         }
 
         // YYYY-MM String 을 LocalDate 로 변환. DD는 01로 고정
-        String[] yearAndMonth = request.getWorkDate().split("-");
-        int year = Integer.parseInt(yearAndMonth[0]);
-        int month = Integer.parseInt(yearAndMonth[1]);
-        LocalDate workDate = LocalDate.of(year, month, 1);
+        LocalDate workDate = stringToLocalDate(request.getWorkDate());
 
         return Work.builder()
                 .workDate(workDate)
@@ -70,6 +67,13 @@ public class WorkMapper {
         }
 
         return new ResponseEntity(resource, header, HttpStatus.OK);
+    }
+
+    public LocalDate stringToLocalDate(String strWorkDate) {
+        String[] yearAndMonth = strWorkDate.split("-");
+        int year = Integer.parseInt(yearAndMonth[0]);
+        int month = Integer.parseInt(yearAndMonth[1]);
+        return LocalDate.of(year, month, 1);
     }
 
 }

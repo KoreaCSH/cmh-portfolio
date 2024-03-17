@@ -171,9 +171,27 @@
 
     modalTitle.textContent = `Information of ${title}`;
     modalBodyInputTitle.value = title;
-    modalBodyWorkDate.value = workDate;
+    modalBodyWorkDate.value = workDate.slice(0, 7);
     modalBodyInputId.value = id;
     modalHomeImage.src = `/admin/works/display?fileName=${fileName}`;
+
+    const parseWorkDate = workDate.split('-');
+    const workYear = +parseWorkDate[0];
+    const workMonth = +parseWorkDate[1];
+
+    $(workUpdateModal).ready(function() {
+      $(modalBodyWorkDate).datepicker({
+        format: "yyyy-mm",
+        minViewMode: 1,
+        language: "ko",
+        autoclose: true
+      }).datepicker("setDate", new Date(workYear, workMonth-1));
+
+      $('#get-history').on('click', function() {
+        const dateArr = $('#date-picker').val().split('-');
+        location.href = '/history?year=' + dateArr[0] + '&month=' + dateArr[1];
+      })
+    })
   })
 
   // Modal 내 Input Validation 로직
@@ -206,22 +224,6 @@
       }, false);
     });
   }, false);
-
-  document.querySelector('#date-picker').value = new Date().toISOString().slice(0, 7);
-
-  $(document).ready(function() {
-    $('#date-picker').datepicker({
-      format: "yyyy-mm",
-      minViewMode: 1,
-      language: "ko",
-      autoclose: true
-    })
-
-    $('#get-history').on('click', function() {
-      const dateArr = $('#date-picker').val().split('-')
-      location.href = '/history?year=' + dateArr[0] + '&month=' + dateArr[1]
-    })
-  })
 </script>
 </body>
 </html>

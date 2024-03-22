@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>CHOIMYEONGHEON</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+<body>
+
+<div class="container" id="container">
+  <div class="form-container">
+    <form action="#">
+      <div class="sign-in-header">
+        <h1>Sign in</h1>
+      </div>
+      <div class="sign-in-input">
+        <input type="ID" placeholder="ID" />
+        <input type="password" placeholder="Password" />
+      </div>
+      <div class="sign-in-btn">
+        <div class="home-btn">
+          <a th:href="@{/home}">HOME</a>
+        </div>
+        <div class="submit-btn">
+          <button type="submit">Sign In</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="home-footer">ALL IMAGES AND SITE CONTENT © CHOI MYEONGHEON</div>
+
+<script src="/js/bootstrap.bundle.js"></script>
+</body>
+</html>

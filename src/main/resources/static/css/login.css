@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #f6f5f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+    height: 90vh;
+}
+
+h1 {
+    font-weight: bold;
+    margin: 0;
+}
+
+h2 {
+    text-align: center;
+}
+
+span {
+    font-size: 12px;
+}
+
+a {
+    display: inline-block;
+    border-radius: 20px;
+    border: 1px solid rgb(140, 140, 140);
+    background-color: rgb(140, 140, 140);
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Arial;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+    text-decoration: none;
+}
+
+button {
+    border-radius: 20px;
+    border: 1px solid #FF4B2B;
+    background-color: #FF4B2B;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+button:focus {
+    outline: none;
+}
+
+button.ghost {
+    background-color: transparent;
+    border-color: #FFFFFF;
+}
+
+input {
+    background-color: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+}
+
+.container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    overflow: hidden;
+    width: 360px;
+    max-width: 100%;
+    min-height: 300px;
+}
+
+.form-container {
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
+form {
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    text-align: center;
+}
+
+.sign-in-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 25%;
+}
+
+.sign-in-input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    width: 85%;
+}
+
+.sign-in-btn {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 25%;
+    width: 85%;
+}
+
+.home-btn {
+    display: flex;
+    width: 100%;
+}
+
+.submit-btn {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.home-footer {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    left: 50%;
+    bottom: 5px;
+    transform: translateX(-50%);
+    font-size: 12px;
+}

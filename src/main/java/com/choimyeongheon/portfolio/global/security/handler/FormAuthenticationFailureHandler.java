@@ -18,15 +18,15 @@ public class FormAuthenticationFailureHandler extends SimpleUrlAuthenticationFai
                                         AuthenticationException exception)
             throws IOException, ServletException {
 
-        String errorMessage = "Invalid UserId or Password";
+        String errorCode = "InvalidLoginRequest";
 
         if (exception instanceof BadCredentialsException) {
-            errorMessage = exception.getMessage();
+            errorCode = exception.getMessage();
         } else if (exception instanceof InsufficientAuthenticationException) {
-            errorMessage = "Invalid Secret Key";
+            errorCode = "InvalidSecretKey";
         }
 
-        setDefaultFailureUrl("/error-alert?errorMessage=" + errorMessage);
+        setDefaultFailureUrl("/security-error?errorCode=" + errorCode);
         super.onAuthenticationFailure(request, response, exception);
     }
 }

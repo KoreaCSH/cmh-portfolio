@@ -17,8 +17,8 @@ public class FormAccessDeniedHandler implements AccessDeniedHandler {
             throws IOException, ServletException {
 
         // 추후 ADMIN 이 아닌 계정이 추가되었을 때를 대비한 AccessDeniedHandler
-        String errorMessage = "NoAuthorization";
-        String deniedUrl = "/error-alert?errorMessage=" + errorMessage;
+        String errorCode = "NoAuthorization";
+        String deniedUrl = "/security-error?errorCode=" + errorCode;
         response.sendRedirect(deniedUrl);
     }
 }

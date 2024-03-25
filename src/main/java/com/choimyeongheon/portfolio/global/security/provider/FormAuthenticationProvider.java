@@ -27,7 +27,7 @@ public class FormAuthenticationProvider implements AuthenticationProvider {
         AdminAdapter adminAdapter = (AdminAdapter) userDetailsService.loadUserByUsername(userId);
 
         if (!passwordEncoder.matches(password, adminAdapter.getAdmin().getPassword())) {
-            throw new BadCredentialsException("비밀번호가 일치하지 않습니다");
+            throw new BadCredentialsException("BadCredentials");
         }
 
         UsernamePasswordAuthenticationToken authenticationToken =

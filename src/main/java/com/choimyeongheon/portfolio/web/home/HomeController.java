@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,8 +24,19 @@ public class HomeController {
     }
 
     @GetMapping("/error-alert")
-    public String error() {
+    public String error(@RequestParam(name = "errorMessage", required = false) String errorMessage, Model model) {
+
+        if (errorMessage != null) {
+            model.addAttribute("errorMessage", errorMessage);
+        }
+
         return "exception/error";
+    }
+
+    @GetMapping("/security-error")
+    public String securityError(@RequestParam(name = "errorCode") String errorCode, Model model) {
+        model.addAttribute("errorCode", errorCode);
+        return "exception/securityError";
     }
 
 }

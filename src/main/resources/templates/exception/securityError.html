@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header.html :: header}">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<div class="error-text" id="error-text" th:text="${errorCode}"></div>
+<div>
+  <a class="btn btn-secondary" href="/login/form">이전</a>
+</div>
+
+<script>
+  let errorMessage = "";
+  let directUrl = "";
+
+  const errorCode = document.getElementById("error-text").innerText;
+  if(errorCode === "BadCredentials") {
+    errorMessage = "비밀번호가 일치하지 않습니다.";
+    directUrl = "/login/form";
+  }
+  else if(errorCode === "InvalidLoginRequest") {
+    errorMessage = "아이디와 비밀번호를 확인해주세요.";
+    directUrl = "/login/form";
+  }
+  else if(errorCode === "NoAuthorization") {
+    errorMessage = "권한이 없습니다.";
+    directUrl = "/home";
+  }
+
+  alert(errorMessage);
+  location.replace(directUrl);
+</script>
+
+</body>
+</html>

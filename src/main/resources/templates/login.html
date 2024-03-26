@@ -10,13 +10,14 @@
 
 <div class="container" id="container">
   <div class="form-container">
-    <form action="#">
+    <form th:action="@{/login}" method="post">
       <div class="sign-in-header">
         <h1>Sign in</h1>
       </div>
       <div class="sign-in-input">
-        <input type="ID" placeholder="ID" />
-        <input type="password" placeholder="Password" />
+        <input type="ID" placeholder="ID" name="userId"/>
+        <input type="password" placeholder="Password" name="password"/>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value = "${_csrf.token}" />
       </div>
       <div class="sign-in-btn">
         <div class="home-btn">

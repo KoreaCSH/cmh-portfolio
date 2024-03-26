@@ -24,6 +24,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -36,7 +37,9 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf(csrf -> csrf.disable())
+                .csrf(csrf -> csrf.csrfTokenRepository(new HttpSessionCsrfTokenRepository())
+                                  .ignoringRequestMatchers("/admin/sign-up"))
+
                 .formLogin(form ->
                         form.loginPage("/login/form")
                                 .defaultSuccessUrl("/home")
@@ -52,9 +55,8 @@ public class SecurityConfiguration {
                 .exceptionHandling(configurer -> configurer.accessDeniedHandler(accessDeniedHandler()))
 
                 .authorizeHttpRequests(authorize -> authorize
-                                                             .requestMatchers("/admin/sign-up").permitAll()
+                                                             .requestMatchers("/admin/sign-up", "/error").permitAll()
                                                              .requestMatchers("/admin/**").hasAnyAuthority(Role.ADMIN.getRole())
-                                                             .requestMatchers("/error").permitAll()
                                                              .anyRequest().permitAll())
 
                 .build();

@@ -51,6 +51,12 @@ public class SecurityConfiguration {
                                 .failureHandler(authenticationFailureHandler())
                                 .permitAll())
 
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/home")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID"))
+
                 .httpBasic(basic -> basic.authenticationEntryPoint(authenticationEntryPoint()))
                 .exceptionHandling(configurer -> configurer.accessDeniedHandler(accessDeniedHandler()))
 

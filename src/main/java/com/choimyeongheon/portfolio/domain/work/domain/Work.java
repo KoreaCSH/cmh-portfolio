@@ -1,5 +1,6 @@
 package com.choimyeongheon.portfolio.domain.work.domain;
 
+import com.choimyeongheon.portfolio.domain.admin.domain.Admin;
 import com.choimyeongheon.portfolio.global.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -30,18 +31,28 @@ public class Work extends BaseEntity {
     @Temporal(TemporalType.DATE)
     private LocalDate workDate;
 
+    @ManyToOne
+    @JoinColumn(name = "created_by")
+    private Admin createdBy;
+
+    @ManyToOne
+    @JoinColumn(name = "updated_by")
+    private Admin updatedBy;
+
     @Builder
-    public Work(String originName, String fileName, String path, String title, LocalDate workDate) {
+    public Work(String originName, String fileName, String path, String title, LocalDate workDate, Admin createdBy) {
         this.originName = originName;
         this.fileName = fileName;
         this.path = path;
         this.title = title;
         this.workDate = workDate;
+        this.createdBy = createdBy;
     }
 
-    public void updateTitleAndWorkDate(String title, LocalDate workDate) {
+    public void updateTitleAndWorkDate(String title, LocalDate workDate, Admin updatedBy) {
         this.title = title;
         this.workDate = workDate;
+        this.updatedBy = updatedBy;
     }
 
 }

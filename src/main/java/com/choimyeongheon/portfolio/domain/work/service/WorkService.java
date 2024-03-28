@@ -1,5 +1,6 @@
 package com.choimyeongheon.portfolio.domain.work.service;
 
+import com.choimyeongheon.portfolio.domain.admin.domain.Admin;
 import com.choimyeongheon.portfolio.domain.work.domain.Work;
 import com.choimyeongheon.portfolio.domain.work.repository.WorkRepository;
 import com.choimyeongheon.portfolio.global.exception.CustomException;
@@ -25,8 +26,8 @@ public class WorkService {
 
     // Transaction 관리
     @Transactional
-    public Long createWork(WorkSaveRequest request) {
-        Work savedWork = workRepository.save(workMapper.toEntity(request));
+    public Long createWork(WorkSaveRequest request, Admin admin) {
+        Work savedWork = workRepository.save(workMapper.toEntity(request, admin));
         return savedWork.getId();
     }
 
@@ -48,11 +49,11 @@ public class WorkService {
 
     // 수정 - title, workDate 변경 가능
     @Transactional
-    public void update(WorkUpdateRequest request) {
+    public void update(WorkUpdateRequest request, Admin admin) {
         Work findWork = workRepository.findById(request.getId())
                                       .orElseThrow(() -> new CustomException(ErrorType.IMAGE_NOT_FOUND));
 
-        findWork.updateTitleAndWorkDate(request.getUpdatedTitle(), workMapper.stringToLocalDate(request.getUpdatedWorkDate()));
+        findWork.updateTitleAndWorkDate(request.getUpdatedTitle(), workMapper.stringToLocalDate(request.getUpdatedWorkDate()), admin);
     }
 
     // 삭제 - 일괄 삭제 가능

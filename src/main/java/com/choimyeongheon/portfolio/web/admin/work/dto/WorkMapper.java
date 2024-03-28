@@ -1,5 +1,6 @@
 package com.choimyeongheon.portfolio.web.admin.work.dto;
 
+import com.choimyeongheon.portfolio.domain.admin.domain.Admin;
 import com.choimyeongheon.portfolio.domain.work.domain.Work;
 import com.choimyeongheon.portfolio.global.exception.CustomException;
 import com.choimyeongheon.portfolio.global.exception.ErrorType;
@@ -25,7 +26,7 @@ public class WorkMapper {
     @Value("${portfolio.upload.path}")
     private String uploadPath;
 
-    public Work toEntity(WorkSaveRequest request) {
+    public Work toEntity(WorkSaveRequest request, Admin admin) {
         String originName = request.getWork().getOriginalFilename();
         String fileName = UUID.randomUUID() + "_" + originName.substring(originName.lastIndexOf("\\") + 1);
         String path = uploadPath + File.separator + fileName;
@@ -45,6 +46,7 @@ public class WorkMapper {
                 .originName(originName)
                 .fileName(fileName)
                 .path(path)
+                .createdBy(admin)
                 .build();
     }
 

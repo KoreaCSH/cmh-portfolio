@@ -1,8 +1,10 @@
 package com.choimyeongheon.portfolio.web.admin.work;
 
+import com.choimyeongheon.portfolio.domain.admin.domain.Admin;
 import com.choimyeongheon.portfolio.domain.work.domain.WorkYear;
 import com.choimyeongheon.portfolio.domain.work.service.WorkService;
 import com.choimyeongheon.portfolio.domain.work.service.WorkYearService;
+import com.choimyeongheon.portfolio.global.security.service.AdminAdapter;
 import com.choimyeongheon.portfolio.web.admin.work.dto.WorkDeleteRequest;
 import com.choimyeongheon.portfolio.web.admin.work.dto.WorkResponse;
 import com.choimyeongheon.portfolio.web.admin.work.dto.WorkSaveRequest;
@@ -11,6 +13,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -42,14 +45,17 @@ public class WorkController {
     }
 
     @PostMapping("/admin/works")
-    public String save(@ModelAttribute("request") @Valid WorkSaveRequest request) {
-        workService.createWork(request);
+    public String save(@ModelAttribute("request") @Valid WorkSaveRequest request,
+                       @AuthenticationPrincipal Admin admin) {
+
+        workService.createWork(request, admin);
         return "redirect:/admin/works";
     }
 
     @PutMapping("/admin/works")
-    public String update(@ModelAttribute("request") @Valid WorkUpdateRequest request) {
-        workService.update(request);
+    public String update(@ModelAttribute("request") @Valid WorkUpdateRequest request,
+                         @AuthenticationPrincipal Admin admin) {
+        workService.update(request, admin);
         return "redirect:/admin/works";
     }
 

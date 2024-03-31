@@ -1,5 +1,6 @@
 package com.choimyeongheon.portfolio.domain.homeImage.service;
 
+import com.choimyeongheon.portfolio.domain.admin.domain.Admin;
 import com.choimyeongheon.portfolio.domain.homeImage.domain.HomeImage;
 import com.choimyeongheon.portfolio.domain.homeImage.repository.HomeImageRepository;
 import com.choimyeongheon.portfolio.global.exception.CustomException;
@@ -24,15 +25,15 @@ public class HomeImageService {
     private final HomeImageMapper homeImageMapper;
 
     @Transactional
-    public Long createHomeImage(HomeImageSaveRequest request) {
-        HomeImage savedImage = homeImageRepository.save(homeImageMapper.toEntity(request));
+    public Long createHomeImage(HomeImageSaveRequest request, Admin admin) {
+        HomeImage savedImage = homeImageRepository.save(homeImageMapper.toEntity(request, admin));
         return savedImage.getId();
     }
 
     @Transactional
-    public void updateHomeImage(HomeImageUpdateRequest request) {
+    public void updateHomeImage(HomeImageUpdateRequest request, Admin admin) {
         HomeImage homeImage = findById(request.getId());
-        homeImage.updateTitle(request.getUpdatedTitle());
+        homeImage.updateTitle(request.getUpdatedTitle(), admin);
     }
 
     @Transactional
@@ -53,7 +54,7 @@ public class HomeImageService {
 
     public HomeImage findById(Long id) {
         return homeImageRepository.findById(id)
-                .orElseThrow(() -> new CustomException(ErrorType.HOME_IMAGE_NOT_FOUND));
+                .orElseThrow(() -> new CustomException(ErrorType.IMAGE_NOT_FOUND));
     }
 
     public List<HomeImageResponse> findAll() {

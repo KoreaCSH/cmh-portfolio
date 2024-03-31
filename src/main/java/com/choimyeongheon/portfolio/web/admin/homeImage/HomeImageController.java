@@ -1,11 +1,13 @@
 package com.choimyeongheon.portfolio.web.admin.homeImage;
 
+import com.choimyeongheon.portfolio.domain.admin.domain.Admin;
 import com.choimyeongheon.portfolio.domain.homeImage.service.HomeImageService;
 import com.choimyeongheon.portfolio.web.admin.homeImage.dto.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -39,18 +41,20 @@ public class HomeImageController {
     }
 
     @PostMapping("/admin/home-images")
-    public String save(@ModelAttribute("request") @Valid HomeImageSaveRequest request) {
+    public String save(@ModelAttribute("request") @Valid HomeImageSaveRequest request,
+                       @AuthenticationPrincipal Admin admin) {
 
         // 용량 제한 관련 Exception 처리 필요
 
-        homeImageService.createHomeImage(request);
+        homeImageService.createHomeImage(request, admin);
         return "redirect:/admin/home-images";
     }
 
     @PutMapping("/admin/home-images")
-    public String update(@ModelAttribute("request") @Valid HomeImageUpdateRequest request) {
+    public String update(@ModelAttribute("request") @Valid HomeImageUpdateRequest request,
+                         @AuthenticationPrincipal Admin admin) {
 
-        homeImageService.updateHomeImage(request);
+        homeImageService.updateHomeImage(request, admin);
         return "redirect:/admin/home-images";
     }
 

@@ -1,5 +1,6 @@
 package com.choimyeongheon.portfolio.web.admin.homeImage.dto;
 
+import com.choimyeongheon.portfolio.domain.admin.domain.Admin;
 import com.choimyeongheon.portfolio.domain.homeImage.domain.HomeImage;
 import com.choimyeongheon.portfolio.global.exception.CustomException;
 import com.choimyeongheon.portfolio.global.exception.ErrorType;
@@ -24,7 +25,7 @@ public class HomeImageMapper {
     @Value("${portfolio.upload.path}")
     private String uploadPath;
 
-    public HomeImage toEntity(HomeImageSaveRequest request) {
+    public HomeImage toEntity(HomeImageSaveRequest request, Admin admin) {
         String originName = request.getHomeImage().getOriginalFilename();
         String fileName = UUID.randomUUID() + "_" + originName.substring(originName.lastIndexOf("\\") + 1);
         String path = uploadPath + File.separator + fileName;
@@ -40,6 +41,7 @@ public class HomeImageMapper {
                 .fileName(fileName)
                 .path(path)
                 .title(request.getTitle())
+                .createdBy(admin)
                 .build();
     }
 

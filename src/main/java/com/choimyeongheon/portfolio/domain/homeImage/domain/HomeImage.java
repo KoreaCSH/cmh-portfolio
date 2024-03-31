@@ -1,5 +1,6 @@
 package com.choimyeongheon.portfolio.domain.homeImage.domain;
 
+import com.choimyeongheon.portfolio.domain.admin.domain.Admin;
 import com.choimyeongheon.portfolio.global.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -11,7 +12,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@DynamicUpdate
+@DynamicUpdate // JPA 스펙은 아니다. 조금 더 고려하자.
 public class HomeImage extends BaseEntity {
 
     @Id
@@ -27,16 +28,27 @@ public class HomeImage extends BaseEntity {
     // 이미지 파일의 정보
     private String title;
 
+    @ManyToOne
+    @JoinColumn(name = "created_by")
+    private Admin createdBy;
+
+    @ManyToOne
+    @JoinColumn(name = "updated_by")
+    private Admin updatedBy;
+
     @Builder
-    public HomeImage(String originName, String fileName, String path, String title) {
+    public HomeImage(String originName, String fileName, String path, String title, Admin createdBy) {
         this.originName = originName;
         this.fileName = fileName;
         this.path = path;
         this.title = title;
+        this.createdBy = createdBy;
     }
 
-    public void updateTitle(String title) {
+    public void updateTitle(String title, Admin updatedBy) {
+        // null 체크
         this.title = title;
+        this.updatedBy = updatedBy;
     }
 
 }

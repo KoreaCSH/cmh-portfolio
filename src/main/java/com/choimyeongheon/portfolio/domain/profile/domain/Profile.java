@@ -31,4 +31,10 @@ public abstract class Profile extends BaseEntity {
         this.createdBy = createdBy;
     }
 
+    public void update(Integer year, String content, Admin updatedBy) {
+        this.year = year;
+        this.content = content;
+        this.updatedBy = updatedBy;
+    }
+
 }

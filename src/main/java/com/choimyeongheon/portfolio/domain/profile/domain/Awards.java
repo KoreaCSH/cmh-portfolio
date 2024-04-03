@@ -10,15 +10,15 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class Career extends Profile {
+public class Awards extends Profile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "career_id")
+    @Column(name = "awards_id")
     private Long id;
 
     @Builder
-    public Career(Integer year, String content, String contentEn, Admin createdBy) {
+    public Awards(Integer year, String content, String contentEn, Admin createdBy) {
         super(year, content, contentEn, createdBy);
     }
 

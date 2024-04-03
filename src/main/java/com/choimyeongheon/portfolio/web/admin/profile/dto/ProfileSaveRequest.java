@@ -18,4 +18,7 @@ public class ProfileSaveRequest {
     @NotBlank(message = "내용을 입력해 주세요.")
     private String content;
 
+    @NotBlank(message = "내용을 입력해 주세요.")
+    private String contentEn;
+
 }

@@ -1,17 +1,15 @@
 package com.choimyeongheon.portfolio.web.admin.profile.dto;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
-@Setter
-public class ProfileUpdateRequest {
+public class ProfileResponse {
 
-    private Long id;
     private Integer year;
     private String content;
     private String contentEn;

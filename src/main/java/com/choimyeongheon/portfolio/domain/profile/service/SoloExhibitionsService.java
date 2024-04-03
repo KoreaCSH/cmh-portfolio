@@ -1,8 +1,8 @@
 package com.choimyeongheon.portfolio.domain.profile.service;
 
 import com.choimyeongheon.portfolio.domain.admin.domain.Admin;
-import com.choimyeongheon.portfolio.domain.profile.domain.Career;
-import com.choimyeongheon.portfolio.domain.profile.repository.CareerRepository;
+import com.choimyeongheon.portfolio.domain.profile.domain.SoloExhibitions;
+import com.choimyeongheon.portfolio.domain.profile.repository.SoloExhibitionsRepository;
 import com.choimyeongheon.portfolio.global.exception.CustomException;
 import com.choimyeongheon.portfolio.global.exception.ErrorType;
 import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileResponse;
@@ -18,47 +18,44 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class CareerService implements ProfileService {
+public class SoloExhibitionsService implements ProfileService {
 
-    private final CareerRepository careerRepository;
+    private final SoloExhibitionsRepository soloExhibitionsRepository;
 
     @Override
-    @Transactional
     public Long create(ProfileSaveRequest request, Admin admin) {
 
-        Career career = Career.builder()
-                            .year(request.getYear())
-                            .content(request.getContent())
-                            .contentEn(request.getContentEn())
-                            .createdBy(admin)
-                            .build();
+        SoloExhibitions soloExhibitions
+                = SoloExhibitions.builder()
+                    .year(request.getYear())
+                    .content(request.getContent())
+                    .contentEn(request.getContentEn())
+                    .createdBy(admin)
+                    .build();
 
-        Career savedCareer = careerRepository.save(career);
+        SoloExhibitions savedSoloExhibitions = soloExhibitionsRepository.save(soloExhibitions);
 
-        return savedCareer.getId();
+        return savedSoloExhibitions.getId();
     }
 
     @Override
-    @Transactional
     public void update(ProfileUpdateRequest request, Admin admin) {
-        Career findCareer = careerRepository.findById(request.getId())
+        SoloExhibitions findSoloExhibitions = soloExhibitionsRepository.findById(request.getId())
                 .orElseThrow(() -> new CustomException(ErrorType.PROFILE_NOT_FOUND));
 
-        findCareer.update(request.getYear(), request.getContent(), request.getContentEn(), admin);
+        findSoloExhibitions.update(request.getYear(), request.getContent(), request.getContentEn(), admin);
     }
 
     @Override
     public List<ProfileResponse> findAll() {
-        return careerRepository.findAll()
+        return soloExhibitionsRepository.findAll()
                 .stream()
-                .map(career -> new ProfileResponse(career.getYear(), career.getContent(), career.getContentEn()))
+                .map(soloExhibitions -> new ProfileResponse(soloExhibitions.getYear(), soloExhibitions.getContent(), soloExhibitions.getContentEn()))
                 .collect(Collectors.toList());
     }
 
     @Override
-    @Transactional
     public void delete() {
 
     }
-
 }

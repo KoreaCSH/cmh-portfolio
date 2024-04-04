@@ -36,6 +36,9 @@ public class HomeImage extends BaseEntity {
     @JoinColumn(name = "updated_by")
     private Admin updatedBy;
 
+    @Column(name = "del_yn", nullable = false)
+    private Character delYn;
+
     @Builder
     public HomeImage(String originName, String fileName, String path, String title, Admin createdBy) {
         this.originName = originName;
@@ -43,6 +46,7 @@ public class HomeImage extends BaseEntity {
         this.path = path;
         this.title = title;
         this.createdBy = createdBy;
+        this.delYn = 'N';
     }
 
     public void updateTitle(String title, Admin updatedBy) {

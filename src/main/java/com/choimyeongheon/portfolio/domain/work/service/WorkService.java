@@ -35,6 +35,7 @@ public class WorkService {
     public List<WorkResponse> findAllByOrderByWorkDateDesc() {
         return workRepository.findAllByOrderByWorkDateDesc()
                 .stream()
+                .filter(work -> work.getDelYn() == 'N')
                 .map(workMapper::toResponse)
                 .collect(Collectors.toList());
     }
@@ -43,6 +44,7 @@ public class WorkService {
     public List<WorkResponse> findByYearOrderByWorkDateDesc(int year) {
         return workRepository.findByYearOrderByWorkDateDesc(year)
                 .stream()
+                .filter(work -> work.getDelYn() == 'N')
                 .map(workMapper::toResponse)
                 .collect(Collectors.toList());
     }
@@ -50,8 +52,7 @@ public class WorkService {
     // 수정 - title, workDate 변경 가능
     @Transactional
     public void update(WorkUpdateRequest request, Admin admin) {
-        Work findWork = workRepository.findById(request.getId())
-                                      .orElseThrow(() -> new CustomException(ErrorType.IMAGE_NOT_FOUND));
+        Work findWork = findById(request.getId());
 
         findWork.updateTitleAndWorkDate(request.getUpdatedTitle(), workMapper.stringToLocalDate(request.getUpdatedWorkDate()), admin);
     }
@@ -60,6 +61,7 @@ public class WorkService {
     public List<WorkDeleteDto> findAllDeleteDto() {
         return workRepository.findAllByOrderByWorkDateDesc()
                         .stream()
+                        .filter(work -> work.getDelYn() == 'N')
                         .map(work -> new WorkDeleteDto(work.getId(), work.getFileName(), work.getTitle(), work.getWorkDate()))
                         .collect(Collectors.toList());
     }
@@ -81,7 +83,7 @@ public class WorkService {
     }
 
     public Work findById(Long id) {
-        return workRepository.findById(id)
+        return workRepository.findNotDeletedById(id)
                 .orElseThrow(() -> new CustomException(ErrorType.WORK_NOT_FOUND));
     }
 

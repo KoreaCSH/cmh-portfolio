@@ -39,6 +39,9 @@ public class Work extends BaseEntity {
     @JoinColumn(name = "updated_by")
     private Admin updatedBy;
 
+    @Column(name = "del_yn", nullable = false)
+    private Character delYn;
+
     @Builder
     public Work(String originName, String fileName, String path, String title, LocalDate workDate, Admin createdBy) {
         this.originName = originName;
@@ -47,6 +50,7 @@ public class Work extends BaseEntity {
         this.title = title;
         this.workDate = workDate;
         this.createdBy = createdBy;
+        this.delYn = 'N';
     }
 
     public void updateTitleAndWorkDate(String title, LocalDate workDate, Admin updatedBy) {

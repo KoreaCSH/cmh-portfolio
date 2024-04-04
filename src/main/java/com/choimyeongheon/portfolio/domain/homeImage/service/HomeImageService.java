@@ -53,13 +53,14 @@ public class HomeImageService {
     }
 
     public HomeImage findById(Long id) {
-        return homeImageRepository.findById(id)
+        return homeImageRepository.findNotDeletedById(id)
                 .orElseThrow(() -> new CustomException(ErrorType.IMAGE_NOT_FOUND));
     }
 
     public List<HomeImageResponse> findAll() {
         return homeImageRepository.findAll()
                                     .stream()
+                                    .filter(homeImage -> homeImage.getDelYn() == 'N')
                                     .map(homeImage -> homeImageMapper.toResponse(homeImage))
                                     .collect(Collectors.toList());
     }
@@ -67,6 +68,7 @@ public class HomeImageService {
     public List<HomeImageDeletionDto> findAllDeletionDto() {
         return homeImageRepository.findAll()
                         .stream()
+                        .filter(homeImage -> homeImage.getDelYn() == 'N')
                         .map(homeImage -> new HomeImageDeletionDto(homeImage.getId(), homeImage.getFileName(), homeImage.getTitle()))
                         .collect(Collectors.toList());
     }

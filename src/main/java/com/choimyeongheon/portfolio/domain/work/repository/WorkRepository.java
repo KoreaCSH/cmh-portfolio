@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface WorkRepository extends JpaRepository<Work, Long> {
 
@@ -16,7 +17,10 @@ public interface WorkRepository extends JpaRepository<Work, Long> {
     List<Work> findByYearOrderByWorkDateDesc(@Param("findYear") int findYear);
 
     @Modifying
-    @Query("DELETE FROM Work w WHERE w.id in :ids")
+    @Query("UPDATE Work w SET w.delYn = 'Y' WHERE w.id in :ids")
     void deleteAllByIds(@Param("ids") List<Long> ids);
+
+    @Query("SELECT w FROM Work w WHERE w.delYn = 'N' AND w.id = :id")
+    Optional<Work> findNotDeletedById(@Param("id") Long id);
 
 }

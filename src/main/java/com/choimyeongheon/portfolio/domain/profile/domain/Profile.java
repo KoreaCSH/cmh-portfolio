@@ -2,18 +2,22 @@ package com.choimyeongheon.portfolio.domain.profile.domain;
 
 import com.choimyeongheon.portfolio.domain.admin.domain.Admin;
 import com.choimyeongheon.portfolio.global.common.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MappedSuperclass;
+import com.choimyeongheon.portfolio.global.common.DelYn;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@MappedSuperclass
+@Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public abstract class Profile extends BaseEntity {
+public class Profile extends BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "profile_id")
+    private Long id;
 
     @Column(name = "year")
     private Integer year;
@@ -24,6 +28,10 @@ public abstract class Profile extends BaseEntity {
     @Column(name = "content_en")
     private String contentEn;
 
+    @Column(name = "profile_type")
+    @Enumerated(EnumType.STRING)
+    private ProfileType profileType;
+
     @ManyToOne
     @JoinColumn(name = "created_by")
     private Admin createdBy;
@@ -32,11 +40,18 @@ public abstract class Profile extends BaseEntity {
     @JoinColumn(name = "updated_by")
     private Admin updatedBy;
 
-    public Profile(Integer year, String content, String contentEn, Admin createdBy) {
+    @Column(name = "del_yn", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private DelYn delYn;
+
+    @Builder
+    public Profile(Integer year, String content, String contentEn, ProfileType profileType, Admin createdBy) {
         this.year = year;
         this.content = content;
         this.contentEn = contentEn;
+        this.profileType = profileType;
         this.createdBy = createdBy;
+        this.delYn = DelYn.N;
     }
 
     public void update(Integer year, String content, String contentEn, Admin updatedBy) {

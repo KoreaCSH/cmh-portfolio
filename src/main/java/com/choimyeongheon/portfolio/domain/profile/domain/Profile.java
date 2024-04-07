@@ -3,6 +3,7 @@ package com.choimyeongheon.portfolio.domain.profile.domain;
 import com.choimyeongheon.portfolio.domain.admin.domain.Admin;
 import com.choimyeongheon.portfolio.global.common.BaseEntity;
 import com.choimyeongheon.portfolio.global.common.DelYn;
+import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileUpdateRequest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -54,11 +55,20 @@ public class Profile extends BaseEntity {
         this.delYn = DelYn.N;
     }
 
-    public void update(Integer year, String content, String contentEn, Admin updatedBy) {
-        this.year = year;
-        this.content = content;
-        this.contentEn = contentEn;
+    public void update(ProfileUpdateRequest request, Admin updatedBy) {
+        this.year = request.getYear();
+        this.content = request.getContent();
+        this.contentEn = request.getContentEn();
+        this.profileType = ProfileType.of(request.getProfileType());
         this.updatedBy = updatedBy;
+    }
+
+    public void delete() {
+        this.delYn = DelYn.Y;
+    }
+
+    public boolean isNotDeleted() {
+        return this.delYn == DelYn.N;
     }
 
 }

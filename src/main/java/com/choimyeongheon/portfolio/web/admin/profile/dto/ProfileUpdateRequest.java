@@ -11,9 +11,11 @@ import lombok.Setter;
 @Setter
 public class ProfileUpdateRequest {
 
+    // Validation 필요
     private Long id;
     private Integer year;
     private String content;
     private String contentEn;
+    private String profileType;
 
 }

@@ -56,6 +56,7 @@
                 <td th:text="${profile.year}"></td>
                 <td th:text="${profile.content}"></td>
                 <td th:text="${profile.contentEn}"></td>
+                <td th:text="${profile.id}" style="display: none"></td>
               </tr>
               </tbody>
             </table>
@@ -64,16 +65,19 @@
             <table class="table table-hover">
               <thead>
               <tr class="table-dark">
+                <th scope="col">Type</th>
                 <th scope="col">Year</th>
                 <th scope="col">Content</th>
                 <th scope="col">Content(En)</th>
               </tr>
               </thead>
               <tbody>
-              <tr class="table-light" th:each="profile : ${profiles}" th:if="${profile.profileType == profileType}" data-bs-toggle="modal" data-bs-target="#workUpdateModal">
+              <tr class="table-light" th:each="profile : ${profiles}" th:if="${profile.profileType == profileType}" data-bs-toggle="modal" data-bs-target="#profileUpdateModal">
+                <td th:text="${profile.profileType}"></td>
                 <td th:text="${profile.year}"></td>
                 <td th:text="${profile.content}"></td>
                 <td th:text="${profile.contentEn}"></td>
+                <td th:text="${profile.id}" style="display: none"></td>
               </tr>
               </tbody>
             </table>
@@ -93,43 +97,52 @@
 </div>
 
 <!-- Modal -->
-<!--<div class="modal fade" id="profileUpdateModal" tabindex="-1" aria-labelledby="workUpdateModalLabel" aria-hidden="true">-->
-<!--  <div class="modal-dialog modal-dialog-centered">-->
-<!--    <div class="modal-content">-->
-<!--      <div class="modal-header">-->
-<!--        <h1 class="modal-title fs-5" id="workUpdateModalLabel">New message</h1>-->
-<!--        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--      </div>-->
-<!--      <form th:action="@{/admin/works}" th:object="${request}" th:method="put" class="validation-form" novalidate>-->
-<!--        <div class="modal-body">-->
-<!--          <div class="mb-3">-->
-<!--            <label class="col-form-label">Work:</label>-->
-<!--            <img class="img-fluid" style="width: 6rem; display: block">-->
-<!--          </div>-->
-<!--          <div class="mb-3">-->
-<!--            <label for="title" class="col-form-label">Title:</label>-->
-<!--            <input type="text" th:field="*{updatedTitle}" class="form-control" id="title" required>-->
-<!--            <div class="invalid-feedback">-->
-<!--              Please write the title-->
-<!--            </div>-->
-<!--            <input type="hidden" th:field="*{id}" id="home-image-id">-->
-<!--          </div>-->
-<!--          <div class="mb-3">-->
-<!--            <label class="col-form-label">Work Date</label>-->
-<!--            <input type="text" id="date-picker" class="form-control" aria-label="Search" aria-describedby="basic-addon2" th:field="*{updatedWorkDate}" required>-->
-<!--            <div class="invalid-feedback">-->
-<!--              Please select the Work Date-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="modal-footer">-->
-<!--          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>-->
-<!--          <button type="submit" class="btn btn-primary">수정</button>-->
-<!--        </div>-->
-<!--      </form>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
+<div class="modal fade" id="profileUpdateModal" tabindex="-1" aria-labelledby="profileUpdateModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="profileUpdateModalLabel">New message</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form th:action="@{/admin/profile}" th:object="${request}" th:method="put" class="validation-form" novalidate>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="col-form-label">ProfileType:</label>
+            <select id="profileType" class="form-select" th:field="*{profileType}">
+              <option th:each="pType : ${profileTypes}" th:value="${pType}" th:utext="${pType}"></option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="year" class="col-form-label">Year:</label>
+            <input type="number" id="year" class="form-control" placeholder="연도" min="2015" th:field="*{year}" required>
+            <div class="invalid-feedback">
+              Please write the Year
+            </div>
+            <input type="hidden" th:field="*{id}" id="profile-id">
+          </div>
+          <div class="mb-3">
+            <label class="col-form-label">Content</label>
+            <input type="text" id="content" class="form-control" th:field="*{content}" required>
+            <div class="invalid-feedback">
+              Please write the Content
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="col-form-label">Content</label>
+            <input type="text" id="content-en" class="form-control" th:field="*{contentEn}" required>
+            <div class="invalid-feedback">
+              Please write the Content(English)
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+          <button type="submit" class="btn btn-primary">수정</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 <div class="home-footer">ALL IMAGES AND SITE CONTENT © CHOI MYEONGHEON</div>
 
@@ -142,75 +155,60 @@
   }
 
   // Modal 에 데이터 전달하는 로직
-  // const workUpdateModal = document.getElementById('workUpdateModal');
-  // workUpdateModal.addEventListener('show.bs.modal', event => {
-  //   const tr = event.relatedTarget;
-  //   const title = tr.cells[1].innerHTML;
-  //   const workDate = tr.cells[2].innerHTML;
-  //   const fileName = tr.cells[3].innerHTML;
-  //   const id = tr.cells[4].innerHTML;
-  //
-  //   const modalTitle = workUpdateModal.querySelector('.modal-title');
-  //   const modalBodyInputTitle = workUpdateModal.querySelector('.modal-body #title');
-  //   const modalBodyWorkDate = workUpdateModal.querySelector('.modal-body #date-picker');
-  //   const modalHomeImage = workUpdateModal.querySelector('.modal-body img');
-  //   const modalBodyInputId = workUpdateModal.querySelector('.modal-body #home-image-id');
-  //
-  //   modalTitle.textContent = `Information of ${title}`;
-  //   modalBodyInputTitle.value = title;
-  //   modalBodyWorkDate.value = workDate.slice(0, 7);
-  //   modalBodyInputId.value = id;
-  //   modalHomeImage.src = `/admin/works/display?fileName=${fileName}`;
-  //
-  //   const parseWorkDate = workDate.split('-');
-  //   const workYear = +parseWorkDate[0];
-  //   const workMonth = +parseWorkDate[1];
-  //
-  //   $(workUpdateModal).ready(function() {
-  //     $(modalBodyWorkDate).datepicker({
-  //       format: "yyyy-mm",
-  //       minViewMode: 1,
-  //       language: "ko",
-  //       autoclose: true
-  //     }).datepicker("setDate", new Date(workYear, workMonth-1));
-  //
-  //     $('#get-history').on('click', function() {
-  //       const dateArr = $('#date-picker').val().split('-');
-  //       location.href = '/history?year=' + dateArr[0] + '&month=' + dateArr[1];
-  //     })
-  //   })
-  // })
+  const profileUpdateModal = document.getElementById('profileUpdateModal');
+  profileUpdateModal.addEventListener('show.bs.modal', event => {
+    const tr = event.relatedTarget;
+    const type = tr.cells[0].innerHTML;
+    const year = tr.cells[1].innerHTML;
+    const content = tr.cells[2].innerHTML;
+    const contentEn = tr.cells[3].innerHTML;
+    const id = tr.cells[4].innerHTML;
+
+    const modalTitle = profileUpdateModal.querySelector('.modal-title');
+    const modalBodyProfileType = profileUpdateModal.querySelector('.modal-body #profileType');
+    const modalBodyYear = profileUpdateModal.querySelector('.modal-body #year');
+    const modalBodyContent = profileUpdateModal.querySelector('.modal-body #content');
+    const modalBodyContentEn = profileUpdateModal.querySelector('.modal-body #content-en');
+    const modalBodyProfileId = profileUpdateModal.querySelector('.modal-body #profile-id');
+
+    modalTitle.textContent = `Information of Profile`;
+    modalBodyProfileType.value = type;
+    modalBodyYear.value = year;
+    modalBodyContent.value = content;
+    modalBodyContentEn.value = contentEn;
+    modalBodyProfileId.value = id;
+  });
 
   // Modal 내 Input Validation 로직
-  // window.addEventListener('load', () => {
-  //   const forms = document.getElementsByClassName('validation-form');
-  //
-  //   Array.prototype.filter.call(forms, (form) => {
-  //     form.addEventListener('submit', function (event) {
-  //       if (form.checkValidity() === false) {
-  //         event.preventDefault();
-  //         event.stopPropagation();
-  //       }
-  //
-  //       form.classList.add('was-validated');
-  //     }, false);
-  //   });
-  // }, false);
-  //
-  // window.addEventListener('load', () => {
-  //   const forms = document.getElementsByClassName('validation-form');
-  //
-  //   Array.prototype.filter.call(forms, (form) => {
-  //     form.addEventListener('submit', function (event) {
-  //       if (form.checkValidity() === false) {
-  //         event.preventDefault();
-  //         event.stopPropagation();
-  //       }
-  //
-  //       form.classList.add('was-validated');
-  //     }, false);
-  //   });
-  // }, false);
+  window.addEventListener('load', () => {
+    const forms = document.getElementsByClassName('validation-form');
+
+    Array.prototype.filter.call(forms, (form) => {
+      form.addEventListener('submit', function (event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+
+  window.addEventListener('load', () => {
+    const forms = document.getElementsByClassName('validation-form');
+
+    Array.prototype.filter.call(forms, (form) => {
+      form.addEventListener('submit', function (event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
 </script>
 </body>
 </html>

@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header.html :: header}">
+    <title>Hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<div>
+    <div th:replace="~{fragments/nav.html :: navFrament}" />
+</div>
+
+<div class="admin-container">
+    <div class="admin-wrapper">
+        <div class="left-nav">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/home-images">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/works">Works</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/admin/profile">Profile</a>
+                </li>
+            </ul>
+        </div>
+        <div class="home-image-wrapper">
+            <form th:action="@{/admin/profile}" th:object="${request}" method="#" th:method="delete" onsubmit="return deleteHandler()" style="height: 100%">
+                <div class="home-image-table">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#all" aria-selected="true" role="tab">ALL</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="profile-type" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Type</a>
+                            <ul class="dropdown-menu">
+                                <li role="presentation" th:each="profileType : ${profileTypes}" style="text-align: center">
+                                    <a class="dropdown-item" data-bs-toggle="tab" th:href="'#' + ${profileType}" th:text="${profileType}" aria-selected="false" role="tab" tabindex="-1" onclick="dropDownHandler(this)">ProfileType</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="all" role="tabpanel">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr class="table-dark">
+                                    <th></th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Year</th>
+                                    <th scope="col">Content</th>
+                                    <th scope="col">Content(En)</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="table-light" th:each="profile, itemStat : *{profileDeletionDtoList}">
+                                    <th><input type="checkbox" th:field="*{profileDeletionDtoList[__${itemStat.index}__].isDeleted}" class="form-check-input"></th>
+                                    <td th:text="${profile.profileType}"></td>
+                                    <td th:text="${profile.year}"></td>
+                                    <td th:text="${profile.content}"></td>
+                                    <td th:text="${profile.contentEn}"></td>
+                                    <td style="display: none"><input type="hidden" th:field="*{profileDeletionDtoList[__${itemStat.index}__].id}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="awards" role="tabpanel" th:each="profileType : ${profileTypes}" th:id="${profileType}">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr class="table-dark">
+                                    <th></th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Year</th>
+                                    <th scope="col">Content</th>
+                                    <th scope="col">Content(En)</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="table-light" th:each="profile, itemStat : *{profileDeletionDtoList}">
+                                    <th><input type="checkbox" th:field="*{profileDeletionDtoList[__${itemStat.index}__].isDeleted}" class="form-check-input"></th>
+                                    <td th:text="${profile.profileType}"></td>
+                                    <td th:text="${profile.year}"></td>
+                                    <td th:text="${profile.content}"></td>
+                                    <td th:text="${profile.contentEn}"></td>
+                                    <td style="display: none"><input type="hidden" th:field="*{profileDeletionDtoList[__${itemStat.index}__].id}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="home-image-button-wrapper">
+                    <div class="home-image-save">
+                        <a class="btn btn-secondary" href="/admin/profile">이전</a>
+                    </div>
+                    <div class="home-image-delete">
+                        <button type="submit" class="btn btn-danger">삭제</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="home-footer">ALL IMAGES AND SITE CONTENT © CHOI MYEONGHEON</div>
+
+<script src="/js/bootstrap.bundle.js"></script>
+<script>
+    function dropDownHandler(elem) {
+        const workYear = document.querySelector('#profile-type');
+        const selectedWorkYear = elem.textContent;
+        workYear.textContent = selectedWorkYear;
+    }
+
+    function deleteHandler() {
+        if(confirm("선택한 약력을 삭제하시겠습니까?")) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+</script>
+</body>
+</html>

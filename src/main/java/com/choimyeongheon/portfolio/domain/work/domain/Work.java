@@ -2,6 +2,7 @@ package com.choimyeongheon.portfolio.domain.work.domain;
 
 import com.choimyeongheon.portfolio.domain.admin.domain.Admin;
 import com.choimyeongheon.portfolio.global.common.BaseEntity;
+import com.choimyeongheon.portfolio.global.common.DelYn;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -40,7 +41,8 @@ public class Work extends BaseEntity {
     private Admin updatedBy;
 
     @Column(name = "del_yn", nullable = false)
-    private Character delYn;
+    @Enumerated(EnumType.STRING)
+    private DelYn delYn;
 
     @Builder
     public Work(String originName, String fileName, String path, String title, LocalDate workDate, Admin createdBy) {
@@ -50,7 +52,7 @@ public class Work extends BaseEntity {
         this.title = title;
         this.workDate = workDate;
         this.createdBy = createdBy;
-        this.delYn = 'N';
+        this.delYn = DelYn.N;
     }
 
     public void updateTitleAndWorkDate(String title, LocalDate workDate, Admin updatedBy) {

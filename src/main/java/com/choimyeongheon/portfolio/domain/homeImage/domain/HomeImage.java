@@ -2,6 +2,7 @@ package com.choimyeongheon.portfolio.domain.homeImage.domain;
 
 import com.choimyeongheon.portfolio.domain.admin.domain.Admin;
 import com.choimyeongheon.portfolio.global.common.BaseEntity;
+import com.choimyeongheon.portfolio.global.common.DelYn;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -37,7 +38,8 @@ public class HomeImage extends BaseEntity {
     private Admin updatedBy;
 
     @Column(name = "del_yn", nullable = false)
-    private Character delYn;
+    @Enumerated(EnumType.STRING)
+    private DelYn delYn;
 
     @Builder
     public HomeImage(String originName, String fileName, String path, String title, Admin createdBy) {
@@ -46,7 +48,7 @@ public class HomeImage extends BaseEntity {
         this.path = path;
         this.title = title;
         this.createdBy = createdBy;
-        this.delYn = 'N';
+        this.delYn = DelYn.N;
     }
 
     public void updateTitle(String title, Admin updatedBy) {

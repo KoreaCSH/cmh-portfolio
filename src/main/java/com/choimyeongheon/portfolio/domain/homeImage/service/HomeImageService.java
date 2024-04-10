@@ -3,6 +3,7 @@ package com.choimyeongheon.portfolio.domain.homeImage.service;
 import com.choimyeongheon.portfolio.domain.admin.domain.Admin;
 import com.choimyeongheon.portfolio.domain.homeImage.domain.HomeImage;
 import com.choimyeongheon.portfolio.domain.homeImage.repository.HomeImageRepository;
+import com.choimyeongheon.portfolio.global.common.DelYn;
 import com.choimyeongheon.portfolio.global.exception.CustomException;
 import com.choimyeongheon.portfolio.global.exception.ErrorType;
 import com.choimyeongheon.portfolio.web.admin.homeImage.dto.*;
@@ -46,7 +47,7 @@ public class HomeImageService {
                                                 .collect(Collectors.toList());
 
         if(CollectionUtils.isEmpty(deletedHomeImageIdList)) {
-            throw new CustomException(ErrorType.EMPTY_DELETION_LIST);
+            throw new CustomException(ErrorType.EMPTY_IMAGE_DELETION_LIST);
         }
 
         homeImageRepository.deleteAllByIds(deletedHomeImageIdList);
@@ -60,7 +61,7 @@ public class HomeImageService {
     public List<HomeImageResponse> findAll() {
         return homeImageRepository.findAll()
                                     .stream()
-                                    .filter(homeImage -> homeImage.getDelYn() == 'N')
+                                    .filter(homeImage -> homeImage.getDelYn() == DelYn.N)
                                     .map(homeImage -> homeImageMapper.toResponse(homeImage))
                                     .collect(Collectors.toList());
     }
@@ -68,7 +69,7 @@ public class HomeImageService {
     public List<HomeImageDeletionDto> findAllDeletionDto() {
         return homeImageRepository.findAll()
                         .stream()
-                        .filter(homeImage -> homeImage.getDelYn() == 'N')
+                        .filter(homeImage -> homeImage.getDelYn() == DelYn.N)
                         .map(homeImage -> new HomeImageDeletionDto(homeImage.getId(), homeImage.getFileName(), homeImage.getTitle()))
                         .collect(Collectors.toList());
     }

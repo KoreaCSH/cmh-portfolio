@@ -3,6 +3,7 @@ package com.choimyeongheon.portfolio.domain.work.service;
 import com.choimyeongheon.portfolio.domain.admin.domain.Admin;
 import com.choimyeongheon.portfolio.domain.work.domain.Work;
 import com.choimyeongheon.portfolio.domain.work.repository.WorkRepository;
+import com.choimyeongheon.portfolio.global.common.DelYn;
 import com.choimyeongheon.portfolio.global.exception.CustomException;
 import com.choimyeongheon.portfolio.global.exception.ErrorType;
 import com.choimyeongheon.portfolio.web.admin.work.dto.*;
@@ -35,7 +36,7 @@ public class WorkService {
     public List<WorkResponse> findAllByOrderByWorkDateDesc() {
         return workRepository.findAllByOrderByWorkDateDesc()
                 .stream()
-                .filter(work -> work.getDelYn() == 'N')
+                .filter(work -> work.getDelYn() == DelYn.N)
                 .map(workMapper::toResponse)
                 .collect(Collectors.toList());
     }
@@ -44,7 +45,7 @@ public class WorkService {
     public List<WorkResponse> findByYearOrderByWorkDateDesc(int year) {
         return workRepository.findByYearOrderByWorkDateDesc(year)
                 .stream()
-                .filter(work -> work.getDelYn() == 'N')
+                .filter(work -> work.getDelYn() == DelYn.N)
                 .map(workMapper::toResponse)
                 .collect(Collectors.toList());
     }
@@ -61,7 +62,7 @@ public class WorkService {
     public List<WorkDeleteDto> findAllDeleteDto() {
         return workRepository.findAllByOrderByWorkDateDesc()
                         .stream()
-                        .filter(work -> work.getDelYn() == 'N')
+                        .filter(work -> work.getDelYn() == DelYn.N)
                         .map(work -> new WorkDeleteDto(work.getId(), work.getFileName(), work.getTitle(), work.getWorkDate()))
                         .collect(Collectors.toList());
     }
@@ -76,7 +77,7 @@ public class WorkService {
                                                     .collect(Collectors.toList());
 
         if (CollectionUtils.isEmpty(deletedWorkIdList)) {
-            throw new CustomException(ErrorType.EMPTY_DELETION_LIST);
+            throw new CustomException(ErrorType.EMPTY_IMAGE_DELETION_LIST);
         }
 
         workRepository.deleteAllByIds(deletedWorkIdList);

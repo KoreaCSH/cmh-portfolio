@@ -2,6 +2,7 @@ package com.choimyeongheon.portfolio.web.admin.profile;
 
 import com.choimyeongheon.portfolio.domain.admin.domain.Admin;
 import com.choimyeongheon.portfolio.domain.profile.service.ProfileService;
+import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileDeletionRequest;
 import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileResponse;
 import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileSaveRequest;
 import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileUpdateRequest;
@@ -10,10 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,7 +34,7 @@ public class ProfileController {
     }
 
     @GetMapping("/save-form")
-    public String createForm(ProfileSaveRequest request, Model model) {
+    public String createForm(Model model, ProfileSaveRequest request) {
         List<String> profileTypes = profileService.findAllProfileType();
 
         model.addAttribute("profileTypes", profileTypes);
@@ -45,7 +43,7 @@ public class ProfileController {
     }
 
     @PostMapping
-    public String create(@Valid ProfileSaveRequest request,
+    public String create(@ModelAttribute("request") @Valid ProfileSaveRequest request,
                          @AuthenticationPrincipal Admin admin) {
         profileService.create(request, admin);
 
@@ -53,10 +51,26 @@ public class ProfileController {
     }
 
     @PutMapping
-    public String update(@Valid ProfileUpdateRequest request,
+    public String update(@ModelAttribute("request") @Valid ProfileUpdateRequest request,
                          @AuthenticationPrincipal Admin admin) {
         profileService.update(request, admin);
 
+        return "redirect:/admin/profile";
+    }
+
+    @GetMapping("delete-form")
+    public String deleteForm(Model model, ProfileDeletionRequest request) {
+
+        List<String> profileTypes = profileService.findAllProfileType();
+        request.setProfileDeletionDtoList(profileService.findAllDeletionDto());
+        model.addAttribute("profileTypes", profileTypes);
+        model.addAttribute("request", request);
+        return "admin/profile/delete";
+    }
+
+    @DeleteMapping
+    public String delete(@ModelAttribute("request") ProfileDeletionRequest request) {
+        profileService.deleteAllByIds(request.getProfileDeletionDtoList());
         return "redirect:/admin/profile";
     }
 

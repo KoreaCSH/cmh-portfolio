@@ -6,12 +6,14 @@ import com.choimyeongheon.portfolio.domain.profile.domain.ProfileType;
 import com.choimyeongheon.portfolio.domain.profile.repository.ProfileRepository;
 import com.choimyeongheon.portfolio.global.exception.CustomException;
 import com.choimyeongheon.portfolio.global.exception.ErrorType;
+import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileDeletionDto;
 import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileResponse;
 import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileSaveRequest;
 import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -51,6 +53,28 @@ public class ProfileService {
                 .orElseThrow(() -> new CustomException(ErrorType.PROFILE_NOT_FOUND));
 
         findProfile.delete();
+    }
+
+    @Transactional
+    public void deleteAllByIds(List<ProfileDeletionDto> profileDeletionDtoList) {
+        List<Long> deletedProfileIdList = profileDeletionDtoList.stream()
+                                            .filter(ProfileDeletionDto::getIsDeleted)
+                                            .map(ProfileDeletionDto::getId)
+                                            .collect(Collectors.toList());
+
+        if (CollectionUtils.isEmpty(deletedProfileIdList)) {
+            throw new CustomException(ErrorType.EMPTY_PROFILE_DELETION_LIST);
+        }
+
+        profileRepository.deleteAllByIds(deletedProfileIdList);
+    }
+
+    public List<ProfileDeletionDto> findAllDeletionDto() {
+        return profileRepository.findAll()
+                .stream()
+                .filter(Profile::isNotDeleted)
+                .map(ProfileDeletionDto::new)
+                .collect(Collectors.toList());
     }
 
     public List<String> findAllProfileType() {

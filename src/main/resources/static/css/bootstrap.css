@@ -649,7 +649,7 @@ progress {
 .admin-wrapper {
   position: absolute;
   width: 70%;
-  height: 60vh;
+  height: 70vh;
   text-align: center;
   left: 50%;
   top: 50%;
@@ -704,7 +704,7 @@ progress {
 .home-image-save-wrapper {
   position: absolute;
   width: 70%;
-  height: 60vh;
+  height: 70vh;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -718,9 +718,15 @@ progress {
   display: flex;
 }
 
-.home-image-saved {
+.home-image-saved-list {
   width: 50%;
   border-right: 2px solid black;
+  padding: 3%;
+  overflow: auto;
+}
+
+.home-image-saved {
+  display: inline-block;
 }
 
 .home-image-save-form {

@@ -3,11 +3,6 @@
 <head th:replace="~{fragments/header.html :: header}">
   <title>Hello</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <style>
-    .admin-container .admin-wrapper .left-nav .nav-pills .nav-item .nav-link.active {
-      background-color: dodgerblue; !important;
-    }
-  </style>
 </head>
 <body>
 
@@ -25,6 +20,9 @@
         <li class="nav-item">
           <a class="nav-link" href="/admin/works">Works</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/profile">Profile</a>
+        </li>
       </ul>
     </div>
     <div class="home-image-wrapper">
@@ -40,7 +38,7 @@
             </thead>
             <tbody>
             <tr class="table-light" th:each="homeImage, itemStat : *{homeImageDeletionDtoList}">
-              <th><input type="checkbox" th:field="*{homeImageDeletionDtoList[__${itemStat.index}__].deleted}" class="form-check-input"></th>
+              <th><input type="checkbox" th:field="*{homeImageDeletionDtoList[__${itemStat.index}__].isDeleted}" class="form-check-input"></th>
               <td><img th:src="'/admin/home-images/display?fileName='+${homeImage.fileName}" class="img-fluid" style="width: 4rem"></td>
               <td th:text="${homeImage.title}"></td>
               <td style="display: none"><input type="hidden" th:field="*{homeImageDeletionDtoList[__${itemStat.index}__].id}"></td>
@@ -65,8 +63,6 @@
 
 <div class="home-footer">ALL IMAGES AND SITE CONTENT © CHOI MYEONGHEON</div>
 
-<script src="/js/bootstrap.js"></script>
 <script src="/js/bootstrap.bundle.js"></script>
-<script src="/js/bootstrap.esm.js"></script>
 </body>
 </html>

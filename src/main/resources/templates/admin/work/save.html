@@ -26,11 +26,14 @@
         <li class="nav-item">
           <a class="nav-link active" href="/admin/works">Works</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/profile">Profile</a>
+        </li>
       </ul>
     </div>
     <div class="home-image-right-wrapper">
       <div class="home-image-saved-list">
-        <h5>현재 저장된 work 이미지</h5>
+        <h5>현재 저장된 이미지</h5>
       </div>
       <div class="home-image-save-form">
         <form th:action="@{/admin/works}" th:object="${request}" method="post" enctype="multipart/form-data" class="home-image-form validation-form" novalidate>
@@ -114,8 +117,6 @@
     })
   })
 </script>
-<script src="/js/bootstrap.js"></script>
 <script src="/js/bootstrap.bundle.js"></script>
-<script src="/js/bootstrap.esm.js"></script>
 </body>
 </html>

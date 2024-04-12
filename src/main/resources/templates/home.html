@@ -12,15 +12,13 @@
 
   <div class="img-container">
     <div class="img-wrapper">
-      <img th:src="'/admin/home-images/display?fileName='+${response.fileName}" onerror="this.src='img/test1.jpeg'" class="img-fluid">
+      <img th:src="'/admin/home-images/display?fileName='+${response.fileName}" onerror="this.src='images/test1.jpeg'" class="img-fluid">
       <p class="img-explain" th:text="${response.title}"></p>
     </div>
   </div>
 
   <div class="home-footer">ALL IMAGES AND SITE CONTENT © CHOI MYEONGHEON</div>
 
-  <script src="/js/bootstrap.js"></script>
   <script src="/js/bootstrap.bundle.js"></script>
-  <script src="/js/bootstrap.esm.js"></script>
 </body>
 </html>

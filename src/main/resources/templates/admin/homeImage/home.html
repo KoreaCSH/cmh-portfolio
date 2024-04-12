@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head th:replace="~{fragments/header.html :: header}">
-  <title>Hello</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
@@ -19,6 +18,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/admin/works">Works</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/profile">Profile</a>
           </li>
         </ul>
       </div>
@@ -87,9 +89,7 @@
 
   <div class="home-footer">ALL IMAGES AND SITE CONTENT © CHOI MYEONGHEON</div>
 
-  <script src="/js/bootstrap.js"></script>
   <script src="/js/bootstrap.bundle.js"></script>
-  <script src="/js/bootstrap.esm.js"></script>
   <script>
     // Modal 에 데이터 전달하는 로직
     const homeImageUpdateModal = document.getElementById('homeImageUpdateModal');

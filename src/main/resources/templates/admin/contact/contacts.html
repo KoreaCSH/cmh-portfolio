@@ -28,71 +28,17 @@
             </ul>
         </div>
         <div class="admin-contact-wrapper">
-            <div class="contact">
-                <div>Sender</div>
-                <div>Email</div>
+            <div class="contact-top">
+                <div class="contact-sender">Sender</div>
+                <div class="contact-email">Email</div>
                 <div class="contact-subject">Subject</div>
-                <div>Date</div>
+                <div class="contact-date">Date</div>
             </div>
-            <div class="contact">
-                <div>Sender</div>
-                <div>Email</div>
-                <div class="contact-subject">Subject</div>
-                <div>Date</div>
-            </div>
-            <div class="contact">
-                <div>Sender</div>
-                <div>Email</div>
-                <div class="contact-subject">Subject</div>
-                <div>Date</div>
-            </div>
-            <div class="contact">
-                <div>Sender</div>
-                <div>Email</div>
-                <div class="contact-subject">Subject</div>
-                <div>Date</div>
-            </div>
-            <div class="contact">
-                <div>Sender</div>
-                <div>Email</div>
-                <div class="contact-subject">Subject</div>
-                <div>Date</div>
-            </div>
-            <div class="contact">
-                <div>Sender</div>
-                <div>Email</div>
-                <div class="contact-subject">Subject</div>
-                <div>Date</div>
-            </div>
-            <div class="contact">
-                <div>Sender</div>
-                <div>Email</div>
-                <div class="contact-subject">Subject</div>
-                <div>Date</div>
-            </div>
-            <div class="contact">
-                <div>Sender</div>
-                <div>Email</div>
-                <div class="contact-subject">Subject</div>
-                <div>Date</div>
-            </div>
-            <div class="contact">
-                <div>Sender</div>
-                <div>Email</div>
-                <div class="contact-subject">Subject</div>
-                <div>Date</div>
-            </div>
-            <div class="contact">
-                <div>Sender</div>
-                <div>Email</div>
-                <div class="contact-subject">Subject</div>
-                <div>Date</div>
-            </div>
-            <div class="contact">
-                <div>Sender</div>
-                <div>Email</div>
-                <div class="contact-subject">Subject</div>
-                <div>Date</div>
+            <div class="contact" th:each="contact : ${response.contactDtoList}">
+                <div class="contact-sender" th:text="${contact.senderName}">Sender</div>
+                <div class="contact-email" th:text="${contact.senderEmail}">Email</div>
+                <div class="contact-subject" th:text="${contact.subject}">Subject</div>
+                <div class="contact-date" th:text="${contact.createdAt}">Date</div>
             </div>
         </div>
     </div>

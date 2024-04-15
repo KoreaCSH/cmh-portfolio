@@ -28,17 +28,22 @@
             </ul>
         </div>
         <div class="admin-contact-wrapper">
-            <div class="contact-top">
-                <div class="contact-sender">Sender</div>
-                <div class="contact-email">Email</div>
-                <div class="contact-subject">Subject</div>
-                <div class="contact-date">Date</div>
+            <div class="contact-detail">
+                <div class="contact-detail-subject" th:text="${contact.subject}">Subject</div>
+                <div class="contact-detail-sender">
+                    <div>Sender</div>
+                    <div th:text="${contact.senderName}"></div>
+                </div>
+                <div class="contact-detail-sender">
+                    <div>Email
+                    </div>
+                    <div th:text="${contact.senderEmail}"></div>
+                </div>
+                <div class="contact-detail-date" th:text="${contact.createdAt}">Date</div>
+                <div class="contact-detail-content" th:text="${contact.content}">Email</div>
             </div>
-            <div class="contact" th:classappend="${contact.readYn == 'Y' ? 'read' : 'not-read'}" th:each="contact : ${response.contactDtoList}" th:onclick="|location.href='@{|/admin/contact/${contact.id}|}'|">
-                <div class="contact-sender" th:text="${contact.senderName}">Sender</div>
-                <div class="contact-email" th:text="${contact.senderEmail}">Email</div>
-                <div class="contact-subject" th:text="${contact.subject}">Subject</div>
-                <div class="contact-date" th:text="${contact.createdAt}">Date</div>
+            <div>
+                <a class="btn btn-secondary" href="/admin/contact">이전</a>
             </div>
         </div>
     </div>

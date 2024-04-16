@@ -36,6 +36,6 @@ out/
 ### VS Code ###
 .vscode/
 
-src/main/resources/static/img
+src/main/resources/static/images
 src/main/resources/application-db.yml
 src/test/resources/application.yml

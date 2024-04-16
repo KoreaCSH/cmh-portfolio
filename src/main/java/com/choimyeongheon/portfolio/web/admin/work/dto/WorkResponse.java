@@ -1,4 +1,4 @@
-package com.choimyeongheon.portfolio.web.admin.works.dto;
+package com.choimyeongheon.portfolio.web.admin.work.dto;
 
 import lombok.*;
 

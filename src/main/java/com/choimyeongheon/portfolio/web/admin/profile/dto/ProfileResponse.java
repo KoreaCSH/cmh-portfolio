@@ -1,7 +1,6 @@
 package com.choimyeongheon.portfolio.web.admin.profile.dto;
 
 import com.choimyeongheon.portfolio.domain.profile.domain.Profile;
-import com.choimyeongheon.portfolio.domain.profile.domain.ProfileType;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

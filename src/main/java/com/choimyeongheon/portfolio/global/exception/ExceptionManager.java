@@ -11,13 +11,13 @@ public class ExceptionManager {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ModelAndView methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
 
-        String message = e.getBindingResult()
+        String errorMessage = e.getBindingResult()
                 .getAllErrors()
                 .get(0)
                 .getDefaultMessage();
 
         ModelAndView mav = new ModelAndView();
-        mav.addObject("message", message);
+        mav.addObject("errorMessage", errorMessage);
         mav.setViewName("exception/error");
 
         return mav;
@@ -26,10 +26,10 @@ public class ExceptionManager {
     @ExceptionHandler(CustomException.class)
     public ModelAndView exceptionHandler(CustomException e) {
 
-        String message = e.getMessage();
+        String errorMessage = e.getMessage();
 
         ModelAndView mav = new ModelAndView();
-        mav.addObject("message", message);
+        mav.addObject("errorMessage", errorMessage);
         mav.setViewName("exception/error");
         return mav;
     }

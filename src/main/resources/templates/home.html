@@ -1,24 +1,11 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/header.html :: header}">
-  <title>Hello</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!DOCTYPE html>
+<html   lang="ko"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/default}">
+<head>
 </head>
-<body>
+<div layout:fragment="content">
 
-  <div class="container">
-    <div th:replace="~{fragments/nav.html :: navFrament}" />
-  </div>
-
-  <div class="img-container">
-    <div class="img-wrapper">
-      <img th:src="'/admin/home-images/display?fileName='+${response.fileName}" onerror="this.src='images/test1.jpeg'" class="img-fluid">
-      <p class="img-explain" th:text="${response.title}"></p>
-    </div>
-  </div>
-
-  <div class="home-footer">ALL IMAGES AND SITE CONTENT © CHOI MYEONGHEON</div>
-
-  <script src="/js/bootstrap.bundle.js"></script>
-</body>
+</div>
 </html>

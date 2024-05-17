@@ -1,0 +1,25 @@
+:root {
+    --text-color: #263343;
+    --background-color: white;
+    --accent-color: #d49466;
+    --media-background-color: #f0f4f5;
+    --navbar-toogleBtn-color: rgba(33, 33, 33, 0.519);
+    --admin-background-color: #f5f7fa;
+    --admin-border-color: #e1e1e1;
+    --admin-del-btn-color: rgba(135, 22, 22, 0.921);
+    --admin-save-btn-color: rgb(36, 77, 158);
+}
+
+body {
+    margin: 0;
+    font-family: "Noto Sans", sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+i {
+    cursor: pointer;
+}

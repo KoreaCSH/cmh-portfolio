@@ -1,0 +1,31 @@
+.admin-container {
+    max-width: 1536px;
+    display: flex;
+    border: 1px solid var(--admin-border-color);
+    margin-top: 16px;
+}
+
+.admin-navbar {
+    width: 220px;
+    width: 15%;
+    background-color: var(--admin-background-color);
+    padding: 8px 12px;
+    border-right: 1px solid var(--admin-border-color);
+}
+
+.admin-navbar a {
+    display: block;
+    padding: 8px;
+}
+
+.admin-navbar a:hover {
+    background-color: rgb(225, 233, 249);
+    color: #0273e6;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+.admin-content {
+    padding: 8px 12px;
+    width: 85%;
+}

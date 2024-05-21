@@ -27,7 +27,7 @@ public class HomeImageController {
         model.addAttribute("homeImages", homeImages);
         model.addAttribute("request", request);
 
-        return "admin/homeImage/home";
+        return "admin/homeImage/homeImages";
     }
 
     @GetMapping("/admin/home-images/save-form")

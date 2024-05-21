@@ -37,3 +37,24 @@
         margin-right: auto;
     }
 }
+
+.before-btn {
+    display: inline-block;
+    padding: 8px 14px;
+    height: 21.5px;
+    line-height: 21.5px;
+    box-sizing: content-box;
+    color: var(--before-btn-background-color);
+    background-color: var(--background-color);
+    border: 2px solid var(--before-btn-background-color);
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.before-btn:hover {
+    color: #fff;
+    font-weight: 500;
+    background-color: var(--before-btn-background-color);
+}

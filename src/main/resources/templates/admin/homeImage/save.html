@@ -22,13 +22,9 @@
         <label for="home-image-title" class="input-label">제목</label>
         <input id="home-image-title" type="text" th:field="*{title}" class="form-control" placeholder="Title" required>
       </div>
-    </div>
-    <div class="home-image-save-btn-wrapper">
-      <div class="home-image-save">
-        <a class="btn btn-secondary" href="/admin/home-images">이전</a>
-      </div>
-      <div class="home-image-delete">
-        <button type="submit" class="btn btn-success home-image-save-btn">저장</button>
+      <div class="home-image-save-btn-wrapper">
+          <a class="before-btn" href="/admin/home-images">이전</a>
+          <button type="submit" class="home-image-save-btn">저장</button>
       </div>
     </div>
   </form>

@@ -29,3 +29,11 @@
     padding: 8px 12px;
     width: 85%;
 }
+
+@media screen and (min-width: 1600px) {
+    .admin-container {
+        margin-top: 16px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

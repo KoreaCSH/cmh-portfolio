@@ -1,3 +1,10 @@
+.admin-home-image-btn {
+    background-color: rgb(225, 233, 249);
+    color: #0273e6;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
 .home-image-content-header {
     display: flex;
     justify-content: flex-start;
@@ -39,14 +46,6 @@
     color: #fff;
     font-weight: 500;
     background-color: var(--admin-del-btn-color);
-}
-
-@media screen and (min-width: 1600px) {
-    .admin-container {
-        margin-top: 16px;
-        margin-left: auto;
-        margin-right: auto;
-    }
 }
 
 div.minimalistBlack {

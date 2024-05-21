@@ -1,0 +1,79 @@
+.admin-home-image-btn {
+    background-color: rgb(225, 233, 249);
+    color: #0273e6;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+.home-image-save-container {
+    width: 100%;
+    margin: 0 10px;
+}
+
+.home-image-save-form {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 20px);
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+
+.home-image-save-file {
+    display: flex;
+    gap: 10px;
+}
+
+.home-image-file-name {
+    display: block;
+    flex: 1 1 0%;
+    border: 1px solid rgb(220, 220, 220);
+    padding: 8px 12px;
+    font-size: 1rem;
+    font-weight: 400;
+    box-sizing: border-box;
+    margin-top: 5px;
+    border-radius: 4px;
+    height: 40px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.home-image-file-label {
+    display: block;
+    color: #fff;
+    background: #0273e6;
+    text-align: center;
+    padding: 9px 24px;
+    font-size: 1rem;
+    user-select: none;
+    border-radius: 3px;
+    width: 40px;
+    cursor: pointer;
+    height: 22px;
+    margin-top: 5px;
+}
+
+.home-image-file-label i {
+    font-size: 1rem;
+}
+
+.form-control {
+    width: 100%;
+    border: 1px solid rgb(220, 220, 220);
+    padding: 8px 12px;
+    font-size: 1rem;
+    font-weight: 400;
+    box-sizing: border-box;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    height: 40px;
+}
+
+.form-control:focus {
+    outline: none;
+    border: 1px solid rgb(37, 147, 255);
+}

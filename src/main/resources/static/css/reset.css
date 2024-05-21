@@ -8,6 +8,7 @@
     --admin-border-color: #e1e1e1;
     --admin-del-btn-color: rgba(135, 22, 22, 0.921);
     --admin-save-btn-color: rgb(36, 77, 158);
+    --input-border-color: #dee2e6;
 }
 
 body {
@@ -22,4 +23,9 @@ a {
 
 i {
     cursor: pointer;
+}
+
+.input-label {
+    font-size: 1rem;
+    font-weight: 600;
 }

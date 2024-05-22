@@ -23,12 +23,12 @@
             </div>
         </div>
         <div class="divTableBody">
-            <div class="divTableRow">
+            <div class="divTableRow" th:each="homeImage : ${homeImages}">
                 <div class="divTableCell del-chk"><input type="checkbox" /></div>
-                <div class="divTableCell home-image"><img src="/images/test1.jpeg" /></div>
-                <div class="divTableCell home-image-title"></div>
-                <div class="divTableCell home-image-reg-date"></div>
-                <div class="divTableCell home-image-file-name"></div>
+                <div class="divTableCell home-image"><img th:src="'/admin/home-images/display?fileName='+${homeImage.fileName}" /></div>
+                <div class="divTableCell home-image-title" th:text="${homeImage.title}"></div>
+                <div class="divTableCell home-image-reg-date" th:text="${homeImage.regDate}"></div>
+                <div class="divTableCell home-image-file-name" th:text="${homeImage.originName}"></div>
             </div>
         </div>
     </div>

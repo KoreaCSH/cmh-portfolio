@@ -46,7 +46,7 @@ public class HomeImageMapper {
     }
 
     public HomeImageResponse toResponse(HomeImage homeImage) {
-        return new HomeImageResponse(homeImage.getId(), homeImage.getFileName(), homeImage.getTitle());
+        return new HomeImageResponse(homeImage.getId(), homeImage.getFileName(), homeImage.getOriginName(), homeImage.getTitle(), homeImage.getCreatedAt());
     }
 
     public ResponseEntity<Resource> toResource(String fileName) {

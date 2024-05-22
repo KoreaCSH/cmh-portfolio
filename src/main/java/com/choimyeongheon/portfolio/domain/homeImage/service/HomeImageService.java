@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -77,7 +78,7 @@ public class HomeImageService {
     public HomeImageResponse findRandomly() {
         List<HomeImage> randomHomeImage = homeImageRepository.findRandomly();
         if (CollectionUtils.isEmpty(randomHomeImage)) {
-            return new HomeImageResponse(0L, "", "등록한 이미지가 존재하지 않습니다.");
+            return new HomeImageResponse(0L, "", "", "등록한 이미지가 존재하지 않습니다.", LocalDateTime.now());
         }
 
         return homeImageMapper.toResponse(randomHomeImage.get(0));

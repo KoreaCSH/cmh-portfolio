@@ -51,7 +51,7 @@ public class WorkMapper {
     }
 
     public WorkResponse toResponse(Work work) {
-        return new WorkResponse(work.getId(), work.getFileName(), work.getTitle(), work.getWorkDate());
+        return new WorkResponse(work.getId(), work.getFileName(), work.getOriginName(), work.getTitle(), work.getWorkDate(), work.getCreatedAt());
     }
 
     public ResponseEntity<Resource> toResource(String fileName) {
@@ -75,7 +75,8 @@ public class WorkMapper {
         String[] yearAndMonth = strWorkDate.split("-");
         int year = Integer.parseInt(yearAndMonth[0]);
         int month = Integer.parseInt(yearAndMonth[1]);
-        return LocalDate.of(year, month, 1);
+        int date = Integer.parseInt(yearAndMonth[2]);
+        return LocalDate.of(year, month, date);
     }
 
 }

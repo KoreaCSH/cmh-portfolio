@@ -1,4 +1,4 @@
-.admin-home-image-btn {
+.admin-work-btn {
     background-color: rgb(225, 233, 249);
     color: #0273e6;
     font-weight: 500;
@@ -143,18 +143,44 @@ div.minimalistBlack {
 }
 
 .divTableHeading .divTableRow .home-image-title-header,
-.divTableHeading .divTableRow .home-image-reg-date-header {
-    width: 250px;
+.divTableHeading .divTableRow .home-image-reg-date-header,
+.divTableHeading .divTableRow .home-image-work-date-header{
+    width: 200px;
 }
 
 .divTableBody .divTableRow .home-image-title,
-.divTableBody .divTableRow .home-image-reg-date {
+.divTableBody .divTableRow .home-image-reg-date,
+.divTableBody .divTableRow .home-image-work-date {
     width: max-content;
-    max-width: 250px;
+    max-width: 200px;
     word-break: break-all;
 }
 
 .divTableBody .divTableRow .home-image-file-name {
     width: max-content;
     word-break: break-all;
+}
+
+select::-ms-expand {
+    display: none;
+}
+.work-date-select {
+    -o-appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 150px;
+    height: 41.5px;
+    background: url("../../images/angle-down-solid.svg") calc(100% - 5px) center no-repeat;
+    background-size: 15px;
+    padding: 5px 30px 5px 10px;
+    border-radius: 4px;
+    outline: 0 none;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+.work-date-select option {
+    background: black;
+    color: #fff;
+    padding: 3px 0;
 }

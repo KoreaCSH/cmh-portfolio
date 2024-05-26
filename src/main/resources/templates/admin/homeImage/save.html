@@ -8,19 +8,19 @@
   <script src="/js/homeImages-save.js" defer></script>
 </head>
 <div layout:fragment="admin-content">
-  <form th:action="@{/admin/home-images}" th:object="${request}" method="post" enctype="multipart/form-data" class="home-image-form validation-form" novalidate>
+  <form th:action="@{/admin/home-images}" th:object="${request}" method="post" enctype="multipart/form-data" class="home-image-form">
     <div class="home-image-save-container">
       <div class="home-image-save-form">
         <span class="input-label">이미지</span>
         <div class="home-image-save-file">
           <span class="home-image-file-name" id="home-image-file-name">파일명</span>
-          <input id="home-image-file" class="form-control" type="file" accept="image/*" th:field="*{homeImage}" required>
+          <input id="home-image-file" class="form-control" type="file" accept="image/*" th:field="*{homeImage}">
           <label for="home-image-file" class="home-image-file-label"><i class="fa-solid fa-upload"></i></label>
         </div>
       </div>
       <div class="home-image-save-title home-image-save-form">
         <label for="home-image-title" class="input-label">제목</label>
-        <input id="home-image-title" type="text" th:field="*{title}" class="form-control" placeholder="Title" required>
+        <input id="home-image-title" type="text" th:field="*{title}" class="form-control" placeholder="Title">
       </div>
       <div class="home-image-save-btn-wrapper">
           <a class="before-btn" href="/admin/home-images">이전</a>

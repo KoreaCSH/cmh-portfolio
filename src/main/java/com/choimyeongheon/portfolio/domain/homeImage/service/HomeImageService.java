@@ -71,7 +71,7 @@ public class HomeImageService {
         return homeImageRepository.findAll()
                         .stream()
                         .filter(homeImage -> homeImage.getDelYn() == DelYn.N)
-                        .map(homeImage -> new HomeImageDeletionDto(homeImage.getId(), homeImage.getFileName(), homeImage.getTitle()))
+                        .map(homeImage -> new HomeImageDeletionDto(homeImage.getId(), homeImage.getFileName(), homeImage.getOriginName(), homeImage.getTitle(), homeImage.getCreatedAt()))
                         .collect(Collectors.toList());
     }
 

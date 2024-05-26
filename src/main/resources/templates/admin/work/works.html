@@ -1,235 +1,40 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html   lang="ko"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/admin-default}">
 <head>
-  <title>CHOIMYEONGHEON</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
-        integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+  <link rel="stylesheet" href="/css/admin/works.css" />
 </head>
-<body>
-
-<div>
-  <div th:replace="~{fragments/nav.html :: navFrament}" />
-</div>
-
-<div class="admin-container">
-  <div class="admin-wrapper">
-    <div class="left-nav">
-      <ul class="nav nav-pills flex-column">
-        <li class="nav-item">
-          <a class="nav-link" href="/admin/home-images">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="/admin/works">Works</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/admin/profile">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/admin/contact">Contact</a>
-        </li>
-      </ul>
-    </div>
-    <div class="home-image-wrapper">
-      <div class="home-image-table">
-        <ul class="nav nav-tabs" role="tablist">
-          <li class="nav-item" role="presentation">
-            <a class="nav-link active" data-bs-toggle="tab" href="#all" aria-selected="true" role="tab">ALL</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="work-year" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Years</a>
-            <ul class="dropdown-menu">
-              <li role="presentation" th:each="workYear : ${workYears}" style="text-align: center">
-                <a class="dropdown-item" data-bs-toggle="tab" th:href="'#' + ${workYear.year}" th:text="${workYear.year}" aria-selected="false" role="tab" tabindex="-1" onclick="dropDownHandler(this)">2018</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <div class="tab-content">
-          <div class="tab-pane fade show active" id="all" role="tabpanel">
-            <table class="table table-hover">
-              <thead>
-              <tr class="table-dark">
-                <th scope="col">Image</th>
-                <th scope="col">Title</th>
-                <th scope="col">WorkDate</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr class="table-light" th:each="work : ${works}" data-bs-toggle="modal" data-bs-target="#workUpdateModal">
-                <td><img th:src="'/admin/works/display?fileName='+${work.fileName}" class="img-fluid" style="width: 6rem"></td>
-                <td th:text="${work.title}"></td>
-                <td th:text="${work.workDate}"></td>
-                <td th:text="${work.fileName}" style="display: none"></td>
-                <td th:text="${work.id}" style="display: none"></td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="tab-pane fade" id="2018" role="tabpanel" th:each="workYear : ${workYears}" th:id="${workYear.year}">
-            <table class="table table-hover">
-              <thead>
-                <tr class="table-dark">
-                  <th scope="col">Image</th>
-                  <th scope="col">Title</th>
-                  <th scope="col">WorkDate</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="table-light" th:each="work : ${works}" th:if="${work.getWorkDate().getYear() == workYear.year}" data-bs-toggle="modal" data-bs-target="#workUpdateModal">
-                  <td><img th:src="'/admin/home-images/display?fileName='+${work.fileName}" class="img-fluid" style="width: 6rem"></td>
-                  <td th:text="${work.title}"></td>
-                  <td th:text="${work.workDate}"></td>
-                  <td th:text="${work.fileName}" style="display: none"></td>
-                  <td th:text="${work.id}" style="display: none"></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+<div layout:fragment="admin-content">
+  <div class="home-image-content-header">
+    <!-- <h3>현재 저장된 홈 이미지 (1)</h3> -->
+    <a href="/admin/works/save-form" class="home-image-content-header-save-btn">저장</a>
+    <a href="/admin/home-images/delete-form" class="home-image-content-header-del-btn">삭제</a>
+    <select name="workDate" class="work-date-select">
+      <option selected>All</option>
+      <option th:each="workYear : ${workYears}" th:text="${workYear.year}">2018</option>
+    </select>
+  </div>
+  <div class="divTable minimalistBlack">
+    <div class="divTableHeading">
+      <div class="divTableRow">
+        <div class="divTableHead home-image-header">이미지</div>
+        <div class="divTableHead home-image-title-header">제목</div>
+        <div class="divTableHead home-image-work-date-header">작업일자</div>
+        <div class="divTableHead home-image-reg-date-header">등록일자</div>
+        <div class="divTableHead home-image-file-name-header">파일명</div>
       </div>
-      <div class="home-image-button-wrapper">
-        <div class="home-image-save">
-          <a class="btn btn-success" href="/admin/works/save-form">저장</a>
-        </div>
-        <div class="home-image-delete">
-          <a class="btn btn-danger" href="/admin/works/delete-form">삭제</a>
-        </div>
+    </div>
+    <div class="divTableBody">
+      <div class="divTableRow" th:each="work : ${works}">
+        <div class="divTableCell home-image"><img th:src="'/admin/home-images/display?fileName='+${work.fileName}" /></div>
+        <div class="divTableCell home-image-title" th:text="${work.title}"></div>
+        <div class="divTableCell home-image-work-date" th:text="${work.workDate}"></div>
+        <div class="divTableCell home-image-reg-date" th:text="${work.regDate}"></div>
+        <div class="divTableCell home-image-file-name" th:text="${work.originName}"></div>
       </div>
     </div>
   </div>
 </div>
-
-<!-- Modal -->
-<div class="modal fade" id="workUpdateModal" tabindex="-1" aria-labelledby="workUpdateModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="workUpdateModalLabel">New message</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <form th:action="@{/admin/works}" th:object="${request}" th:method="put" class="validation-form" novalidate>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label class="col-form-label">Work:</label>
-            <img class="img-fluid" style="width: 6rem; display: block">
-          </div>
-          <div class="mb-3">
-            <label for="title" class="col-form-label">Title:</label>
-            <input type="text" th:field="*{updatedTitle}" class="form-control" id="title" required>
-            <div class="invalid-feedback">
-              Please write the title
-            </div>
-            <input type="hidden" th:field="*{id}" id="home-image-id">
-          </div>
-          <div class="mb-3">
-            <label class="col-form-label">Work Date</label>
-            <input type="text" id="date-picker" class="form-control" aria-label="Search" aria-describedby="basic-addon2" th:field="*{updatedWorkDate}" required>
-            <div class="invalid-feedback">
-              Please select the Work Date
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-          <button type="submit" class="btn btn-primary">수정</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-<div class="home-footer">ALL IMAGES AND SITE CONTENT © CHOI MYEONGHEON</div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
-        integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js"
-        integrity="sha512-L4qpL1ZotXZLLe8Oo0ZyHrj/SweV7CieswUODAAPN/tnqN3PA1P+4qPu5vIryNor6HQ5o22NujIcAZIfyVXwbQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="/js/bootstrap.bundle.js"></script>
-<script>
-  function dropDownHandler(elem) {
-    const workYear = document.querySelector('#work-year');
-    const selectedWorkYear = elem.textContent;
-    workYear.textContent = selectedWorkYear;
-  }
-
-  // Modal 에 데이터 전달하는 로직
-  const workUpdateModal = document.getElementById('workUpdateModal');
-  workUpdateModal.addEventListener('show.bs.modal', event => {
-    const tr = event.relatedTarget;
-    const title = tr.cells[1].innerHTML;
-    const workDate = tr.cells[2].innerHTML;
-    const fileName = tr.cells[3].innerHTML;
-    const id = tr.cells[4].innerHTML;
-
-    const modalTitle = workUpdateModal.querySelector('.modal-title');
-    const modalBodyInputTitle = workUpdateModal.querySelector('.modal-body #title');
-    const modalBodyWorkDate = workUpdateModal.querySelector('.modal-body #date-picker');
-    const modalHomeImage = workUpdateModal.querySelector('.modal-body img');
-    const modalBodyInputId = workUpdateModal.querySelector('.modal-body #home-image-id');
-
-    modalTitle.textContent = `Information of ${title}`;
-    modalBodyInputTitle.value = title;
-    modalBodyWorkDate.value = workDate.slice(0, 7);
-    modalBodyInputId.value = id;
-    modalHomeImage.src = `/admin/works/display?fileName=${fileName}`;
-
-    const parseWorkDate = workDate.split('-');
-    const workYear = +parseWorkDate[0];
-    const workMonth = +parseWorkDate[1];
-
-    $(workUpdateModal).ready(function() {
-      $(modalBodyWorkDate).datepicker({
-        format: "yyyy-mm",
-        minViewMode: 1,
-        language: "ko",
-        autoclose: true
-      }).datepicker("setDate", new Date(workYear, workMonth-1));
-
-      $('#get-history').on('click', function() {
-        const dateArr = $('#date-picker').val().split('-');
-        location.href = '/history?year=' + dateArr[0] + '&month=' + dateArr[1];
-      })
-    })
-  })
-
-  // Modal 내 Input Validation 로직
-  window.addEventListener('load', () => {
-    const forms = document.getElementsByClassName('validation-form');
-
-    Array.prototype.filter.call(forms, (form) => {
-      form.addEventListener('submit', function (event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
-
-  window.addEventListener('load', () => {
-    const forms = document.getElementsByClassName('validation-form');
-
-    Array.prototype.filter.call(forms, (form) => {
-      form.addEventListener('submit', function (event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
-</script>
-</body>
 </html>

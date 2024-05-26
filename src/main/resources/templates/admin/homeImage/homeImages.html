@@ -10,12 +10,11 @@
     <div class="home-image-content-header">
         <!-- <h3>현재 저장된 홈 이미지 (1)</h3> -->
         <a href="/admin/home-images/save-form" class="home-image-content-header-save-btn">저장</a>
-        <a href="#none" class="home-image-content-header-del-btn">삭제</a>
+        <a href="/admin/home-images/delete-form" class="home-image-content-header-del-btn">삭제</a>
     </div>
     <div class="divTable minimalistBlack">
         <div class="divTableHeading">
             <div class="divTableRow">
-                <div class="divTableHead del-chk-header"><input type="checkbox" /></div>
                 <div class="divTableHead home-image-header">이미지</div>
                 <div class="divTableHead home-image-title-header">제목</div>
                 <div class="divTableHead home-image-reg-date-header">등록일자</div>
@@ -24,7 +23,6 @@
         </div>
         <div class="divTableBody">
             <div class="divTableRow" th:each="homeImage : ${homeImages}">
-                <div class="divTableCell del-chk"><input type="checkbox" /></div>
                 <div class="divTableCell home-image"><img th:src="'/admin/home-images/display?fileName='+${homeImage.fileName}" /></div>
                 <div class="divTableCell home-image-title" th:text="${homeImage.title}"></div>
                 <div class="divTableCell home-image-reg-date" th:text="${homeImage.regDate}"></div>

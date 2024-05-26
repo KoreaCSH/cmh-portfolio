@@ -9,4 +9,3 @@ document.getElementById('home-image-file').addEventListener('change', function(e
         fileNameDisplay.textContent = '파일명';
     }
 });
-

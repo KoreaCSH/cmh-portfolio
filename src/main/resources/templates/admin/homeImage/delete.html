@@ -5,9 +5,10 @@
         layout:decorate="~{layouts/admin-default}">
 <head>
   <link rel="stylesheet" href="/css/admin/homeImages.css" />
+  <script src="/js/common.js" defer></script>
 </head>
 <div layout:fragment="admin-content">
-  <form th:action="@{/admin/home-images}" th:object="${request}" th:method="delete">
+  <form th:action="@{/admin/home-images}" th:object="${request}" th:method="delete" onsubmit="return deleteHandler()">
     <div class="home-image-content-header">
       <!-- <h3>현재 저장된 홈 이미지 (1)</h3> -->
       <a class="before-btn" href="/admin/home-images">이전</a>

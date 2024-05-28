@@ -9,3 +9,12 @@ document.getElementById('home-image-file').addEventListener('change', function(e
         fileNameDisplay.textContent = '파일명';
     }
 });
+
+function deleteHandler() {
+    if(confirm("선택한 이미지를 삭제하시겠습니까?")) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}

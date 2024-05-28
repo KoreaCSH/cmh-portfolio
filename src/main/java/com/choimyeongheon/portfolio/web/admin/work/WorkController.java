@@ -29,11 +29,27 @@ public class WorkController {
 
     @GetMapping("/admin/works")
     public String works(Model model, WorkUpdateRequest request) {
+
         List<WorkResponse> works = workService.findAllByOrderByWorkDateDesc();
         List<WorkYear> workYears = workYearService.findAll();
         model.addAttribute("works", works);
         model.addAttribute("workYears", workYears);
         model.addAttribute("request", request);
+        model.addAttribute("workYear", "All");
+
+        return "admin/work/works";
+    }
+
+    @GetMapping("/admin/works/work-year/{workYear}")
+    public String worksByWorkDate(Model model, WorkUpdateRequest request,
+                                  @PathVariable(name = "workYear") Integer workYear) {
+
+        List<WorkResponse> works = workService.findByYearOrderByWorkDateDesc(workYear);
+        List<WorkYear> workYears = workYearService.findAll();
+        model.addAttribute("works", works);
+        model.addAttribute("workYears", workYears);
+        model.addAttribute("request", request);
+        model.addAttribute("workYear", workYear);
 
         return "admin/work/works";
     }
@@ -65,6 +81,19 @@ public class WorkController {
         List<WorkYear> workYears = workYearService.findAll();
         model.addAttribute("request", request);
         model.addAttribute("workYears", workYears);
+        model.addAttribute("workYear", "All");
+        return "admin/work/delete";
+    }
+
+    @GetMapping("/admin/works/work-year/{workYear}/delete-form")
+    public String deleteFormByWorkYear(Model model, WorkDeleteRequest request,
+                                       @PathVariable(name = "workYear") Integer workYear) {
+
+        request.setWorkDeleteDtoList(workService.findAllDeleteDtoByYearOrderByWorkDateDesc(workYear));
+        List<WorkYear> workYears = workYearService.findAll();
+        model.addAttribute("request", request);
+        model.addAttribute("workYears", workYears);
+        model.addAttribute("workYear", workYear);
         return "admin/work/delete";
     }
 

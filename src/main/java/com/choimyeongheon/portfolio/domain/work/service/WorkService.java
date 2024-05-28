@@ -63,8 +63,16 @@ public class WorkService {
         return workRepository.findAllByOrderByWorkDateDesc()
                         .stream()
                         .filter(work -> work.getDelYn() == DelYn.N)
-                        .map(work -> new WorkDeleteDto(work.getId(), work.getFileName(), work.getTitle(), work.getWorkDate()))
+                        .map(work -> new WorkDeleteDto(work.getId(), work.getFileName(), work.getOriginName(), work.getTitle(), work.getWorkDate(), work.getCreatedAt()))
                         .collect(Collectors.toList());
+    }
+
+    public List<WorkDeleteDto> findAllDeleteDtoByYearOrderByWorkDateDesc(int year) {
+        return workRepository.findByYearOrderByWorkDateDesc(year)
+                .stream()
+                .filter(work -> work.getDelYn() == DelYn.N)
+                .map(work -> new WorkDeleteDto(work.getId(), work.getFileName(), work.getOriginName(), work.getTitle(), work.getWorkDate(), work.getCreatedAt()))
+                .collect(Collectors.toList());
     }
 
     @Transactional

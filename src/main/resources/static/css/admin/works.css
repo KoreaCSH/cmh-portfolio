@@ -164,7 +164,7 @@ div.minimalistBlack {
 select::-ms-expand {
     display: none;
 }
-.work-date-select {
+.work-year-select {
     -o-appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -179,7 +179,7 @@ select::-ms-expand {
     margin-top: 10px;
     margin-left: 20px;
 }
-.work-date-select option {
+.work-year-select option {
     background: black;
     color: #fff;
     padding: 3px 0;

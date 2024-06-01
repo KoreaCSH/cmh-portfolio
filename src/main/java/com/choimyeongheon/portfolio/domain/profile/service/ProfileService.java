@@ -11,16 +11,19 @@ import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileResponse;
 import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileSaveRequest;
 import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileUpdateRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
+@Slf4j
 public class ProfileService {
 
     private final ProfileRepository profileRepository;
@@ -42,6 +45,13 @@ public class ProfileService {
 
     public List<ProfileResponse> findAll() {
         return profileRepository.findAllOrderByYear()
+                .stream()
+                .map(ProfileResponse::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<ProfileResponse> findAllByProfileType(String profileType) {
+        return profileRepository.findAllByProfileTypeOrderByYear(ProfileType.from(profileType))
                 .stream()
                 .map(ProfileResponse::new)
                 .collect(Collectors.toList());
@@ -77,8 +87,8 @@ public class ProfileService {
                 .collect(Collectors.toList());
     }
 
-    public List<String> findAllProfileType() {
-        return ProfileType.getValues();
+    public List<ProfileType> findAllProfileType() {
+        return Arrays.stream(ProfileType.values()).toList();
     }
 
 }

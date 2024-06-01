@@ -1,6 +1,7 @@
 package com.choimyeongheon.portfolio.web.admin.profile;
 
 import com.choimyeongheon.portfolio.domain.admin.domain.Admin;
+import com.choimyeongheon.portfolio.domain.profile.domain.ProfileType;
 import com.choimyeongheon.portfolio.domain.profile.service.ProfileService;
 import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileDeletionRequest;
 import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileResponse;
@@ -22,20 +23,35 @@ public class ProfileController {
 
     private final ProfileService profileService;
 
-    @GetMapping
+    @GetMapping("/all")
     public String profiles(Model model, ProfileUpdateRequest request) {
         List<ProfileResponse> profiles = profileService.findAll();
-        List<String> profileTypes = profileService.findAllProfileType();
+        List<ProfileType> profileTypes = profileService.findAllProfileType();
 
         model.addAttribute("profiles", profiles);
         model.addAttribute("profileTypes", profileTypes);
+        model.addAttribute("selectedType", "All");
+        model.addAttribute("request", request);
+        return "admin/profile/profiles";
+    }
+
+    @GetMapping("/{profileType}")
+    public String profilesByType(Model model, ProfileUpdateRequest request,
+                                @PathVariable(name = "profileType") String profileType) {
+
+        List<ProfileResponse> profiles = profileService.findAllByProfileType(profileType);
+        List<ProfileType> profileTypes = profileService.findAllProfileType();
+
+        model.addAttribute("profiles", profiles);
+        model.addAttribute("profileTypes", profileTypes);
+        model.addAttribute("selectedType", profileType);
         model.addAttribute("request", request);
         return "admin/profile/profiles";
     }
 
     @GetMapping("/save-form")
     public String createForm(Model model, ProfileSaveRequest request) {
-        List<String> profileTypes = profileService.findAllProfileType();
+        List<ProfileType> profileTypes = profileService.findAllProfileType();
 
         model.addAttribute("profileTypes", profileTypes);
         model.addAttribute("request", request);
@@ -61,7 +77,7 @@ public class ProfileController {
     @GetMapping("delete-form")
     public String deleteForm(Model model, ProfileDeletionRequest request) {
 
-        List<String> profileTypes = profileService.findAllProfileType();
+        List<ProfileType> profileTypes = profileService.findAllProfileType();
         request.setProfileDeletionDtoList(profileService.findAllDeletionDto());
         model.addAttribute("profileTypes", profileTypes);
         model.addAttribute("request", request);

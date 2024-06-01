@@ -11,17 +11,18 @@ import java.util.stream.Collectors;
 @Getter
 public enum ProfileType {
 
-    AWARDS("수상"),
-    CAREER("약력"),
-    SOLO_EXHIBITIONS("개인전"),
-    GROUP_EXHIBITIONS("단체전"),
-    ETC("기타");
+    AWARDS("수상", "awards"),
+    CAREER("약력", "career"),
+    SOLO_EXHIBITIONS("개인전", "solo-exhibitions"),
+    GROUP_EXHIBITIONS("단체전", "group-exhibitions"),
+    ETC("기타", "etc");
 
     private final String type;
+    private final String lowerCase;
 
-    public static ProfileType of(String type) {
+    public static ProfileType from(String lowerCase) {
         for (ProfileType profileType : ProfileType.values()) {
-            if (profileType.getType().equals(type)) {
+            if (profileType.getLowerCase().equals(lowerCase)) {
                 return profileType;
             }
         }

@@ -32,7 +32,7 @@ public class ProfileSaveRequest {
                 .year(this.getYear())
                 .content(this.getContent())
                 .contentEn(this.getContentEn())
-                .profileType(ProfileType.of(this.getProfileType()))
+                .profileType(ProfileType.valueOf(this.getProfileType()))
                 .createdBy(admin)
                 .build();
     }

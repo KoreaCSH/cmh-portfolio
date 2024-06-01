@@ -63,7 +63,7 @@ public class ProfileController {
                          @AuthenticationPrincipal Admin admin) {
         profileService.create(request, admin);
 
-        return "redirect:/admin/profile";
+        return "redirect:/admin/profile/all";
     }
 
     @PutMapping

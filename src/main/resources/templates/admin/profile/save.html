@@ -1,101 +1,140 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/header.html :: header}">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/admin-default}">
+<head>
+    <link rel="stylesheet" href="/css/admin/common.css" />
+    <link rel="stylesheet" href="/css/admin/profile/save.css" />
 </head>
-<body>
-
-<div class="container">
-    <div th:replace="~{fragments/nav.html :: navFrament}" />
-</div>
-
-<div class="home-image-save-container">
-    <div class="home-image-save-wrapper">
-        <div class="left-nav">
-            <ul class="nav nav-pills flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin/home-images">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin/works">Works</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/admin/profile">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin/contact">Contact</a>
-                </li>
-            </ul>
-        </div>
-        <div class="home-image-right-wrapper">
-            <div class="home-image-saved-list">
-                <h5>현재 저장된 Profile</h5>
+<div layout:fragment="admin-content">
+    <form th:action="@{/admin/profile}" th:object="${request}" method="post">
+        <div class="profile-save-container">
+            <div class="profile-save-form">
+                <label for="profile-type" class="input-label">Type</label>
+                <select id="profile-type" class="form-select" th:field="*{profileType}">
+                    <option th:each="pType : ${profileTypes}" th:value="${pType}" th:utext="${pType.type}"></option>
+                </select>
             </div>
-            <div class="home-image-save-form">
-                <form th:action="@{/admin/profile}" th:method="post" th:object="${request}" class="home-image-form validation-form" novalidate>
-                    <div class="home-image-save-input">
-                        <div class="form-group">
-                            <div class="form-home-image">
-                                <label for="profileType" class="form-label mt-4">ProfileType</label>
-                                <select id="profileType" class="form-select" th:field="*{profileType}">
-                                    <option th:each="pType : ${profileTypes}" th:value="${pType}" th:utext="${pType}"></option>
-                                </select>
-                            </div>
-                            <div class="form-home-image-title">
-                                <label class="form-label mt-4">Year</label>
-                                <input type="number" id="year" class="form-control" placeholder="연도" min="2015" th:field="*{year}" required>
-                                <div class="invalid-feedback">
-                                    Please write the Year
-                                </div>
-                            </div>
-                            <div>
-                                <label class="form-label mt-4">Content</label>
-                                <input type="text" class="form-control" th:field="*{content}" required>
-                                <div class="invalid-feedback">
-                                    Please select the Content
-                                </div>
-                            </div>
-                            <div>
-                                <label class="form-label mt-4">Content (English)</label>
-                                <input type="text" class="form-control" th:field="*{contentEn}" required>
-                                <div class="invalid-feedback">
-                                    Please select the Content
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="home-image-save-btn-wrapper">
-                        <div class="home-image-save">
-                            <a class="btn btn-secondary" href="/admin/profile">이전</a>
-                        </div>
-                        <div class="home-image-delete">
-                            <button type="submit" class="btn btn-success home-image-save-btn">저장</button>
-                        </div>
-                    </div>
-                </form>
+            <div class="profile-save-form">
+                <label for="profile-year" class="input-label">Year</label>
+                <input id="profile-year" type="number" min="2015" th:field="*{year}" class="form-control" placeholder="Year">
+            </div>
+            <div class="profile-save-form">
+                <label for="profile-content" class="input-label">Content</label>
+                <input id="profile-content" type="text" class="form-control" th:field="*{content}" placeholder="Content">
+            </div>
+            <div class="profile-save-form">
+                <label for="profile-content-en" class="input-label">Content(En)</label>
+                <input id="profile-content-en" type="text" class="form-control" th:field="*{contentEn}" placeholder="Content(En)">
+            </div>
+            <div class="submit-btn-wrapper">
+                <a class="before-btn" href="/admin/profile/all">이전</a>
+                <button type="submit" class="submit-btn">저장</button>
             </div>
         </div>
-    </div>
+    </form>
 </div>
-
-<div class="home-footer">ALL IMAGES AND SITE CONTENT © CHOI MYEONGHEON</div>
-
-<script>
-    window.addEventListener('load', () => {
-        const forms = document.getElementsByClassName('validation-form');
-
-        Array.prototype.filter.call(forms, (form) => {
-            form.addEventListener('submit', function (event) {
-                if (form.checkValidity() === false) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-
-                form.classList.add('was-validated');
-            }, false);
-        });
-    }, false);
-</script>
-<script src="/js/bootstrap.bundle.js"></script>
-</body>
 </html>
+
+<!--<!DOCTYPE HTML>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head th:replace="~{fragments/header.html :: header}">-->
+<!--    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<div class="container">-->
+<!--    <div th:replace="~{fragments/nav.html :: navFrament}" />-->
+<!--</div>-->
+
+<!--<div class="home-image-save-container">-->
+<!--    <div class="home-image-save-wrapper">-->
+<!--        <div class="left-nav">-->
+<!--            <ul class="nav nav-pills flex-column">-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="/admin/home-images">Home</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="/admin/works">Works</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link active" href="/admin/profile">Profile</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="/admin/contact">Contact</a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--        <div class="home-image-right-wrapper">-->
+<!--            <div class="home-image-saved-list">-->
+<!--                <h5>현재 저장된 Profile</h5>-->
+<!--            </div>-->
+<!--            <div class="home-image-save-form">-->
+<!--                <form th:action="@{/admin/profile}" th:method="post" th:object="${request}" class="home-image-form validation-form" novalidate>-->
+<!--                    <div class="home-image-save-input">-->
+<!--                        <div class="form-group">-->
+<!--                            <div class="form-home-image">-->
+<!--                                <label for="profileType" class="form-label mt-4">ProfileType</label>-->
+<!--                                <select id="profileType" class="form-select" th:field="*{profileType}">-->
+<!--                                    <option th:each="pType : ${profileTypes}" th:value="${pType}" th:utext="${pType}"></option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                            <div class="form-home-image-title">-->
+<!--                                <label class="form-label mt-4">Year</label>-->
+<!--                                <input type="number" id="year" class="form-control" placeholder="연도" min="2015" th:field="*{year}" required>-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    Please write the Year-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div>-->
+<!--                                <label class="form-label mt-4">Content</label>-->
+<!--                                <input type="text" class="form-control" th:field="*{content}" required>-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    Please select the Content-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div>-->
+<!--                                <label class="form-label mt-4">Content (English)</label>-->
+<!--                                <input type="text" class="form-control" th:field="*{contentEn}" required>-->
+<!--                                <div class="invalid-feedback">-->
+<!--                                    Please select the Content-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="home-image-save-btn-wrapper">-->
+<!--                        <div class="home-image-save">-->
+<!--                            <a class="btn btn-secondary" href="/admin/profile">이전</a>-->
+<!--                        </div>-->
+<!--                        <div class="home-image-delete">-->
+<!--                            <button type="submit" class="btn btn-success home-image-save-btn">저장</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<div class="home-footer">ALL IMAGES AND SITE CONTENT © CHOI MYEONGHEON</div>-->
+
+<!--<script>-->
+<!--    window.addEventListener('load', () => {-->
+<!--        const forms = document.getElementsByClassName('validation-form');-->
+
+<!--        Array.prototype.filter.call(forms, (form) => {-->
+<!--            form.addEventListener('submit', function (event) {-->
+<!--                if (form.checkValidity() === false) {-->
+<!--                    event.preventDefault();-->
+<!--                    event.stopPropagation();-->
+<!--                }-->
+
+<!--                form.classList.add('was-validated');-->
+<!--            }, false);-->
+<!--        });-->
+<!--    }, false);-->
+<!--</script>-->
+<!--<script src="/js/bootstrap.bundle.js"></script>-->
+<!--</body>-->
+<!--</html>-->

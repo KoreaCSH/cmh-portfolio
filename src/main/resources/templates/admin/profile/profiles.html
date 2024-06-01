@@ -1,217 +1,40 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/header.html :: header}">
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!DOCTYPE html>
+<html   lang="ko"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/admin-default}">
+<head>
+  <link rel="stylesheet" href="/css/admin/common.css" />
+  <link rel="stylesheet" href="/css/admin/profile/profiles.css" />
+  <script src="/js/profiles.js" defer></script>
 </head>
-<body>
-
-<div>
-  <div th:replace="~{fragments/nav.html :: navFrament}" />
-</div>
-
-<div class="admin-container">
-  <div class="admin-wrapper">
-    <div class="left-nav">
-      <ul class="nav nav-pills flex-column">
-        <li class="nav-item">
-          <a class="nav-link" href="/admin/home-images">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/admin/works">Works</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="/admin/profile">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/admin/contact">Contact</a>
-        </li>
-      </ul>
-    </div>
-    <div class="home-image-wrapper">
-      <div class="home-image-table">
-        <ul class="nav nav-tabs" role="tablist">
-          <li class="nav-item" role="presentation">
-            <a class="nav-link active" data-bs-toggle="tab" href="#all" aria-selected="true" role="tab">ALL</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="profile-type" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Type</a>
-            <ul class="dropdown-menu">
-              <li role="presentation" th:each="profileType : ${profileTypes}" style="text-align: center">
-                <a class="dropdown-item" data-bs-toggle="tab" th:href="'#' + ${profileType}" th:text="${profileType}" aria-selected="false" role="tab" tabindex="-1" onclick="dropDownHandler(this)">ProfileType</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <div class="tab-content">
-          <div class="tab-pane fade show active" id="all" role="tabpanel">
-            <table class="table table-hover">
-              <thead>
-              <tr class="table-dark">
-                <th scope="col">Type</th>
-                <th scope="col">Year</th>
-                <th scope="col">Content</th>
-                <th scope="col">Content(En)</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr class="table-light" th:each="profile : ${profiles}" data-bs-toggle="modal" data-bs-target="#profileUpdateModal">
-                <td th:text="${profile.profileType}"></td>
-                <td th:text="${profile.year}"></td>
-                <td th:text="${profile.content}"></td>
-                <td th:text="${profile.contentEn}"></td>
-                <td th:text="${profile.id}" style="display: none"></td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="tab-pane fade" id="awards" role="tabpanel" th:each="profileType : ${profileTypes}" th:id="${profileType}">
-            <table class="table table-hover">
-              <thead>
-              <tr class="table-dark">
-                <th scope="col">Type</th>
-                <th scope="col">Year</th>
-                <th scope="col">Content</th>
-                <th scope="col">Content(En)</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr class="table-light" th:each="profile : ${profiles}" th:if="${profile.profileType == profileType}" data-bs-toggle="modal" data-bs-target="#profileUpdateModal">
-                <td th:text="${profile.profileType}"></td>
-                <td th:text="${profile.year}"></td>
-                <td th:text="${profile.content}"></td>
-                <td th:text="${profile.contentEn}"></td>
-                <td th:text="${profile.id}" style="display: none"></td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+<div layout:fragment="admin-content">
+  <div class="admin-content-header">
+    <!-- <h3>현재 저장된 홈 이미지 (1)</h3> -->
+    <a href="/admin/works/save-form" class="admin-content-header-save-btn">저장</a>
+    <a href="/admin/works/delete-form" class="admin-content-header-del-btn">삭제</a>
+    <select name="workDate" class="admin-content-header-select" id="profile-type-select" onchange="sendGetRequest()">
+      <option th:selected="All == ${selectedType}" value="All">All</option>
+      <option th:each="profileType : ${profileTypes}" th:text="${profileType.type}" th:selected="${profileType.lowerCase} == ${selectedType}" th:value="${profileType.lowerCase}">2018</option>
+    </select>
+  </div>
+  <div class="divTable minimalistBlack">
+    <div class="divTableHeading">
+      <div class="divTableRow">
+        <div class="divTableHead profile-type-header">Type</div>
+        <div class="divTableHead profile-year-header">Year</div>
+        <div class="divTableHead profile-content-header">Content</div>
+        <div class="divTableHead profile-content-en-header">Content(En)</div>
       </div>
-      <div class="home-image-button-wrapper">
-        <div class="home-image-save">
-          <a class="btn btn-success" href="/admin/profile/save-form">저장</a>
-        </div>
-        <div class="home-image-delete">
-          <a class="btn btn-danger" href="/admin/profile/delete-form">삭제</a>
-        </div>
+    </div>
+    <div class="divTableBody">
+      <div class="divTableRow" th:each="profile : ${profiles}">
+        <div class="divTableCell profile-type" th:text="${profile.profileType}"></div>
+        <div class="divTableCell profile-year" th:text="${profile.year}"></div>
+        <div class="divTableCell profile-content" th:text="${profile.content}"></div>
+        <div class="divTableCell profile-content-en" th:text="${profile.contentEn}"></div>
       </div>
     </div>
   </div>
 </div>
-
-<!-- Modal -->
-<div class="modal fade" id="profileUpdateModal" tabindex="-1" aria-labelledby="profileUpdateModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="profileUpdateModalLabel">New message</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <form th:action="@{/admin/profile}" th:object="${request}" th:method="put" class="validation-form" novalidate>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label class="col-form-label">ProfileType:</label>
-            <select id="profileType" class="form-select" th:field="*{profileType}">
-              <option th:each="pType : ${profileTypes}" th:value="${pType}" th:utext="${pType}"></option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="year" class="col-form-label">Year:</label>
-            <input type="number" id="year" class="form-control" placeholder="연도" min="2015" th:field="*{year}" required>
-            <div class="invalid-feedback">
-              Please write the Year
-            </div>
-            <input type="hidden" th:field="*{id}" id="profile-id">
-          </div>
-          <div class="mb-3">
-            <label class="col-form-label">Content</label>
-            <input type="text" id="content" class="form-control" th:field="*{content}" required>
-            <div class="invalid-feedback">
-              Please write the Content
-            </div>
-          </div>
-          <div class="mb-3">
-            <label class="col-form-label">Content</label>
-            <input type="text" id="content-en" class="form-control" th:field="*{contentEn}" required>
-            <div class="invalid-feedback">
-              Please write the Content(English)
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-          <button type="submit" class="btn btn-primary">수정</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-<div class="home-footer">ALL IMAGES AND SITE CONTENT © CHOI MYEONGHEON</div>
-
-<script src="/js/bootstrap.bundle.js"></script>
-<script>
-  function dropDownHandler(elem) {
-    const workYear = document.querySelector('#profile-type');
-    const selectedWorkYear = elem.textContent;
-    workYear.textContent = selectedWorkYear;
-  }
-
-  // Modal 에 데이터 전달하는 로직
-  const profileUpdateModal = document.getElementById('profileUpdateModal');
-  profileUpdateModal.addEventListener('show.bs.modal', event => {
-    const tr = event.relatedTarget;
-    const type = tr.cells[0].innerHTML;
-    const year = tr.cells[1].innerHTML;
-    const content = tr.cells[2].innerHTML;
-    const contentEn = tr.cells[3].innerHTML;
-    const id = tr.cells[4].innerHTML;
-
-    const modalTitle = profileUpdateModal.querySelector('.modal-title');
-    const modalBodyProfileType = profileUpdateModal.querySelector('.modal-body #profileType');
-    const modalBodyYear = profileUpdateModal.querySelector('.modal-body #year');
-    const modalBodyContent = profileUpdateModal.querySelector('.modal-body #content');
-    const modalBodyContentEn = profileUpdateModal.querySelector('.modal-body #content-en');
-    const modalBodyProfileId = profileUpdateModal.querySelector('.modal-body #profile-id');
-
-    modalTitle.textContent = `Information of Profile`;
-    modalBodyProfileType.value = type;
-    modalBodyYear.value = year;
-    modalBodyContent.value = content;
-    modalBodyContentEn.value = contentEn;
-    modalBodyProfileId.value = id;
-  });
-
-  // Modal 내 Input Validation 로직
-  window.addEventListener('load', () => {
-    const forms = document.getElementsByClassName('validation-form');
-
-    Array.prototype.filter.call(forms, (form) => {
-      form.addEventListener('submit', function (event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
-
-  window.addEventListener('load', () => {
-    const forms = document.getElementsByClassName('validation-form');
-
-    Array.prototype.filter.call(forms, (form) => {
-      form.addEventListener('submit', function (event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
-</script>
-</body>
 </html>

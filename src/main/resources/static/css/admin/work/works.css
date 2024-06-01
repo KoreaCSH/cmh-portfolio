@@ -1,0 +1,48 @@
+.admin-work-btn {
+    background-color: rgb(225, 233, 249);
+    color: #0273e6;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+.divTableHeading .divTableRow .del-chk-header {
+    width: 50px;
+}
+
+.del-chk {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.divTableHeading .divTableRow .work-header {
+    width: 190px;
+}
+
+.divTableBody .divTableRow .work {
+    padding: 20px;
+}
+
+.divTableBody .divTableRow .work > img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 1/1;
+}
+
+.divTableHeading .divTableRow .work-title-header,
+.divTableHeading .divTableRow .work-reg-date-header,
+.divTableHeading .divTableRow .work-work-date-header {
+    width: 200px;
+}
+
+.divTableBody .divTableRow .work-title,
+.divTableBody .divTableRow .work-reg-date,
+.divTableBody .divTableRow .work-work-date {
+    width: max-content;
+    max-width: 200px;
+    word-break: break-all;
+}
+
+.divTableBody .divTableRow .work-file-name {
+    width: max-content;
+    word-break: break-all;
+}

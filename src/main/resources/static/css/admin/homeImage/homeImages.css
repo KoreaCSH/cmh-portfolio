@@ -1,0 +1,46 @@
+.admin-home-image-btn {
+    background-color: rgb(225, 233, 249);
+    color: #0273e6;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+.divTableHeading .divTableRow .del-chk-header {
+    width: 50px;
+}
+
+.del-chk {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.divTableHeading .divTableRow .home-image-header {
+    width: 190px;
+}
+
+.divTableBody .divTableRow .home-image {
+    padding: 20px;
+}
+
+.divTableBody .divTableRow .home-image > img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 1/1;
+}
+
+.divTableHeading .divTableRow .home-image-title-header,
+.divTableHeading .divTableRow .home-image-reg-date-header {
+    width: 250px;
+}
+
+.divTableBody .divTableRow .home-image-title,
+.divTableBody .divTableRow .home-image-reg-date {
+    width: max-content;
+    max-width: 250px;
+    word-break: break-all;
+}
+
+.divTableBody .divTableRow .home-image-file-name {
+    width: max-content;
+    word-break: break-all;
+}

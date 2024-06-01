@@ -1,0 +1,39 @@
+.admin-profile-btn {
+    background-color: rgb(225, 233, 249);
+    color: #0273e6;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+.divTableHeading .divTableRow .del-chk-header {
+    width: 50px;
+}
+
+.del-chk {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.divTableHeading .divTableRow .profile-type-header,
+.divTableHeading .divTableRow .profile-year-header
+{
+    width: 160px;
+}
+
+.divTableHeading .divTableRow .profile-content-header,
+.divTableHeading .divTableRow .profile-content-en-header {
+    width: calc(50% - 338px);
+}
+
+.divTableBody .divTableRow .profile-type,
+.divTableBody .divTableRow .profile-year {
+    width: max-content;
+    max-width: 160px;
+    word-break: break-all;
+}
+
+.divTableBody .divTableRow .profile-content,
+.divTableBody .divTableRow .profile-content-en {
+    width: max-content;
+    word-break: break-all;
+}

@@ -1,0 +1,60 @@
+.admin-container {
+    max-width: 1536px;
+    display: flex;
+    border: 1px solid var(--admin-border-color);
+    margin-top: 16px;
+}
+
+.admin-navbar {
+    width: 220px;
+    width: 15%;
+    background-color: var(--admin-background-color);
+    padding: 8px 12px;
+    border-right: 1px solid var(--admin-border-color);
+}
+
+.admin-navbar a {
+    display: block;
+    padding: 8px;
+}
+
+.admin-navbar a:hover {
+    background-color: rgb(225, 233, 249);
+    color: #0273e6;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+.admin-content {
+    padding: 8px 12px;
+    width: 85%;
+}
+
+@media screen and (min-width: 1600px) {
+    .admin-container {
+        margin-top: 16px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.before-btn {
+    display: inline-block;
+    padding: 8px 14px;
+    height: 21.5px;
+    line-height: 21.5px;
+    box-sizing: content-box;
+    color: var(--before-btn-background-color);
+    background-color: var(--background-color);
+    border: 2px solid var(--before-btn-background-color);
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.before-btn:hover {
+    color: #fff;
+    font-weight: 500;
+    background-color: var(--before-btn-background-color);
+}

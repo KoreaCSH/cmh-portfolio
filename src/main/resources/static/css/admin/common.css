@@ -1,16 +1,9 @@
-.admin-home-image-btn {
-    background-color: rgb(225, 233, 249);
-    color: #0273e6;
-    font-weight: 500;
-    border-radius: 4px;
-}
-
-.home-image-content-header {
+.admin-content-header {
     display: flex;
     justify-content: flex-start;
 }
 
-.home-image-content-header a {
+.admin-content-header a {
     display: inline-block;
     padding: 8px 14px;
     border-radius: 6px;
@@ -20,7 +13,7 @@
     font-size: 1rem;
 }
 
-.home-image-content-header button {
+.admin-content-header button {
     display: inline-block;
     padding: 8px 14px;
     height: 21.5px;
@@ -33,11 +26,35 @@
     margin-top: 10px;
 }
 
+select::-ms-expand {
+    display: none;
+}
+.admin-content-header-select {
+    -o-appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 150px;
+    height: 41.5px;
+    background: url("../../images/angle-down-solid.svg") calc(100% - 5px) center no-repeat;
+    background-size: 15px;
+    padding: 5px 30px 5px 10px;
+    border-radius: 4px;
+    outline: 0 none;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+.admin-content-header-select option {
+    background: black;
+    color: #fff;
+    padding: 3px 0;
+}
+
 .before-btn {
     margin: 0 10px;
 }
 
-.home-image-content-header-save-btn {
+.admin-content-header-save-btn {
     /* background-color: rgb(225, 233, 249); */
     border: 2px solid var(--admin-save-btn-color);
     color: var(--admin-save-btn-color);
@@ -45,7 +62,7 @@
     margin: 0 10px 0 10px;
 }
 
-.home-image-content-header-save-btn:hover {
+.admin-content-header-save-btn:hover {
     /* background-color: rgb(225, 233, 249); */
     border: 2px solid var(--admin-save-btn-color);
     color: #fff;
@@ -53,14 +70,14 @@
     background-color: var(--admin-save-btn-color);
 }
 
-.home-image-content-header-del-btn {
+.admin-content-header-del-btn {
     background-color: #fff;
     border: 2px solid var(--admin-del-btn-color);
     color: var(--admin-del-btn-color);
     font-weight: 500;
 }
 
-.home-image-content-header-del-btn:hover {
+.admin-content-header-del-btn:hover {
     border: 2px solid var(--admin-del-btn-color);
     color: #fff;
     font-weight: 500;
@@ -117,44 +134,4 @@ div.minimalistBlack {
 }
 .divTableBody {
     display: table-row-group;
-}
-
-.divTableHeading .divTableRow .del-chk-header {
-    width: 50px;
-}
-
-.del-chk {
-    text-align: center;
-    vertical-align: middle;
-}
-
-.divTableHeading .divTableRow .home-image-header {
-    width: 190px;
-}
-
-.divTableBody .divTableRow .home-image {
-    padding: 20px;
-}
-
-.divTableBody .divTableRow .home-image > img {
-    width: 100%;
-    display: block;
-    aspect-ratio: 1/1;
-}
-
-.divTableHeading .divTableRow .home-image-title-header,
-.divTableHeading .divTableRow .home-image-reg-date-header {
-    width: 250px;
-}
-
-.divTableBody .divTableRow .home-image-title,
-.divTableBody .divTableRow .home-image-reg-date {
-    width: max-content;
-    max-width: 250px;
-    word-break: break-all;
-}
-
-.divTableBody .divTableRow .home-image-file-name {
-    width: max-content;
-    word-break: break-all;
 }

@@ -4,6 +4,7 @@ import com.choimyeongheon.portfolio.domain.admin.domain.Admin;
 import com.choimyeongheon.portfolio.domain.work.domain.Work;
 import com.choimyeongheon.portfolio.global.exception.CustomException;
 import com.choimyeongheon.portfolio.global.exception.ErrorType;
+import com.choimyeongheon.portfolio.global.util.DateUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -51,7 +52,7 @@ public class WorkMapper {
     }
 
     public WorkResponse toResponse(Work work) {
-        return new WorkResponse(work.getId(), work.getFileName(), work.getOriginName(), work.getTitle(), work.getWorkDate(), work.getCreatedAt());
+        return new WorkResponse(work.getId(), work.getFileName(), work.getOriginName(), work.getTitle(), work.getWorkDate(), DateUtil.yyyyMMddHHmm(work.getCreatedAt()));
     }
 
     public ResponseEntity<Resource> toResource(String fileName) {

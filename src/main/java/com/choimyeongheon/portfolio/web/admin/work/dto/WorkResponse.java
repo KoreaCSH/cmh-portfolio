@@ -15,6 +15,6 @@ public class WorkResponse {
     private String originName;
     private String title;
     private LocalDate workDate;
-    private LocalDateTime regDate;
+    private String regDate;
 
 }

@@ -6,6 +6,7 @@ import com.choimyeongheon.portfolio.domain.homeImage.repository.HomeImageReposit
 import com.choimyeongheon.portfolio.global.common.DelYn;
 import com.choimyeongheon.portfolio.global.exception.CustomException;
 import com.choimyeongheon.portfolio.global.exception.ErrorType;
+import com.choimyeongheon.portfolio.global.util.DateUtil;
 import com.choimyeongheon.portfolio.web.admin.homeImage.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
@@ -78,7 +79,7 @@ public class HomeImageService {
     public HomeImageResponse findRandomly() {
         List<HomeImage> randomHomeImage = homeImageRepository.findRandomly();
         if (CollectionUtils.isEmpty(randomHomeImage)) {
-            return new HomeImageResponse(0L, "", "", "등록한 이미지가 존재하지 않습니다.", LocalDateTime.now());
+            return new HomeImageResponse(0L, "", "", "등록한 이미지가 존재하지 않습니다.", DateUtil.yyyyMMddHHmm(LocalDateTime.now()));
         }
 
         return homeImageMapper.toResponse(randomHomeImage.get(0));

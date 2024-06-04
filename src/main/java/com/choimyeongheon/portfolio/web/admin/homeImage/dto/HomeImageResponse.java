@@ -16,6 +16,6 @@ public class HomeImageResponse {
     private String fileName;
     private String originName;
     private String title;
-    private LocalDateTime regDate;
+    private String regDate;
 
 }

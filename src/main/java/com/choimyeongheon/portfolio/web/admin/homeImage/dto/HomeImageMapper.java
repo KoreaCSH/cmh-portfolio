@@ -4,6 +4,7 @@ import com.choimyeongheon.portfolio.domain.admin.domain.Admin;
 import com.choimyeongheon.portfolio.domain.homeImage.domain.HomeImage;
 import com.choimyeongheon.portfolio.global.exception.CustomException;
 import com.choimyeongheon.portfolio.global.exception.ErrorType;
+import com.choimyeongheon.portfolio.global.util.DateUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -46,7 +47,7 @@ public class HomeImageMapper {
     }
 
     public HomeImageResponse toResponse(HomeImage homeImage) {
-        return new HomeImageResponse(homeImage.getId(), homeImage.getFileName(), homeImage.getOriginName(), homeImage.getTitle(), homeImage.getCreatedAt());
+        return new HomeImageResponse(homeImage.getId(), homeImage.getFileName(), homeImage.getOriginName(), homeImage.getTitle(), DateUtil.yyyyMMddHHmm(homeImage.getCreatedAt()));
     }
 
     public ResponseEntity<Resource> toResource(String fileName) {

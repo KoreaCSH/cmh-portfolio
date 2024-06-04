@@ -1,5 +1,6 @@
 package com.choimyeongheon.portfolio.web.admin.work.dto;
 
+import com.choimyeongheon.portfolio.global.util.DateUtil;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,7 +19,7 @@ public class WorkDeleteDto {
     private String title;
     private LocalDate workDate;
     private Boolean isDeleted;
-    private LocalDateTime regDate;
+    private String regDate;
 
     public WorkDeleteDto(Long id, String fileName, String originName, String title, LocalDate workDate, LocalDateTime regDate) {
         this.id = id;
@@ -27,7 +28,7 @@ public class WorkDeleteDto {
         this.title = title;
         this.workDate = workDate;
         this.isDeleted = false;
-        this.regDate = regDate;
+        this.regDate = DateUtil.yyyyMMddHHmm(regDate);
     }
 
 }

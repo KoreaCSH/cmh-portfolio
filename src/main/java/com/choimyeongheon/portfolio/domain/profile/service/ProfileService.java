@@ -80,7 +80,15 @@ public class ProfileService {
     }
 
     public List<ProfileDeletionDto> findAllDeletionDto() {
-        return profileRepository.findAll()
+        return profileRepository.findAllOrderByYear()
+                .stream()
+                .filter(Profile::isNotDeleted)
+                .map(ProfileDeletionDto::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<ProfileDeletionDto> findAllDeletionDtoByProfileType(String profileType) {
+        return profileRepository.findAllByProfileTypeOrderByYear(ProfileType.from(profileType))
                 .stream()
                 .filter(Profile::isNotDeleted)
                 .map(ProfileDeletionDto::new)

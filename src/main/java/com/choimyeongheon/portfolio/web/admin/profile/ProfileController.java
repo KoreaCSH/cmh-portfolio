@@ -74,20 +74,33 @@ public class ProfileController {
         return "redirect:/admin/profile";
     }
 
-    @GetMapping("delete-form")
+    @GetMapping("/delete-form/all")
     public String deleteForm(Model model, ProfileDeletionRequest request) {
 
         List<ProfileType> profileTypes = profileService.findAllProfileType();
         request.setProfileDeletionDtoList(profileService.findAllDeletionDto());
         model.addAttribute("profileTypes", profileTypes);
         model.addAttribute("request", request);
+        model.addAttribute("selectedType", "All");
+        return "admin/profile/delete";
+    }
+
+    @GetMapping("/delete-form/{profileType}")
+    public String deleteFormByProfileType(Model model, ProfileDeletionRequest request,
+                                          @PathVariable(name = "profileType") String profileType) {
+
+        List<ProfileType> profileTypes = profileService.findAllProfileType();
+        request.setProfileDeletionDtoList(profileService.findAllDeletionDtoByProfileType(profileType));
+        model.addAttribute("profileTypes", profileTypes);
+        model.addAttribute("request", request);
+        model.addAttribute("selectedType", profileType);
         return "admin/profile/delete";
     }
 
     @DeleteMapping
     public String delete(@ModelAttribute("request") ProfileDeletionRequest request) {
         profileService.deleteAllByIds(request.getProfileDeletionDtoList());
-        return "redirect:/admin/profile";
+        return "redirect:/admin/profile/all";
     }
 
 }

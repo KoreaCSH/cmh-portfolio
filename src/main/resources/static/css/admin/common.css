@@ -136,6 +136,15 @@ div.minimalistBlack {
     display: table-row-group;
 }
 
+.divTableHeading .divTableRow .update-btn-header {
+    width: 60px;
+}
+
+.update-btn-wrapper {
+    text-align: center;
+    vertical-align: middle;
+}
+
 .submit-btn-wrapper {
     display: flex;
     justify-content: center;

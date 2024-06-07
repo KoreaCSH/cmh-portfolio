@@ -13,7 +13,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@DynamicUpdate // JPA 스펙은 아니다. 조금 더 고려하자.
+//@DynamicUpdate // JPA 스펙은 아니다. 조금 더 고려하자.
 public class HomeImage extends BaseEntity {
 
     @Id

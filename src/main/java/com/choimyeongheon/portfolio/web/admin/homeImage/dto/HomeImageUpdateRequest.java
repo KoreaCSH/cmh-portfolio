@@ -13,6 +13,7 @@ import lombok.Setter;
 public class HomeImageUpdateRequest {
 
     private Long id;
+    private String originName;
 
     @NotBlank(message = "제목을 입력해 주세요.")
     private String updatedTitle;

@@ -50,6 +50,14 @@ public class HomeImageController {
         return "redirect:/admin/home-images";
     }
 
+    @GetMapping("/admin/home-images/update-form/{id}")
+    public String updateForm(Model model, @PathVariable(name = "id") Long id) {
+
+        HomeImageUpdateRequest request = homeImageService.findUpdateRequest(id);
+        model.addAttribute("request", request);
+        return "admin/homeImage/update";
+    }
+
     @PutMapping("/admin/home-images")
     public String update(@ModelAttribute("request") @Valid HomeImageUpdateRequest request,
                          @AuthenticationPrincipal Admin admin) {

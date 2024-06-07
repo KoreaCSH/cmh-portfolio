@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Component
@@ -47,7 +48,8 @@ public class HomeImageMapper {
     }
 
     public HomeImageResponse toResponse(HomeImage homeImage) {
-        return new HomeImageResponse(homeImage.getId(), homeImage.getFileName(), homeImage.getOriginName(), homeImage.getTitle(), DateUtil.yyyyMMddHHmm(homeImage.getCreatedAt()));
+        LocalDateTime regDate = homeImage.getUpdatedAt() == null ? homeImage.getCreatedAt() : homeImage.getUpdatedAt();
+        return new HomeImageResponse(homeImage.getId(), homeImage.getFileName(), homeImage.getOriginName(), homeImage.getTitle(), DateUtil.yyyyMMddHHmm(regDate));
     }
 
     public ResponseEntity<Resource> toResource(String fileName) {

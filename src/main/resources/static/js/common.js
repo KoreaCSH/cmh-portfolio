@@ -18,3 +18,7 @@ function deleteHandler() {
         return false;
     }
 }
+
+function updateHandler() {
+    alert("이미지는 수정할 수 없습니다.");
+}

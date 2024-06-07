@@ -38,7 +38,7 @@
     }
 }
 
-.before-btn {
+.before-btn, .update-btn {
     display: inline-block;
     padding: 8px 14px;
     height: 21.5px;
@@ -53,7 +53,8 @@
     cursor: pointer;
 }
 
-.before-btn:hover {
+.before-btn:hover,
+.update-btn:hover {
     color: #fff;
     font-weight: 500;
     background-color: var(--before-btn-background-color);

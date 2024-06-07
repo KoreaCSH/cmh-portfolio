@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/admin-default}">
+<head>
+  <link rel="stylesheet" href="/css/admin/homeImage/save.css" />
+  <script src="/js/common.js" defer></script>
+</head>
+<div layout:fragment="admin-content">
+  <form th:action="@{/admin/home-images}" th:object="${request}" th:method="put" class="home-image-form">
+    <div class="home-image-save-container">
+      <div class="home-image-save-form">
+        <span class="input-label">이미지</span>
+        <div class="home-image-save-file">
+          <input class="home-image-file-name" id="home-image-file-name" type="text" th:field="*{originName}" readonly>
+          <label class="home-image-file-label" onclick="updateHandler()"><i class="fa-solid fa-upload"></i></label>
+        </div>
+      </div>
+      <div class="home-image-save-title home-image-save-form">
+        <label for="home-image-title" class="input-label">제목</label>
+        <input id="home-image-title" type="text" th:field="*{updatedTitle}" class="form-control" placeholder="Title">
+        <input type="hidden" th:field="*{id}">
+      </div>
+      <div class="home-image-save-btn-wrapper">
+        <a class="before-btn" href="/admin/home-images">이전</a>
+        <button type="submit" class="home-image-save-btn">수정</button>
+      </div>
+    </div>
+  </form>
+</div>
+</html>

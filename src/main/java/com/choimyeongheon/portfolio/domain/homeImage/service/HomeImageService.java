@@ -76,6 +76,11 @@ public class HomeImageService {
                         .collect(Collectors.toList());
     }
 
+    public HomeImageUpdateRequest findUpdateRequest(Long id) {
+        HomeImage homeImage = findById(id);
+        return new HomeImageUpdateRequest(homeImage.getId(), homeImage.getOriginName(), homeImage.getTitle());
+    }
+
     public HomeImageResponse findRandomly() {
         List<HomeImage> randomHomeImage = homeImageRepository.findRandomly();
         if (CollectionUtils.isEmpty(randomHomeImage)) {

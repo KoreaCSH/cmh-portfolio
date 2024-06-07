@@ -62,7 +62,7 @@ class HomeImageServiceTest {
         HomeImage findHomeImage = homeImageService.findById(uploadedHomeImageId);
 
         String updatedTitle = "title update test";
-        HomeImageUpdateRequest updateRequest = new HomeImageUpdateRequest(findHomeImage.getId(), updatedTitle);
+        HomeImageUpdateRequest updateRequest = new HomeImageUpdateRequest(findHomeImage.getId(), updatedTitle, "");
 
         homeImageService.updateHomeImage(updateRequest, admin);
 

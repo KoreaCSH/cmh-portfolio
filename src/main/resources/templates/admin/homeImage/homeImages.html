@@ -16,6 +16,7 @@
     <div class="divTable minimalistBlack">
         <div class="divTableHeading">
             <div class="divTableRow">
+                <div class="divTableHead update-btn-header">수정</div>
                 <div class="divTableHead home-image-header">이미지</div>
                 <div class="divTableHead home-image-title-header">제목</div>
                 <div class="divTableHead home-image-reg-date-header">등록일자</div>
@@ -24,6 +25,7 @@
         </div>
         <div class="divTableBody">
             <div class="divTableRow" th:each="homeImage : ${homeImages}">
+                <div class="divTableCell update-btn-wrapper"><a class="update-btn" th:href="@{/admin/home-images/update-form/{id}(id=${homeImage.id})}">수정</a></div>
                 <div class="divTableCell home-image"><img th:src="'/admin/home-images/display?fileName='+${homeImage.fileName}" /></div>
                 <div class="divTableCell home-image-title" th:text="${homeImage.title}"></div>
                 <div class="divTableCell home-image-reg-date" th:text="${homeImage.regDate}"></div>

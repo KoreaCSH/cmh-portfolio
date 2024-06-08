@@ -6,6 +6,7 @@ import com.choimyeongheon.portfolio.domain.work.repository.WorkRepository;
 import com.choimyeongheon.portfolio.global.common.DelYn;
 import com.choimyeongheon.portfolio.global.exception.CustomException;
 import com.choimyeongheon.portfolio.global.exception.ErrorType;
+import com.choimyeongheon.portfolio.global.util.DateUtil;
 import com.choimyeongheon.portfolio.web.admin.work.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
@@ -54,8 +55,12 @@ public class WorkService {
     @Transactional
     public void update(WorkUpdateRequest request, Admin admin) {
         Work findWork = findById(request.getId());
+        findWork.updateTitleAndWorkDate(request.getUpdatedTitle(), DateUtil.stringToLocalDate(request.getUpdatedWorkDate()), admin);
+    }
 
-        findWork.updateTitleAndWorkDate(request.getUpdatedTitle(), workMapper.stringToLocalDate(request.getUpdatedWorkDate()), admin);
+    public WorkUpdateRequest findWorkUpdateRequestById(Long id) {
+        Work work = findById(id);
+        return new WorkUpdateRequest(work);
     }
 
     // 삭제 - 일괄 삭제 가능
@@ -63,7 +68,7 @@ public class WorkService {
         return workRepository.findAllByOrderByWorkDateDesc()
                         .stream()
                         .filter(work -> work.getDelYn() == DelYn.N)
-                        .map(work -> new WorkDeleteDto(work.getId(), work.getFileName(), work.getOriginName(), work.getTitle(), work.getWorkDate(), work.getCreatedAt()))
+                        .map(WorkDeleteDto::new)
                         .collect(Collectors.toList());
     }
 
@@ -71,7 +76,7 @@ public class WorkService {
         return workRepository.findByYearOrderByWorkDateDesc(year)
                 .stream()
                 .filter(work -> work.getDelYn() == DelYn.N)
-                .map(work -> new WorkDeleteDto(work.getId(), work.getFileName(), work.getOriginName(), work.getTitle(), work.getWorkDate(), work.getCreatedAt()))
+                .map(WorkDeleteDto::new)
                 .collect(Collectors.toList());
     }
 

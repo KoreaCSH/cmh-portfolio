@@ -53,6 +53,10 @@
     cursor: pointer;
 }
 
+.update-btn {
+    font-size: 1vw;
+}
+
 .before-btn:hover,
 .update-btn:hover {
     color: #fff;

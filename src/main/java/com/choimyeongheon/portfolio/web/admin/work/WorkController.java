@@ -68,6 +68,13 @@ public class WorkController {
         return "redirect:/admin/works";
     }
 
+    @GetMapping("/admin/works/update-form/{id}")
+    public String updateForm(Model model, @PathVariable(name = "id") Long id) {
+        WorkUpdateRequest request = workService.findWorkUpdateRequestById(id);
+        model.addAttribute("request", request);
+        return "admin/work/update";
+    }
+
     @PutMapping("/admin/works")
     public String update(@ModelAttribute("request") @Valid WorkUpdateRequest request,
                          @AuthenticationPrincipal Admin admin) {

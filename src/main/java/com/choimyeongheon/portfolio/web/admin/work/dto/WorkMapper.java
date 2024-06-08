@@ -19,6 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Component
@@ -38,11 +39,8 @@ public class WorkMapper {
             throw new CustomException(ErrorType.FILE_UPLOAD_EXCEPTION);
         }
 
-        // YYYY-MM String 을 LocalDate 로 변환. DD는 01로 고정
-        LocalDate workDate = stringToLocalDate(request.getWorkDate());
-
         return Work.builder()
-                .workDate(workDate)
+                .workDate(request.getWorkDate())
                 .title(request.getTitle())
                 .originName(originName)
                 .fileName(fileName)
@@ -52,7 +50,8 @@ public class WorkMapper {
     }
 
     public WorkResponse toResponse(Work work) {
-        return new WorkResponse(work.getId(), work.getFileName(), work.getOriginName(), work.getTitle(), work.getWorkDate(), DateUtil.yyyyMMddHHmm(work.getCreatedAt()));
+        LocalDateTime regDate = work.getUpdatedAt() == null ? work.getCreatedAt() : work.getUpdatedAt();
+        return new WorkResponse(work.getId(), work.getFileName(), work.getOriginName(), work.getTitle(), work.getWorkDate(), DateUtil.yyyyMMddHHmm(regDate));
     }
 
     public ResponseEntity<Resource> toResource(String fileName) {
@@ -70,14 +69,6 @@ public class WorkMapper {
         }
 
         return new ResponseEntity(resource, header, HttpStatus.OK);
-    }
-
-    public LocalDate stringToLocalDate(String strWorkDate) {
-        String[] yearAndMonth = strWorkDate.split("-");
-        int year = Integer.parseInt(yearAndMonth[0]);
-        int month = Integer.parseInt(yearAndMonth[1]);
-        int date = Integer.parseInt(yearAndMonth[2]);
-        return LocalDate.of(year, month, date);
     }
 
 }

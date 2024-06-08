@@ -53,7 +53,7 @@ public class HomeImageController {
     @GetMapping("/admin/home-images/update-form/{id}")
     public String updateForm(Model model, @PathVariable(name = "id") Long id) {
 
-        HomeImageUpdateRequest request = homeImageService.findUpdateRequest(id);
+        HomeImageUpdateRequest request = homeImageService.findUpdateRequestById(id);
         model.addAttribute("request", request);
         return "admin/homeImage/update";
     }

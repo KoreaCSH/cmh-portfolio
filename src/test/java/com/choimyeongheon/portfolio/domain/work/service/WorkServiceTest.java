@@ -106,7 +106,7 @@ class WorkServiceTest {
         MultipartFile multipartFile1 = new MockMultipartFile("image", originalFileName, "image/jpeg",
                 new FileInputStream(filePath));
 
-        request1 = new WorkSaveRequest(multipartFile1, title, workDate);
+        request1 = new WorkSaveRequest(multipartFile1, title, null);
 
 
         originalFileName = "test2.jpeg";
@@ -117,7 +117,7 @@ class WorkServiceTest {
         MultipartFile multipartFile2 = new MockMultipartFile("image", originalFileName, "image/jpeg",
                 new FileInputStream(filePath));
 
-        request2 = new WorkSaveRequest(multipartFile2, title, workDate);
+        request2 = new WorkSaveRequest(multipartFile2, title, null);
 
 
         originalFileName = "test3.jpeg";
@@ -128,10 +128,10 @@ class WorkServiceTest {
         MultipartFile multipartFile3 = new MockMultipartFile("image", originalFileName, "image/jpeg",
                 new FileInputStream(filePath));
 
-        request3 = new WorkSaveRequest(multipartFile3, title, workDate);
+        request3 = new WorkSaveRequest(multipartFile3, title, null);
 
-        request4 = new WorkSaveRequest(multipartFile3, title, "2021-11");
-        request5 = new WorkSaveRequest(multipartFile3, title, "2021-01");
+        request4 = new WorkSaveRequest(multipartFile3, title, null);
+        request5 = new WorkSaveRequest(multipartFile3, title, null);
     }
 
 }

@@ -21,6 +21,7 @@
   <div class="divTable minimalistBlack">
     <div class="divTableHeading">
       <div class="divTableRow">
+        <div class="divTableHead update-btn-header">수정</div>
         <div class="divTableHead work-header">이미지</div>
         <div class="divTableHead work-title-header">제목</div>
         <div class="divTableHead work-work-date-header">작업일자</div>
@@ -30,7 +31,8 @@
     </div>
     <div class="divTableBody">
       <div class="divTableRow" th:each="work : ${works}">
-        <div class="divTableCell work"><img th:src="'/admin/home-images/display?fileName='+${work.fileName}" /></div>
+        <div class="divTableCell update-btn-wrapper"><a class="update-btn" th:href="@{/admin/works/update-form/{id}(id=${work.id})}">수정</a></div>
+        <div class="divTableCell work"><img th:src="'/admin/works/display?fileName='+${work.fileName}" /></div>
         <div class="divTableCell work-title" th:text="${work.title}"></div>
         <div class="divTableCell work-work-date" th:text="${work.workDate}"></div>
         <div class="divTableCell work-reg-date" th:text="${work.regDate}"></div>

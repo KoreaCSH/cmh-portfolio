@@ -13,7 +13,7 @@
     <form th:action="@{/admin/works}" th:object="${request}" th:method="delete" onsubmit="return deleteHandler()">
         <div class="admin-content-header">
             <!-- <h3>현재 저장된 홈 이미지 (1)</h3> -->
-            <a class="before-btn" href="/admin/works">이전</a>
+            <a class="before-btn delete-page-before-btn" href="/admin/works">이전</a>
             <button type="submit" class="admin-content-header-del-btn">삭제</button>
             <select name="workDate" class="admin-content-header-select" id="work-year-select" onchange="sendDeleteFormRequest()">
                 <option th:selected="All == ${workYear}" value="All">All</option>

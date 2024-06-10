@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/admin-default}">
+<head>
+  <link rel="stylesheet" href="/css/admin/common.css" />
+  <link rel="stylesheet" href="/css/admin/profile/save.css" />
+</head>
+<div layout:fragment="admin-content">
+  <form th:action="@{/admin/profile}" th:object="${request}" th:method="put">
+    <div class="profile-save-container">
+      <div class="profile-save-form">
+        <label for="profile-type" class="input-label">Type</label>
+        <select id="profile-type" class="form-select" th:field="*{profileType}">
+          <option th:each="pType : ${profileTypes}" th:value="${pType.lowerCase}" th:text="${pType.type}"></option>
+        </select>
+      </div>
+      <div class="profile-save-form">
+        <label for="profile-year" class="input-label">Year</label>
+        <input id="profile-year" type="number" min="2015" th:field="*{year}" class="form-control" placeholder="Year">
+      </div>
+      <div class="profile-save-form">
+        <label for="profile-content" class="input-label">Content</label>
+        <input id="profile-content" type="text" class="form-control" th:field="*{content}" placeholder="Content">
+      </div>
+      <div class="profile-save-form">
+        <label for="profile-content-en" class="input-label">Content(En)</label>
+        <input id="profile-content-en" type="text" class="form-control" th:field="*{contentEn}" placeholder="Content(En)">
+        <input type="hidden" th:field="*{id}">
+      </div>
+      <div class="submit-btn-wrapper">
+        <a class="before-btn" href="/admin/profile/all">이전</a>
+        <button type="submit" class="submit-btn">수정</button>
+      </div>
+    </div>
+  </form>
+</div>
+</html>

@@ -1,12 +1,12 @@
 package com.choimyeongheon.portfolio.web.admin.profile.dto;
 
+import com.choimyeongheon.portfolio.domain.profile.domain.Profile;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -22,5 +22,13 @@ public class ProfileUpdateRequest {
     @NotBlank(message = "내용을 입력해 주세요.")
     private String contentEn;
     private String profileType;
+
+    public ProfileUpdateRequest(Profile profile) {
+        this.id = profile.getId();
+        this.year = profile.getYear();
+        this.content = profile.getContent();
+        this.contentEn = profile.getContentEn();
+        this.profileType = profile.getProfileType().getLowerCase();
+    }
 
 }

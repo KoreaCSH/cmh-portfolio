@@ -50,10 +50,6 @@ select::-ms-expand {
     padding: 3px 0;
 }
 
-.before-btn {
-    margin: 0 10px;
-}
-
 .admin-content-header-save-btn {
     /* background-color: rgb(225, 233, 249); */
     border: 2px solid var(--admin-save-btn-color);

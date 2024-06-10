@@ -9,6 +9,7 @@ import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileSaveRequest;
 import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileUpdateRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,25 +20,24 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/admin/profile")
+@Slf4j
 public class ProfileController {
 
     private final ProfileService profileService;
 
     @GetMapping("/all")
-    public String profiles(Model model, ProfileUpdateRequest request) {
+    public String profiles(Model model) {
         List<ProfileResponse> profiles = profileService.findAll();
         List<ProfileType> profileTypes = profileService.findAllProfileType();
 
         model.addAttribute("profiles", profiles);
         model.addAttribute("profileTypes", profileTypes);
         model.addAttribute("selectedType", "All");
-        model.addAttribute("request", request);
         return "admin/profile/profiles";
     }
 
     @GetMapping("/{profileType}")
-    public String profilesByType(Model model, ProfileUpdateRequest request,
-                                @PathVariable(name = "profileType") String profileType) {
+    public String profilesByType(Model model, @PathVariable(name = "profileType") String profileType) {
 
         List<ProfileResponse> profiles = profileService.findAllByProfileType(profileType);
         List<ProfileType> profileTypes = profileService.findAllProfileType();
@@ -45,7 +45,6 @@ public class ProfileController {
         model.addAttribute("profiles", profiles);
         model.addAttribute("profileTypes", profileTypes);
         model.addAttribute("selectedType", profileType);
-        model.addAttribute("request", request);
         return "admin/profile/profiles";
     }
 
@@ -66,12 +65,23 @@ public class ProfileController {
         return "redirect:/admin/profile/all";
     }
 
+    @GetMapping("/update-form/{id}")
+    public String updateForm(Model model, @PathVariable(name = "id") Long id) {
+        ProfileUpdateRequest request = profileService.findProfileUpdateRequestById(id);
+        List<ProfileType> profileTypes = profileService.findAllProfileType();
+
+        model.addAttribute("request", request);
+        model.addAttribute("profileTypes", profileTypes);
+        model.addAttribute("selectedType", request.getProfileType());
+        log.info("selectedType : " + request.getProfileType());
+        return "admin/profile/update";
+    }
+
     @PutMapping
     public String update(@ModelAttribute("request") @Valid ProfileUpdateRequest request,
                          @AuthenticationPrincipal Admin admin) {
         profileService.update(request, admin);
-
-        return "redirect:/admin/profile";
+        return "redirect:/admin/profile/all";
     }
 
     @GetMapping("/delete-form/all")

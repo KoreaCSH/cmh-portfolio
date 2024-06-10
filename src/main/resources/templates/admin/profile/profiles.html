@@ -21,6 +21,7 @@
   <div class="divTable minimalistBlack">
     <div class="divTableHeading">
       <div class="divTableRow">
+        <div class="divTableHead update-btn-header">수정</div>
         <div class="divTableHead profile-type-header">Type</div>
         <div class="divTableHead profile-year-header">Year</div>
         <div class="divTableHead profile-content-header">Content</div>
@@ -29,6 +30,7 @@
     </div>
     <div class="divTableBody">
       <div class="divTableRow" th:each="profile : ${profiles}">
+        <div class="divTableCell update-btn-wrapper"><a class="update-btn" th:href="@{/admin/profile/update-form/{id}(id=${profile.id})}">수정</a></div>
         <div class="divTableCell profile-type" th:text="${profile.profileType}"></div>
         <div class="divTableCell profile-year" th:text="${profile.year}"></div>
         <div class="divTableCell profile-content" th:text="${profile.content}"></div>

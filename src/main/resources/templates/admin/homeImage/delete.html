@@ -12,7 +12,7 @@
   <form th:action="@{/admin/home-images}" th:object="${request}" th:method="delete" onsubmit="return deleteHandler()">
     <div class="admin-content-header">
       <!-- <h3>현재 저장된 홈 이미지 (1)</h3> -->
-      <a class="before-btn" href="/admin/home-images">이전</a>
+      <a class="before-btn delete-page-before-btn" href="/admin/home-images">이전</a>
       <button type="submit" class="admin-content-header-del-btn">삭제</button>
     </div>
     <div class="divTable minimalistBlack">

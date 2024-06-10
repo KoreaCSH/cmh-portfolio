@@ -42,6 +42,12 @@ public class ProfileService {
         findProfile.update(request, admin);
     }
 
+    public ProfileUpdateRequest findProfileUpdateRequestById(Long id) {
+        Profile findProfile = profileRepository.findById(id)
+                .orElseThrow(() -> new CustomException(ErrorType.PROFILE_NOT_FOUND));
+
+        return new ProfileUpdateRequest(findProfile);
+    }
 
     public List<ProfileResponse> findAll() {
         return profileRepository.findAllOrderByYear()

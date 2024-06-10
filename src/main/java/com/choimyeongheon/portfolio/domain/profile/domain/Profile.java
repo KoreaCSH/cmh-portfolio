@@ -59,7 +59,7 @@ public class Profile extends BaseEntity {
         this.year = request.getYear();
         this.content = request.getContent();
         this.contentEn = request.getContentEn();
-        this.profileType = ProfileType.valueOf(request.getProfileType());
+        this.profileType = ProfileType.from(request.getProfileType());
         this.updatedBy = updatedBy;
     }
 

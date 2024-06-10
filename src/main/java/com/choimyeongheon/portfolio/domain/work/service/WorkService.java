@@ -8,6 +8,7 @@ import com.choimyeongheon.portfolio.global.exception.CustomException;
 import com.choimyeongheon.portfolio.global.exception.ErrorType;
 import com.choimyeongheon.portfolio.global.util.DateUtil;
 import com.choimyeongheon.portfolio.web.admin.work.dto.*;
+import com.choimyeongheon.portfolio.web.visitor.work.dto.VisitorWorkResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
@@ -103,6 +104,14 @@ public class WorkService {
 
     public ResponseEntity<Resource> display(String fileName) {
         return workMapper.toResource(fileName);
+    }
+
+    public List<VisitorWorkResponse> findAllPublicWorkResponse() {
+        return workRepository.findAllByOrderByWorkDateDesc()
+                .stream()
+                .filter(work -> work.getDelYn() == DelYn.N)
+                .map(VisitorWorkResponse::new)
+                .collect(Collectors.toList());
     }
 
 }

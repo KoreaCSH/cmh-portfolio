@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html   lang="ko"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/default}">
+<head>
+    <link rel="stylesheet" href="/css/works.css" />
+</head>
+<div layout:fragment="content">
+    <div class="work-list-container">
+        <ul class="row">
+            <li class="cell" th:each="work : ${works}">
+                <div class="work-img-container"><img th:src="'/admin/works/display?fileName='+${work.fileName}" alt="" /></div>
+                <div class="work-info" th:text="${work.title}">info</div>
+            </li>
+        </ul>
+    </div>
+</div>
+</html>

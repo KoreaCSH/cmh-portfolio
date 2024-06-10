@@ -2,7 +2,7 @@ package com.choimyeongheon.portfolio.domain.contact.service;
 
 import com.choimyeongheon.portfolio.domain.contact.domain.Contact;
 import com.choimyeongheon.portfolio.domain.contact.repository.ContactRepository;
-import com.choimyeongheon.portfolio.web.contact.dto.SenderContactRequest;
+import com.choimyeongheon.portfolio.web.visitor.contact.dto.SenderContactRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

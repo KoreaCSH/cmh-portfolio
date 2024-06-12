@@ -114,4 +114,12 @@ public class WorkService {
                 .collect(Collectors.toList());
     }
 
+    public List<VisitorWorkResponse> findPublicWorkResponseByWorkYear(Integer workYear) {
+        return workRepository.findByYearOrderByWorkDateDesc(workYear)
+                .stream()
+                .filter(work -> work.getDelYn() == DelYn.N)
+                .map(VisitorWorkResponse::new)
+                .collect(Collectors.toList());
+    }
+
 }

@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -17,9 +18,16 @@ public class VisitorWorkController {
 
     private final WorkService workService;
 
-    @GetMapping
+    @GetMapping("/all")
     public String works(Model model) {
         List<VisitorWorkResponse> works = workService.findAllPublicWorkResponse();
+        model.addAttribute("works", works);
+        return "works";
+    }
+
+    @GetMapping("/{workYear}")
+    public String worksByWorkYear(Model model, @PathVariable(name = "workYear") Integer workYear) {
+        List<VisitorWorkResponse> works = workService.findPublicWorkResponseByWorkYear(workYear);
         model.addAttribute("works", works);
         return "works";
     }

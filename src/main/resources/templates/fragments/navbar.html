@@ -6,7 +6,7 @@
         </div>
         <ul class="navbar-menu">
             <li class="navbar-menu-works">
-                <a href="">Works</a>
+                <a href="/works">Works</a>
                 <ul class="navbar-dropdown-submenu">
                     <li><a href="/works">All</a></li>
                     <li class="navbar-dropdown-submenu-separator">|</li>
@@ -19,6 +19,12 @@
             </li>
             <li><a href="">Biography</a></li>
             <li><a href="">Contact</a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/admin/home-images" style="color: dodgerblue">Admin</a></li>
+            <li sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" th:method="post">
+                    <button class="logout-btn">Logout</button>
+                </form>
+            </li>
         </ul>
         <ul class="navbar-icons">
             <li><i class="fa-brands fa-instagram"></i></li>

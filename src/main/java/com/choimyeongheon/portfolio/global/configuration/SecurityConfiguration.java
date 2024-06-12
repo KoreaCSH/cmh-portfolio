@@ -61,7 +61,7 @@ public class SecurityConfiguration {
                 .exceptionHandling(configurer -> configurer.accessDeniedHandler(accessDeniedHandler()))
 
                 .authorizeHttpRequests(authorize -> authorize
-                                                             .requestMatchers("/admin/sign-up", "/error").permitAll()
+                                                             .requestMatchers("/error", "/css/**", "/js/**", "/images/**", "/admin/works/display", "/admin/home-images/display").permitAll()
                                                              .requestMatchers("/admin/**").hasAnyAuthority(Role.ADMIN.getRole())
                                                              .anyRequest().permitAll())
 

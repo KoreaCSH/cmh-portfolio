@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html   lang="ko"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/default}">
+<head>
+    <link rel="stylesheet" href="/css/profiles.css" />
+</head>
+<div layout:fragment="content">
+    <div class="profile-list-container">
+        <div class="profile-container">
+            <div class="profile-kr">
+                <h2>최명헌</h2>
+                <div class="profile-wrapper" th:each="profile : ${response}" th:if="${profile.profileType == '약력'}">
+                    <div class="profile-year" th:text="${profile.year}"></div>
+                    <div class="profile-content" th:text="${profile.content}"></div>
+                </div>
+            </div>
+            <div class="profile-en">
+                <h2>Choi Myeong Heon</h2>
+                <div class="profile-wrapper" th:each="profile : ${response}" th:if="${profile.profileType == '약력'}">
+                    <div class="profile-year" th:text="${profile.year}"></div>
+                    <div class="profile-content" th:text="${profile.contentEn}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

@@ -10,6 +10,7 @@ import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileDeletionDto;
 import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileResponse;
 import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileSaveRequest;
 import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileUpdateRequest;
+import com.choimyeongheon.portfolio.web.visitor.profile.dto.VisitorProfileResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -53,6 +54,13 @@ public class ProfileService {
         return profileRepository.findAllOrderByYear()
                 .stream()
                 .map(ProfileResponse::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<VisitorProfileResponse> findAllVisitorProfileResponse() {
+        return profileRepository.findAllOrderByYear()
+                .stream()
+                .map(VisitorProfileResponse::new)
                 .collect(Collectors.toList());
     }
 

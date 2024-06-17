@@ -30,3 +30,7 @@ i {
     font-size: 1rem;
     font-weight: 600;
 }
+
+.main-container {
+    margin-top: 40px;
+}

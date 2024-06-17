@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html   lang="ko"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/default}">
+<head>
+  <link rel="stylesheet" href="/css/contact.css" />
+</head>
+<div layout:fragment="content">
+  <form th:action="@{/admin/works}" th:object="${request}" method="post">
+    <div class="contact-container">
+      <div>
+        <label for="contact-name" class="input-label">제목</label>
+        <input id="contact-name" type="text" class="form-control" placeholder="Name">
+      </div>
+      <div>
+        <label for="contact-email" class="input-label">작업일자</label>
+        <input id="contact-email" type="text" class="form-control">
+      </div>
+      <div>
+        <label for="contact-subject" class="input-label">작업일자</label>
+        <input id="contact-subject" type="text" class="form-control">
+      </div>
+      <div>
+        <label for="contact-content" class="input-label">작업일자</label>
+        <textarea id="contact-content" cols="30" rows="10"></textarea>
+      </div>
+      <div class="home-image-save-btn-wrapper">
+        <button type="submit" class="home-image-save-btn">전송</button>
+      </div>
+    </div>
+  </form>
+</div>
+</html>

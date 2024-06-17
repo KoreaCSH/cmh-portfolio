@@ -24,6 +24,10 @@
     width: 100px;
 }
 
+.nav-profiles {
+    color: var(--accent-color);
+}
+
 @media screen and (max-width: 768px) {
     .profile-list-container {
         margin: 0;

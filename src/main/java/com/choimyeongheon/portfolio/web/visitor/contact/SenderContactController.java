@@ -21,7 +21,7 @@ public class SenderContactController {
     @GetMapping
     public String contactForm(Model model, SenderContactRequest request) {
         model.addAttribute("request", request);
-        return "contact/contact";
+        return "contact";
     }
 
     @PostMapping

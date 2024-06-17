@@ -1,0 +1,10 @@
+.contact-container {
+    padding: 8px 12px;
+    width: 700px;
+    border: 1px solid black;
+    margin: 0 auto;
+}
+
+.nav-contact {
+    color: var(--accent-color);
+}

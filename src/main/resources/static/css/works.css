@@ -41,6 +41,14 @@
     text-align: right;
 }
 
+.nav-works {
+    color: var(--accent-color);
+}
+
+.navbar-dropdown-submenu {
+    display: flex;
+}
+
 @media screen and (max-width: 768px) {
     .work-list-container {
         margin: 0;
@@ -53,6 +61,11 @@
     .work-info {
         font-size: 14px;
     }
+
+    .nav-works {
+        color: var(--text-color);
+    }
+
 }
 
 @media screen and (max-width: 380px) {

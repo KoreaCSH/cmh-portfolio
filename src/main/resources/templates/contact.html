@@ -10,23 +10,23 @@
   <form th:action="@{/admin/works}" th:object="${request}" method="post">
     <div class="contact-container">
       <div>
-        <label for="contact-name" class="input-label">제목</label>
+        <label for="contact-name" class="input-label">Name</label>
         <input id="contact-name" type="text" class="form-control" placeholder="Name">
       </div>
       <div>
-        <label for="contact-email" class="input-label">작업일자</label>
-        <input id="contact-email" type="text" class="form-control">
+        <label for="contact-email" class="input-label">Email</label>
+        <input id="contact-email" type="text" class="form-control" placeholder="Email">
       </div>
       <div>
-        <label for="contact-subject" class="input-label">작업일자</label>
-        <input id="contact-subject" type="text" class="form-control">
+        <label for="contact-subject" class="input-label">Subject</label>
+        <input id="contact-subject" type="text" class="form-control" placeholder="Subject">
       </div>
       <div>
-        <label for="contact-content" class="input-label">작업일자</label>
-        <textarea id="contact-content" cols="30" rows="10"></textarea>
+        <label for="contact-content" class="input-label">Content</label>
+        <textarea id="contact-content" cols="30" rows="10" class="textarea-control"></textarea>
       </div>
-      <div class="home-image-save-btn-wrapper">
-        <button type="submit" class="home-image-save-btn">전송</button>
+      <div class="contact-submit-btn-container">
+        <button type="submit" class="submit-btn">Send</button>
       </div>
     </div>
   </form>

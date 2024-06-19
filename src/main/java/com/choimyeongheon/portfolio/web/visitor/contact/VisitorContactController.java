@@ -1,7 +1,7 @@
 package com.choimyeongheon.portfolio.web.visitor.contact;
 
-import com.choimyeongheon.portfolio.domain.contact.service.SenderContactService;
-import com.choimyeongheon.portfolio.web.visitor.contact.dto.SenderContactRequest;
+import com.choimyeongheon.portfolio.domain.contact.service.VisitorContactService;
+import com.choimyeongheon.portfolio.web.visitor.contact.dto.VisitorContactRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,18 +14,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/contact")
-public class SenderContactController {
+public class VisitorContactController {
 
-    private final SenderContactService senderContactService;
+    private final VisitorContactService senderContactService;
 
     @GetMapping
-    public String contactForm(Model model, SenderContactRequest request) {
+    public String contactForm(Model model, VisitorContactRequest request) {
         model.addAttribute("request", request);
         return "contact";
     }
 
     @PostMapping
-    public String contact(@Valid @ModelAttribute("request") SenderContactRequest request) {
+    public String contact(@Valid @ModelAttribute("request") VisitorContactRequest request) {
         senderContactService.contact(request);
         return "redirect:/home";
     }

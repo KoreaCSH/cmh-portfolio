@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SenderContactRequest {
+public class VisitorContactRequest {
 
     @NotBlank(message = "이름을 입력해 주세요.")
     private String senderName;

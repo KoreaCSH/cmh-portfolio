@@ -28,7 +28,7 @@ public class ContactDto {
         this.subject = contact.getSubject();
         this.content = contact.getContent();
         // 연-월-일 시-분 까지만
-        this.createdAt = contact.getCreatedAt().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
+        this.createdAt = contact.getCreatedAt().format(DateTimeFormatter.ofPattern("yy.M.d HH:mm"));
         this.readYn = contact.getReadYn().name();
     }
 

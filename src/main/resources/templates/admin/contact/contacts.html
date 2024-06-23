@@ -1,51 +1,35 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
-<head th:replace="~{fragments/header.html :: header}">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!DOCTYPE html>
+<html   lang="ko"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/admin-default}">
+<head>
+    <link rel="stylesheet" href="/css/admin/common.css" />
+    <link rel="stylesheet" href="/css/admin/contact/contacts.css" />
 </head>
-<body>
-
-<div>
-    <div th:replace="~{fragments/nav.html :: navFrament}" />
-</div>
-
-<div class="admin-container">
-    <div class="admin-wrapper">
-        <div class="left-nav">
-            <ul class="nav nav-pills flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin/home-images">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin/works">Works</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin/profile">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/admin/contact">Contact</a>
-                </li>
-            </ul>
-        </div>
-        <div class="admin-contact-wrapper">
-            <div class="contact-top">
-                <div class="contact-sender">Sender</div>
-                <div class="contact-email">Email</div>
-                <div class="contact-subject">Subject</div>
-                <div class="contact-date">Date</div>
+<div layout:fragment="admin-content" class="admin-contact-content">
+    <div class="admin-contact-header">
+        <span class="admin-contact-cnt">안 읽은 메일 수 / 전체 메일 수</span>
+    </div>
+    <div class="divTable minimalistBlack">
+        <div class="divTableHeading">
+            <div class="divTableRow">
+                <div class="divTableHead del-chk-header"><input type="checkbox" /></div>
+                <div class="divTableHead contact-sender-header">보낸 사람</div>
+                <div class="divTableHead contact-sender-email-header">이메일</div>
+                <div class="divTableHead contact-title-header">제목</div>
+                <div class="divTableHead contact-date-header">일자</div>
             </div>
-            <div class="contact" th:classappend="${contact.readYn == 'Y' ? 'read' : 'not-read'}" th:each="contact : ${response.contactDtoList}" th:onclick="|location.href='@{|/admin/contact/${contact.id}|}'|">
-                <div class="contact-sender" th:text="${contact.senderName}">Sender</div>
-                <div class="contact-email" th:text="${contact.senderEmail}">Email</div>
-                <div class="contact-subject" th:text="${contact.subject}">Subject</div>
-                <div class="contact-date" th:text="${contact.createdAt}">Date</div>
+        </div>
+        <div class="divTableBody">
+            <div class="divTableRow" th:each="contact : ${response.contactDtoList}">
+                <div class="divTableCell del-chk"><input type="checkbox"></div>
+                <div class="divTableCell contact-sender" th:text="${contact.senderName}"></div>
+                <div class="divTableCell contact-sender-email" th:text="${contact.senderEmail}"></div>
+                <div class="divTableCell contact-title" th:text="${contact.subject}"></div>
+                <div class="divTableCell contact-date" th:text="${contact.createdAt}"></div>
             </div>
         </div>
     </div>
 </div>
-
-<div class="home-footer">ALL IMAGES AND SITE CONTENT © CHOI MYEONGHEON</div>
-
-<script src="/js/bootstrap.bundle.js"></script>
-</body>
 </html>

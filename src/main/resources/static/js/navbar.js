@@ -6,3 +6,12 @@ toggleBtn.addEventListener("click", () => {
     menu.classList.toggle("active");
     icons.classList.toggle("active");
 });
+
+function logoutHandler() {
+    if(confirm("로그아웃 하시겠습니까?")) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}

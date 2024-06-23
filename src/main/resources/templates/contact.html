@@ -11,19 +11,19 @@
     <div class="contact-container">
       <div>
         <label for="contact-name" class="input-label">Name</label>
-        <input id="contact-name" type="text" class="form-control" placeholder="Name" th:field="*{senderName}">
+        <input id="contact-name" type="text" class="form-control" placeholder="Name" th:field="*{senderName}" required>
       </div>
       <div>
         <label for="contact-email" class="input-label">Email</label>
-        <input id="contact-email" type="text" class="form-control" placeholder="Email" th:field="*{senderEmail}">
+        <input id="contact-email" type="email" class="form-control" placeholder="Email" th:field="*{senderEmail}" required>
       </div>
       <div>
         <label for="contact-subject" class="input-label">Subject</label>
-        <input id="contact-subject" type="text" class="form-control" placeholder="Subject" th:field="*{subject}">
+        <input id="contact-subject" type="text" class="form-control" placeholder="Subject" th:field="*{subject}" required>
       </div>
       <div>
         <label for="contact-content" class="input-label">Content</label>
-        <textarea id="contact-content" cols="30" rows="10" class="textarea-control" th:field="*{content}"></textarea>
+        <textarea id="contact-content" cols="30" rows="10" class="textarea-control" th:field="*{content}" required></textarea>
       </div>
       <div class="contact-submit-btn-container">
         <button type="submit" class="submit-btn">Send</button>

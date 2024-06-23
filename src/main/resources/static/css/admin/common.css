@@ -97,6 +97,7 @@ div.minimalistBlack {
     font-size: 1rem;
     text-align: center;
 }
+
 .divTable.minimalistBlack .divTableHeading {
     background-color: var(--admin-background-color);
 }

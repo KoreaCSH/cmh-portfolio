@@ -1,0 +1,71 @@
+.admin-container {
+    min-width: 1200px;
+    overflow-x: auto;
+}
+
+.admin-contact-btn {
+    background-color: rgb(225, 233, 249);
+    color: #0273e6;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+.admin-contact-cnt {
+    display: inline-block;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+.divTable.minimalistBlack {
+    min-width: 1010px; /* 최소 너비 설정 */
+}
+
+.divTableHeading .divTableRow .del-chk-header {
+    width: 50px;
+}
+
+.del-chk {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.divTableHeading .divTableRow .contact-sender-header {
+    width: 150px;
+}
+
+.divTableHeading .divTableRow .contact-sender-email-header {
+    width: 200px;
+}
+
+.divTableHeading .divTableRow .contact-title-header {
+    width: 450px;
+}
+
+.divTableBody .divTableRow .contact-sender {
+    width: max-content;
+    max-width: 150px;
+    word-break: break-all;
+}
+
+.divTableBody .divTableRow .contact-sender-email {
+    width: max-content;
+    max-width: 200px;
+    word-break: break-all;
+}
+
+.divTable.minimalistBlack .divTableBody .contact-sender-email,
+.divTable.minimalistBlack .divTableBody .contact-title {
+    padding-left: 10px;
+    text-align: left;
+}
+
+.divTableBody .divTableRow .contact-title {
+    width: max-content;
+    max-width: 450px;
+    word-break: break-all;
+}
+
+.divTableBody .divTableRow .contact-date {
+    width: max-content;
+    word-break: break-all;
+}

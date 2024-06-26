@@ -1,56 +1,33 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
-<head th:replace="~{fragments/header.html :: header}">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/admin-default}">
+<head>
+    <link rel="stylesheet" href="/css/admin/common.css" />
+    <link rel="stylesheet" href="/css/admin/contact/detail.css" />
 </head>
-<body>
-
-<div>
-    <div th:replace="~{fragments/nav.html :: navFrament}" />
-</div>
-
-<div class="admin-container">
-    <div class="admin-wrapper">
-        <div class="left-nav">
-            <ul class="nav nav-pills flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin/home-images">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin/works">Works</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin/profile">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/admin/contact">Contact</a>
-                </li>
-            </ul>
+<div layout:fragment="admin-content">
+    <div class="contact-detail-container">
+        <div class="contact-detail-form">
+            <label for="contact-sender-name" class="input-label">Content</label>
+            <input id="contact-sender-name" type="text" class="form-control" th:field="*{contact.senderName}" readonly>
         </div>
-        <div class="admin-contact-wrapper">
-            <div class="contact-detail">
-                <div class="contact-detail-subject" th:text="${contact.subject}">Subject</div>
-                <div class="contact-detail-sender">
-                    <div>Sender</div>
-                    <div th:text="${contact.senderName}"></div>
-                </div>
-                <div class="contact-detail-sender">
-                    <div>Email
-                    </div>
-                    <div th:text="${contact.senderEmail}"></div>
-                </div>
-                <div class="contact-detail-date" th:text="${contact.createdAt}">Date</div>
-                <div class="contact-detail-content" th:text="${contact.content}">Email</div>
-            </div>
-            <div>
-                <a class="btn btn-secondary" href="/admin/contact">이전</a>
-            </div>
+        <div class="contact-detail-form">
+            <label for="contact-sender-email" class="input-label">Content</label>
+            <input id="contact-sender-email" type="text" class="form-control" th:field="*{contact.senderEmail}" readonly>
+        </div>
+        <div class="contact-detail-form">
+            <label for="contact-subject" class="input-label">Content</label>
+            <input id="contact-subject" type="text" class="form-control" th:field="*{contact.subject}" readonly>
+        </div>
+        <div class="contact-detail-form">
+            <label for="contact-content" class="input-label">Content</label>
+            <textarea id="contact-content" cols="30" rows="10" type="text" class="textarea-control" th:field="*{contact.content}" readonly></textarea>
+        </div>
+        <div class="submit-btn-wrapper">
+            <a class="before-btn" href="/admin/contact">이전</a>
         </div>
     </div>
 </div>
-
-<div class="home-footer">ALL IMAGES AND SITE CONTENT © CHOI MYEONGHEON</div>
-
-<script src="/js/bootstrap.bundle.js"></script>
-</body>
 </html>

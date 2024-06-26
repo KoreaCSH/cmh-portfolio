@@ -6,10 +6,14 @@
 <head>
     <link rel="stylesheet" href="/css/admin/common.css" />
     <link rel="stylesheet" href="/css/admin/contact/contacts.css" />
+    <script src="/js/contacts.js" defer></script>
 </head>
 <div layout:fragment="admin-content" class="admin-contact-content">
     <div class="admin-contact-header">
-        <span class="admin-contact-cnt">안 읽은 메일 수 / 전체 메일 수</span>
+        <span class="admin-contact-cnt">
+            <span class="not-read-cnt" th:text="${response.notReadContactCount}"></span>
+            <span class="read-cnt" th:text="| / ${response.totalContactCount}|"></span>
+        </span>
     </div>
     <div class="divTable minimalistBlack">
         <div class="divTableHeading">
@@ -22,7 +26,8 @@
             </div>
         </div>
         <div class="divTableBody">
-            <div class="divTableRow" th:each="contact : ${response.contactDtoList}">
+            <div class="divTableRow" th:each="contact : ${response.contactDtoList}"
+                 th:onclick="|rowClick(event, '${contact.id}')|" th:classappend="${contact.readYn == 'Y' ? 'read' : 'not-read'}">
                 <div class="divTableCell del-chk"><input type="checkbox"></div>
                 <div class="divTableCell contact-sender" th:text="${contact.senderName}"></div>
                 <div class="divTableCell contact-sender-email" th:text="${contact.senderEmail}"></div>

@@ -1,5 +1,5 @@
 .admin-container {
-    min-width: 1200px;
+    min-width: 1300px;
     overflow-x: auto;
 }
 
@@ -17,7 +17,7 @@
 }
 
 .divTable.minimalistBlack {
-    min-width: 1010px; /* 최소 너비 설정 */
+    min-width: 1100px; /* 최소 너비 설정 */
 }
 
 .divTableHeading .divTableRow .del-chk-header {
@@ -38,7 +38,7 @@
 }
 
 .divTableHeading .divTableRow .contact-title-header {
-    width: 450px;
+    width: 550px;
 }
 
 .divTableBody .divTableRow .contact-sender {
@@ -61,11 +61,24 @@
 
 .divTableBody .divTableRow .contact-title {
     width: max-content;
-    max-width: 450px;
+    max-width: 550px;
     word-break: break-all;
 }
 
 .divTableBody .divTableRow .contact-date {
     width: max-content;
     word-break: break-all;
+}
+
+.read {
+    color: #e2e2e2;
+}
+
+.not-read {
+    color: #000000;
+}
+
+.not-read-cnt {
+    color: #0273e6;
+    font-weight: bold;
 }

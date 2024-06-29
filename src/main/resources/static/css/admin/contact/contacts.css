@@ -3,6 +3,16 @@
     overflow-x: auto;
 }
 
+.admin-contact-header a {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 6px;
+    height: 21.5px;
+    line-height: 21.5px;
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
 .admin-contact-btn {
     background-color: rgb(225, 233, 249);
     color: #0273e6;

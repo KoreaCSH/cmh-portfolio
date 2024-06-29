@@ -22,3 +22,8 @@ function deleteHandler() {
 function updateHandler() {
     alert("이미지는 수정할 수 없습니다.");
 }
+
+function toggleCheckbox(selectAllCheckBox) {
+    const checkBoxes = document.querySelectorAll('.del-chk-box');
+    checkBoxes.forEach(checkbox => checkbox.checked = selectAllCheckBox.checked);
+}

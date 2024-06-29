@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/admin/common.css" />
     <link rel="stylesheet" href="/css/admin/profile/profiles.css" />
     <script src="/js/profiles.js" defer></script>
+    <script src="/js/common.js" defer></script>
 </head>
 <div layout:fragment="admin-content">
     <form th:action="@{/admin/profile}" th:object="${request}" th:method="delete" onsubmit="return deleteHandler()">
@@ -22,7 +23,7 @@
         <div class="divTable minimalistBlack">
             <div class="divTableHeading">
                 <div class="divTableRow">
-                    <div class="divTableHead del-chk-header"><input type="checkbox" /></div>
+                    <div class="divTableHead del-chk-header"><input type="checkbox" onclick="toggleCheckbox(this)" /></div>
                     <div class="divTableHead profile-type-header">Type</div>
                     <div class="divTableHead profile-year-header">Year</div>
                     <div class="divTableHead profile-content-header">Content</div>
@@ -31,7 +32,7 @@
             </div>
             <div class="divTableBody">
                 <div class="divTableRow" th:each="profile, itemStat : *{profileDeletionDtoList}">
-                    <div class="divTableCell del-chk"><input type="checkbox" th:field="*{profileDeletionDtoList[__${itemStat.index}__].isDeleted}"></div>
+                    <div class="divTableCell del-chk"><input type="checkbox" class="del-chk-box" th:field="*{profileDeletionDtoList[__${itemStat.index}__].isDeleted}"></div>
                     <div class="divTableCell profile-type" th:text="${profile.profileType}"></div>
                     <div class="divTableCell profile-year" th:text="${profile.year}"></div>
                     <div class="divTableCell profile-content" th:text="${profile.content}"></div>

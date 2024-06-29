@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/admin/common.css" />
     <link rel="stylesheet" href="/css/admin/contact/contacts.css" />
     <script src="/js/contacts.js" defer></script>
+    <script src="/js/common.js" defer></script>
 </head>
 <div layout:fragment="admin-content" class="admin-contact-content">
     <div class="admin-contact-header">
@@ -14,11 +15,12 @@
             <span class="not-read-cnt" th:text="${response.notReadContactCount}"></span>
             <span class="read-cnt" th:text="| / ${response.totalContactCount}|"></span>
         </span>
+        <a href="#" class="admin-content-header-del-btn">삭제</a>
     </div>
     <div class="divTable minimalistBlack">
         <div class="divTableHeading">
             <div class="divTableRow">
-                <div class="divTableHead del-chk-header"><input type="checkbox" /></div>
+                <div class="divTableHead del-chk-header"><input type="checkbox" onclick="toggleCheckbox(this)" /></div>
                 <div class="divTableHead contact-sender-header">보낸 사람</div>
                 <div class="divTableHead contact-sender-email-header">이메일</div>
                 <div class="divTableHead contact-title-header">제목</div>
@@ -28,7 +30,7 @@
         <div class="divTableBody">
             <div class="divTableRow" th:each="contact : ${response.contactDtoList}"
                  th:onclick="|rowClick(event, '${contact.id}')|" th:classappend="${contact.readYn == 'Y' ? 'read' : 'not-read'}">
-                <div class="divTableCell del-chk"><input type="checkbox"></div>
+                <div class="divTableCell del-chk"><input type="checkbox" class="del-chk-box"></div>
                 <div class="divTableCell contact-sender" th:text="${contact.senderName}"></div>
                 <div class="divTableCell contact-sender-email" th:text="${contact.senderEmail}"></div>
                 <div class="divTableCell contact-title" th:text="${contact.subject}"></div>

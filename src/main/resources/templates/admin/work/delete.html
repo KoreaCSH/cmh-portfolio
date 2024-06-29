@@ -23,7 +23,7 @@
         <div class="divTable minimalistBlack">
             <div class="divTableHeading">
                 <div class="divTableRow">
-                    <div class="divTableHead del-chk-header"><input type="checkbox" /></div>
+                    <div class="divTableHead del-chk-header"><input type="checkbox" onclick="toggleCheckbox(this)" /></div>
                     <div class="divTableHead work-header">이미지</div>
                     <div class="divTableHead work-title-header">제목</div>
                     <div class="divTableHead work-work-date-header">작업일자</div>
@@ -33,7 +33,7 @@
             </div>
             <div class="divTableBody">
                 <div class="divTableRow" th:each="work, itemStat : *{workDeleteDtoList}">
-                    <div class="divTableCell del-chk"><input type="checkbox" th:field="*{workDeleteDtoList[__${itemStat.index}__].isDeleted}"></div>
+                    <div class="divTableCell del-chk"><input type="checkbox" class="del-chk-box" th:field="*{workDeleteDtoList[__${itemStat.index}__].isDeleted}"></div>
                     <div class="divTableCell work"><img th:src="'/admin/home-images/display?fileName='+${work.fileName}" /></div>
                     <div class="divTableCell work-title" th:text="${work.title}"></div>
                     <div class="divTableCell work-work-date" th:text="${work.workDate}"></div>

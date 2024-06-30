@@ -11,11 +11,14 @@
 </head>
 <div layout:fragment="admin-content" class="admin-contact-content">
     <div class="admin-contact-header">
-        <span class="admin-contact-cnt">
+        <div class="admin-contact-cnt">
             <span class="not-read-cnt" th:text="${response.notReadContactCount}"></span>
-            <span class="read-cnt" th:text="| / ${response.totalContactCount}|"></span>
-        </span>
-        <a href="#" class="admin-content-header-del-btn">삭제</a>
+            <span> / </span>
+            <span class="read-cnt" th:text="${response.totalContactCount}"></span>
+        </div>
+        <div class="del-btn-container">
+            <button class="admin-content-header-del-btn">삭제</button>
+        </div>
     </div>
     <div class="divTable minimalistBlack">
         <div class="divTableHeading">

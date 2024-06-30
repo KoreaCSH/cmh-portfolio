@@ -3,14 +3,22 @@
     overflow-x: auto;
 }
 
-.admin-contact-header a {
+.admin-contact-header {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.admin-contact-header button {
     display: inline-block;
     padding: 8px 14px;
-    border-radius: 6px;
     height: 21.5px;
     line-height: 21.5px;
-    margin-top: 10px;
+    box-sizing: content-box;
+    border-radius: 6px;
+    font-weight: 500;
     font-size: 1rem;
+    cursor: pointer;
 }
 
 .admin-contact-btn {
@@ -21,9 +29,12 @@
 }
 
 .admin-contact-cnt {
-    display: inline-block;
-    margin-top: 15px;
+    display: flex;
+    /*margin-top: 15px;*/
     margin-left: 15px;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
 }
 
 .divTable.minimalistBlack {

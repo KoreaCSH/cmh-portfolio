@@ -1,6 +1,7 @@
 package com.choimyeongheon.portfolio.domain.contact.domain;
 
 import com.choimyeongheon.portfolio.global.common.BaseEntity;
+import com.choimyeongheon.portfolio.global.common.DelYn;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -33,6 +34,10 @@ public class Contact extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private ReadYn readYn;
 
+    @Column(name = "del_yn", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private DelYn delYn;
+
     // 읽은 시간 추가 ?
 
     @Builder
@@ -42,6 +47,7 @@ public class Contact extends BaseEntity {
         this.subject = subject;
         this.content = content;
         this.readYn = ReadYn.N;
+        this.delYn = DelYn.N;
     }
 
     public void checkRead() {

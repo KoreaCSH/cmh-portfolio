@@ -52,7 +52,7 @@
     .home-image-container > img {
         width: 100%;
         height: auto;
-        vertical-align: center;
+        /*vertical-align: center;*/
     }
 }
 
@@ -74,6 +74,7 @@
 
     .home-image-container > img {
         width: 100%;
+        max-height: 600px;
         height: auto;
         vertical-align: center;
     }

@@ -9,7 +9,7 @@
 <div layout:fragment="content">
     <div class="home-container">
         <div class="home-image-container">
-            <img th:src="'/admin/home-images/display?fileName='+${response.fileName}" onerror="this.src='img/test1.jpeg'" class="img-fluid">
+            <img th:src="'/admin/home-images/display?fileName='+${response.fileName}" onerror="this.src='images/test1.jpeg'" class="img-fluid">
         </div>
         <div class="home-image-info">
             <p class="img-explain" th:text="${response.title}"></p>

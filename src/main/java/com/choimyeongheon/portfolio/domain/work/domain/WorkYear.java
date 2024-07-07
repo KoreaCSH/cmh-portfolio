@@ -1,5 +1,6 @@
 package com.choimyeongheon.portfolio.domain.work.domain;
 
+import com.choimyeongheon.portfolio.web.admin.work.dto.WorkYearDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -16,5 +17,9 @@ public class WorkYear {
     private Long id;
 
     private Integer year;
+
+    public WorkYear(WorkYearDto dto) {
+        this.year = dto.getWorkYear();
+    }
 
 }

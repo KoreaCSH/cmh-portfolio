@@ -16,6 +16,7 @@ public enum ErrorType {
     EMPTY_PROFILE_DELETION_LIST("삭제할 약력을 선택해 주세요"),
     CONTACT_NOT_FOUND("메일을 찾을 수 없습니다."),
     EMPTY_CONTACT_DELETION_LIST("삭제할 메일을 선택해 주세요"),
+    EMPTY_WORK_YEAR("연도를 입력해 주세요."),
 
     DUPLICATED_ADMIN("가입할 수 없는 아이디입니다.");
 

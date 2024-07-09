@@ -10,7 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,9 +39,10 @@ public class WorkYearService {
     }
 
     private void validateWorkYear(WorkYearRequest request) {
+        Set<Integer> workYearSet = new HashSet<>(workYearRepository.findAll().stream().map(workYear -> workYear.getYear()).collect(Collectors.toList()));
         for (WorkYearDto dto : request.getWorkYearDtoList()) {
-            if (dto.getWorkYear() == null) {
-                throw new CustomException(ErrorType.EMPTY_WORK_YEAR);
+            if (dto.getWorkYear() == null || workYearSet.contains(dto.getWorkYear())) {
+                throw new CustomException(ErrorType.EMPTY_WORK_YEAR_OR_DUPLICATED);
             }
         }
     }

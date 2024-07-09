@@ -29,6 +29,7 @@
 select::-ms-expand {
     display: none;
 }
+
 .admin-content-header-select {
     -o-appearance: none;
     -webkit-appearance: none;
@@ -44,6 +45,7 @@ select::-ms-expand {
     margin-top: 10px;
     margin-left: 20px;
 }
+
 .admin-content-header-select option {
     background: black;
     color: #fff;
@@ -51,7 +53,7 @@ select::-ms-expand {
 }
 
 .admin-content-header-save-btn {
-    /* background-color: rgb(225, 233, 249); */
+    background-color: #fff;
     border: 2px solid var(--admin-save-btn-color);
     color: var(--admin-save-btn-color);
     font-weight: 500;
@@ -59,7 +61,6 @@ select::-ms-expand {
 }
 
 .admin-content-header-save-btn:hover {
-    /* background-color: rgb(225, 233, 249); */
     border: 2px solid var(--admin-save-btn-color);
     color: #fff;
     font-weight: 500;

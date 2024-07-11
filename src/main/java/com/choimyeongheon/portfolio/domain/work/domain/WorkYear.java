@@ -19,7 +19,7 @@ public class WorkYear {
     private Integer year;
 
     public WorkYear(WorkYearDto dto) {
-        this.year = dto.getWorkYear();
+        this.year = dto.getYear();
     }
 
 }

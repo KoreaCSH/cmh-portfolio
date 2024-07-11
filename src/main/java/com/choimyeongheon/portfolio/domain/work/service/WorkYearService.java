@@ -4,6 +4,8 @@ import com.choimyeongheon.portfolio.domain.work.domain.WorkYear;
 import com.choimyeongheon.portfolio.domain.work.repository.WorkYearRepository;
 import com.choimyeongheon.portfolio.global.exception.CustomException;
 import com.choimyeongheon.portfolio.global.exception.ErrorType;
+import com.choimyeongheon.portfolio.web.admin.work.dto.WorkYearDeleteDto;
+import com.choimyeongheon.portfolio.web.admin.work.dto.WorkYearDeleteRequest;
 import com.choimyeongheon.portfolio.web.admin.work.dto.WorkYearDto;
 import com.choimyeongheon.portfolio.web.admin.work.dto.WorkYearRequest;
 import lombok.RequiredArgsConstructor;
@@ -38,10 +40,34 @@ public class WorkYearService {
         return workYearRepository.findAllByOrderByYear();
     }
 
+    public List<WorkYearDto> findAllWorkYearDto() {
+        return findAll()
+                .stream()
+                .map(workYear -> new WorkYearDto(workYear.getYear())).collect(Collectors.toList());
+    }
+
+    public List<WorkYearDeleteDto> findAllWorkYearDeleteDto() {
+        return findAll()
+                .stream()
+                .map(WorkYearDeleteDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void deleteAll(WorkYearDeleteRequest request) {
+        List<Long> deletedIdList = request.getWorkYearDeleteDtoList()
+                .stream()
+                .filter(WorkYearDeleteDto::getIsDeleted)
+                .map(dto -> dto.getId())
+                .collect(Collectors.toList());
+
+        workYearRepository.deleteAllByIdInBatch(deletedIdList);
+    }
+
     private void validateWorkYear(WorkYearRequest request) {
         Set<Integer> workYearSet = new HashSet<>(workYearRepository.findAll().stream().map(workYear -> workYear.getYear()).collect(Collectors.toList()));
         for (WorkYearDto dto : request.getWorkYearDtoList()) {
-            if (dto.getWorkYear() == null || workYearSet.contains(dto.getWorkYear())) {
+            if (dto.getYear() == null || workYearSet.contains(dto.getYear())) {
                 throw new CustomException(ErrorType.EMPTY_WORK_YEAR_OR_DUPLICATED);
             }
         }

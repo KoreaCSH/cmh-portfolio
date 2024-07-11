@@ -31,6 +31,7 @@ public class WorkController {
     public String works(Model model, WorkUpdateRequest request) {
 
         List<WorkResponse> works = workService.findAllByOrderByWorkDateDesc();
+        // List<WorkYearDto> 로 변경
         List<WorkYear> workYears = workYearService.findAll();
         model.addAttribute("works", works);
         model.addAttribute("workYears", workYears);
@@ -45,6 +46,7 @@ public class WorkController {
                                   @PathVariable(name = "workYear") Integer workYear) {
 
         List<WorkResponse> works = workService.findByYearOrderByWorkDateDesc(workYear);
+        // List<WorkYearDto> 로 변경
         List<WorkYear> workYears = workYearService.findAll();
         model.addAttribute("works", works);
         model.addAttribute("workYears", workYears);
@@ -85,6 +87,7 @@ public class WorkController {
     @GetMapping("/admin/works/delete-form")
     public String deleteForm(Model model, WorkDeleteRequest request) {
         request.setWorkDeleteDtoList(workService.findAllDeleteDto());
+        // List<WorkYearDto> 로 변경
         List<WorkYear> workYears = workYearService.findAll();
         model.addAttribute("request", request);
         model.addAttribute("workYears", workYears);
@@ -97,6 +100,7 @@ public class WorkController {
                                        @PathVariable(name = "workYear") Integer workYear) {
 
         request.setWorkDeleteDtoList(workService.findAllDeleteDtoByYearOrderByWorkDateDesc(workYear));
+        // List<WorkYearDto> 로 변경
         List<WorkYear> workYears = workYearService.findAll();
         model.addAttribute("request", request);
         model.addAttribute("workYears", workYears);

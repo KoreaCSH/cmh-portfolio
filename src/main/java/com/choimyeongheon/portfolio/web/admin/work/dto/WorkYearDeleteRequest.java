@@ -1,18 +1,18 @@
 package com.choimyeongheon.portfolio.web.admin.work.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
 @Setter
-public class WorkYearDto {
+@Getter
+public class WorkYearDeleteRequest {
 
-    @NotBlank(message = "연도를 입력해주세요.")
-    private Integer year;
+    List<WorkYearDeleteDto> workYearDeleteDtoList;
 
 }

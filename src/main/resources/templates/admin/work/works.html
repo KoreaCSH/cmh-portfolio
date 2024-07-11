@@ -18,7 +18,7 @@
       <option th:each="wy : ${workYears}" th:text="${wy.year}" th:selected="${workYear} == ${wy.year}" th:value="${wy.year}">2018</option>
     </select>
     <a href="/admin/work-year" class="admin-content-header-save-btn work-year-btn">작업년도 추가</a>
-    <a href="#" class="admin-content-header-del-btn work-year-del-btn">작업년도 삭제</a>
+    <a href="/admin/work-year/delete-form" class="admin-content-header-del-btn work-year-del-btn">작업년도 삭제</a>
   </div>
   <div class="divTable minimalistBlack">
     <div class="divTableHeading">

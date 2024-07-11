@@ -5,7 +5,7 @@ function addYearInput() {
     newField.className = 'work-year-save-form';
     newField.innerHTML = `
                 <label for="work-year-${index}" class="input-label">Year</label>
-                <input id="work-year-${index}" type="number" min="2015" name="workYearDtoList[${index}].workYear" class="form-control" placeholder="Year" required>
+                <input id="work-year-${index}" type="number" min="2015" name="workYearDtoList[${index}].year" class="form-control" placeholder="Year" required>
             `;
     // 가장 앞에 새 요소를 추가
     container.insertBefore(newField, container.firstChild);

@@ -1,7 +1,7 @@
 package com.choimyeongheon.portfolio.global.common;
 
-import com.choimyeongheon.portfolio.domain.work.domain.WorkYear;
 import com.choimyeongheon.portfolio.domain.work.service.WorkYearService;
+import com.choimyeongheon.portfolio.web.admin.work.dto.WorkYearDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -17,7 +17,7 @@ public class GlobalControllerAdvice {
 
     @ModelAttribute
     public void getWorkYears(Model model) {
-        List<WorkYear> workYears = workYearService.findAll();
+        List<WorkYearDto> workYears = workYearService.findAllWorkYearDto();
         model.addAttribute("workYears", workYears);
     }
 

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html   lang="ko"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/admin-default}">
+<head>
+    <link rel="stylesheet" href="/css/admin/common.css" />
+    <link rel="stylesheet" href="/css/admin/work/works.css" />
+    <script src="/js/common.js" defer></script>
+    <script src="/js/works.js" defer></script>
+</head>
+<div layout:fragment="admin-content">
+    <form th:action="@{/admin/work-year}" th:object="${request}" th:method="delete" onsubmit="return deleteHandler()">
+        <div class="admin-content-header">
+            <!-- <h3>현재 저장된 홈 이미지 (1)</h3> -->
+            <a class="before-btn delete-page-before-btn" href="/admin/works">이전</a>
+            <button type="submit" class="admin-content-header-del-btn">삭제</button>
+        </div>
+        <div class="divTable minimalistBlack">
+            <div class="divTableHeading">
+                <div class="divTableRow">
+                    <div class="divTableHead del-chk-header"><input type="checkbox" onclick="toggleCheckbox(this)" /></div>
+                    <div class="divTableHead work-year-header">Year</div>
+                </div>
+            </div>
+            <div class="divTableBody">
+                <div class="divTableRow" th:each="workYear, itemStat : *{workYearDeleteDtoList}">
+                    <div class="divTableCell del-chk"><input type="checkbox" class="del-chk-box" th:field="*{workYearDeleteDtoList[__${itemStat.index}__].isDeleted}"></div>
+                    <div class="divTableCell work-year" th:text="${workYear.year}"></div>
+                    <input type="hidden" th:field="*{workYearDeleteDtoList[__${itemStat.index}__].id}">
+                    <input type="hidden" th:field="*{workYearDeleteDtoList[__${itemStat.index}__].year}">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</html>

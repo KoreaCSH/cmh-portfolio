@@ -65,6 +65,7 @@ public class ProfileController {
         return "redirect:/admin/profile/all";
     }
 
+    // update 로직 수정해야 한다. - ProfileTypeE 를 찾고, 변경해주는 로직 추가해야 함
     @GetMapping("/update-form/{id}")
     public String updateForm(Model model, @PathVariable(name = "id") Long id) {
         ProfileUpdateRequest request = profileService.findProfileUpdateRequestById(id);
@@ -109,6 +110,7 @@ public class ProfileController {
 
     @DeleteMapping
     public String delete(@ModelAttribute("request") ProfileDeletionRequest request) {
+        // to-do : DEL_YN 일관성 추가
         profileService.deleteAllByIds(request.getProfileDeletionDtoList());
         return "redirect:/admin/profile/all";
     }

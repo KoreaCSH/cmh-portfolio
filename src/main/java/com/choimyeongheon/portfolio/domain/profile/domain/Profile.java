@@ -34,6 +34,10 @@ public class Profile extends BaseEntity {
     private ProfileType profileType;
 
     @ManyToOne
+    @JoinColumn(name = "profile_type_id")
+    private ProfileTypeE profileTypeE;
+
+    @ManyToOne
     @JoinColumn(name = "created_by")
     private Admin createdBy;
 
@@ -45,6 +49,7 @@ public class Profile extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private DelYn delYn;
 
+    // V1 - ASIS - 삭제 필요
     @Builder
     public Profile(Integer year, String content, String contentEn, ProfileType profileType, Admin createdBy) {
         this.year = year;
@@ -53,6 +58,24 @@ public class Profile extends BaseEntity {
         this.profileType = profileType;
         this.createdBy = createdBy;
         this.delYn = DelYn.N;
+    }
+
+
+    // V2 - TOBE - 테스트 필요
+    @Builder
+    public Profile(Integer year, String content, String contentEn, ProfileTypeE profileTypeE, Admin createdBy) {
+        this.setProfileTypeE(profileTypeE);
+        this.year = year;
+        this.content = content;
+        this.contentEn = contentEn;
+        this.createdBy = createdBy;
+        this.delYn = DelYn.N;
+    }
+
+    // 연관관계 편의 메서드
+    public void setProfileTypeE(ProfileTypeE profileTypeE) {
+        this.profileTypeE = profileTypeE;
+        profileTypeE.getProfiles().add(this);
     }
 
     public void update(ProfileUpdateRequest request, Admin updatedBy) {

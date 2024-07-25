@@ -8,6 +8,7 @@ import lombok.Getter;
 public enum ErrorType {
 
     EMPTY_IMAGE_DELETION_LIST("삭제할 이미지를 선택해 주세요"),
+    EMPTY_PROFILE_TYPE_LIST("삭제할 타입을 선택해 주세요"),
     IMAGE_NOT_FOUND("이미지를 찾을 수 없습니다."),
     FILE_IO_EXCEPTION("이미지를 불러오지 못했습니다."),
     FILE_UPLOAD_EXCEPTION("파일을 저장하지 못했습니다."),
@@ -17,6 +18,8 @@ public enum ErrorType {
     CONTACT_NOT_FOUND("메일을 찾을 수 없습니다."),
     EMPTY_CONTACT_DELETION_LIST("삭제할 메일을 선택해 주세요"),
     EMPTY_WORK_YEAR_OR_DUPLICATED("연도를 입력하지 않았거나, 이미 저장된 연도입니다."),
+    EMPTY_PROFILE_TYPE_OR_DUPLICATED("타입을 입력하지 않았거나, 이미 저장된 타입입니다."),
+    PROFILE_TYPE_NOT_FOUND("타입을 찾을 수 없습니다."),
 
     DUPLICATED_ADMIN("가입할 수 없는 아이디입니다.");
 

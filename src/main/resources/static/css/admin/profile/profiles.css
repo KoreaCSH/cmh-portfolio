@@ -47,3 +47,7 @@
     width: max-content;
     word-break: break-all;
 }
+
+.profile-type-before-btn {
+    margin-left: 10px;
+}

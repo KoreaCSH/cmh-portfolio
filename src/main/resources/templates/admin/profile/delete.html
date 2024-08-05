@@ -17,7 +17,7 @@
             <button type="submit" class="admin-content-header-del-btn">삭제</button>
             <select name="workDate" class="admin-content-header-select" id="profile-type-select" onchange="sendDeleteFormRequest()">
                 <option th:selected="All == ${selectedType}" value="All">All</option>
-                <option th:each="profileType : ${profileTypes}" th:text="${profileType.type}" th:selected="${profileType.lowerCase} == ${selectedType}" th:value="${profileType.lowerCase}">2018</option>
+                <option th:each="profileType : ${profileTypes}" th:text="${profileType.type}" th:selected="${profileType.id} == ${selectedType}" th:value="${profileType.id}">2018</option>
             </select>
         </div>
         <div class="divTable minimalistBlack">

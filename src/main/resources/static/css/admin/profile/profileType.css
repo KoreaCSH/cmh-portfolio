@@ -1,0 +1,37 @@
+.admin-profile-btn {
+    background-color: rgb(225, 233, 249);
+    color: #0273e6;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+.profile-type-save-container {
+    width: 100%;
+    margin: 0 10px;
+}
+
+.profile-type-save-form {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 20px);
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.form-control {
+    width: 100%;
+    border: 1px solid rgb(220, 220, 220);
+    padding: 8px 12px;
+    font-size: 1rem;
+    font-weight: 400;
+    box-sizing: border-box;
+    margin-top: 5px;
+    border-radius: 4px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    height: 40px;
+}
+
+.form-control:focus {
+    outline: none;
+    border: 1px solid rgb(37, 147, 255);
+}

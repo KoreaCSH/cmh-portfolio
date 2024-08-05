@@ -12,8 +12,8 @@
         <div class="profile-save-container">
             <div class="profile-save-form">
                 <label for="profile-type" class="input-label">Type</label>
-                <select id="profile-type" class="form-select" th:field="*{profileType}">
-                    <option th:each="pType : ${profileTypes}" th:value="${pType}" th:utext="${pType.type}"></option>
+                <select id="profile-type" class="form-select" th:field="*{profileTypeId}">
+                    <option th:each="pType : ${profileTypes}" th:value="${pType.id}" th:utext="${pType.type}"></option>
                 </select>
             </div>
             <div class="profile-save-form">

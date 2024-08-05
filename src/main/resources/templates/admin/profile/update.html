@@ -13,7 +13,7 @@
       <div class="profile-save-form">
         <label for="profile-type" class="input-label">Type</label>
         <select id="profile-type" class="form-select" th:field="*{profileType}">
-          <option th:each="pType : ${profileTypes}" th:value="${pType.lowerCase}" th:text="${pType.type}"></option>
+          <option th:each="pType : ${profileTypes}" th:value="${pType.id}" th:text="${pType.type}"></option>
         </select>
       </div>
       <div class="profile-save-form">

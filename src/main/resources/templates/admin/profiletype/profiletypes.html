@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html   lang="ko"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/admin-default}">
+<head>
+    <link rel="stylesheet" href="/css/admin/common.css" />
+    <link rel="stylesheet" href="/css/admin/profile/profiles.css" />
+    <script src="/js/profiles.js" defer></script>
+</head>
+<div layout:fragment="admin-content">
+    <div class="admin-content-header">
+        <!-- <h3>현재 저장된 홈 이미지 (1)</h3> -->
+        <a href="/admin/profile-type/save-form" class="admin-content-header-save-btn">타입 저장</a>
+        <a href="/admin/profile-type/delete-form/all" class="admin-content-header-del-btn">타입 삭제</a>
+    </div>
+    <div class="divTable minimalistBlack">
+        <div class="divTableHeading">
+            <div class="divTableRow">
+                <div class="divTableHead update-btn-header">수정</div>
+                <div class="divTableHead profile-type-header">Type</div>
+            </div>
+        </div>
+        <div class="divTableBody">
+            <div class="divTableRow" th:each="profileType : ${profileTypes}">
+                <div class="divTableCell update-btn-wrapper"><a class="update-btn" th:href="@{/admin/profile-type/update-form/{id}(id=${profileType.id})}">수정</a></div>
+                <div class="divTableCell profile-type" th:text="${profileType.type}"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

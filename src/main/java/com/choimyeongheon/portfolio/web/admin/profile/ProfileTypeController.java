@@ -23,13 +23,13 @@ public class ProfileTypeController {
     public String profileTypes(Model model) {
         List<ProfileTypeDto> profileTypes = profileTypeService.findAllDto();
         model.addAttribute("profileTypes", profileTypes);
-        return "";
+        return "admin/profiletype/profiletypes";
     }
 
     @GetMapping("/save-form")
     public String saveForm(ProfileTypeRequest request, Model model) {
         model.addAttribute("request", request);
-        return "";
+        return "admin/profiletype/save";
     }
 
     @PostMapping
@@ -44,7 +44,7 @@ public class ProfileTypeController {
     public String updateForm(Model model, @PathVariable(name = "id") Long id) {
         ProfileTypeDto request = profileTypeService.findDto(id);
         model.addAttribute("request", request);
-        return "";
+        return "admin/profiletype/update";
     }
 
     @PutMapping

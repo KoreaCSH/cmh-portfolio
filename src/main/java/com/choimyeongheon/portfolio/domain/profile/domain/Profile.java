@@ -5,14 +5,16 @@ import com.choimyeongheon.portfolio.global.common.BaseEntity;
 import com.choimyeongheon.portfolio.global.common.DelYn;
 import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileUpdateRequest;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.Objects;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@ToString
+@Slf4j
 public class Profile extends BaseEntity {
 
     @Id
@@ -29,13 +31,9 @@ public class Profile extends BaseEntity {
     @Column(name = "content_en")
     private String contentEn;
 
-    @Column(name = "profile_type")
-    @Enumerated(EnumType.STRING)
-    private ProfileType profileType;
-
     @ManyToOne
     @JoinColumn(name = "profile_type_id")
-    private ProfileTypeE profileTypeE;
+    private ProfileType profileType;
 
     @ManyToOne
     @JoinColumn(name = "created_by")
@@ -49,40 +47,39 @@ public class Profile extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private DelYn delYn;
 
-    // V1 - ASIS - 삭제 필요
     @Builder
     public Profile(Integer year, String content, String contentEn, ProfileType profileType, Admin createdBy) {
         this.year = year;
         this.content = content;
         this.contentEn = contentEn;
+        this.setProfileType(profileType);
+        this.createdBy = createdBy;
+        this.delYn = DelYn.N;
+    }
+
+    /**
+     * 연관관계 편의 메서드 - Profile 생성 시
+     * */
+    public void setProfileType(ProfileType profileType) {
         this.profileType = profileType;
-        this.createdBy = createdBy;
-        this.delYn = DelYn.N;
+        profileType.getProfiles().add(this);
     }
 
+    /**
+     * 연관관계 편의 메서드 - Profile 수정 시
+     * */
+    public void updateProfileTypeE(ProfileType beforeProfileType, ProfileType afterProfileType) {
+        beforeProfileType.getProfiles().remove(this);
 
-    // V2 - TOBE - 테스트 필요
-    @Builder
-    public Profile(Integer year, String content, String contentEn, ProfileTypeE profileTypeE, Admin createdBy) {
-        this.setProfileTypeE(profileTypeE);
-        this.year = year;
-        this.content = content;
-        this.contentEn = contentEn;
-        this.createdBy = createdBy;
-        this.delYn = DelYn.N;
+        this.profileType = afterProfileType;
+        profileType.getProfiles().add(this);
     }
 
-    // 연관관계 편의 메서드
-    public void setProfileTypeE(ProfileTypeE profileTypeE) {
-        this.profileTypeE = profileTypeE;
-        profileTypeE.getProfiles().add(this);
-    }
-
-    public void update(ProfileUpdateRequest request, Admin updatedBy) {
+    public void update(ProfileUpdateRequest request, ProfileType beforeProfileType, ProfileType afterProfileType, Admin updatedBy) {
         this.year = request.getYear();
         this.content = request.getContent();
         this.contentEn = request.getContentEn();
-        this.profileType = ProfileType.from(request.getProfileType());
+        this.updateProfileTypeE(beforeProfileType, afterProfileType);
         this.updatedBy = updatedBy;
     }
 
@@ -92,6 +89,19 @@ public class Profile extends BaseEntity {
 
     public boolean isNotDeleted() {
         return this.delYn == DelYn.N;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Profile profile = (Profile) obj;
+        return Objects.equals(id, profile.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
 }

@@ -1,13 +1,14 @@
 package com.choimyeongheon.portfolio.domain.profile.service;
 
 import com.choimyeongheon.portfolio.domain.admin.domain.Admin;
-import com.choimyeongheon.portfolio.domain.profile.domain.ProfileTypeE;
+import com.choimyeongheon.portfolio.domain.profile.domain.ProfileType;
 import com.choimyeongheon.portfolio.domain.profile.repository.ProfileTypeRepository;
 import com.choimyeongheon.portfolio.global.exception.CustomException;
 import com.choimyeongheon.portfolio.global.exception.ErrorType;
 import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileTypeDto;
 import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileTypeRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
+@Slf4j
 public class ProfileTypeService {
 
     private final ProfileTypeRepository profileTypeRepository;
@@ -28,7 +30,7 @@ public class ProfileTypeService {
     public void create(ProfileTypeRequest request, Admin admin) {
         validateProfileType(request);
 
-        List<ProfileTypeE> profileTypeList = request.getProfileTypeDtoList()
+        List<ProfileType> profileTypeList = request.getProfileTypeDtoList()
                                             .stream()
                                             .map(dto -> dto.toEntity(admin))
                                             .collect(Collectors.toList());
@@ -38,7 +40,7 @@ public class ProfileTypeService {
 
     @Transactional
     public void update(ProfileTypeDto dto, Admin updatedBy) {
-        ProfileTypeE findProfileType = this.findById(dto.getId());
+        ProfileType findProfileType = this.findById(dto.getId());
         findProfileType.update(dto.getType(), updatedBy);
     }
 
@@ -66,15 +68,15 @@ public class ProfileTypeService {
     }
 
     public ProfileTypeDto findDto(Long id) {
-        ProfileTypeE findProfileType = this.findById(id);
+        ProfileType findProfileType = this.findById(id);
         return new ProfileTypeDto(findProfileType);
     }
 
-    private List<ProfileTypeE> findAll() {
+    private List<ProfileType> findAll() {
         return profileTypeRepository.findAll();
     }
 
-    private ProfileTypeE findById(Long id) {
+    public ProfileType findById(Long id) {
         return profileTypeRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorType.PROFILE_TYPE_NOT_FOUND));
     }

@@ -1,12 +1,9 @@
 package com.choimyeongheon.portfolio.web.admin.profile;
 
 import com.choimyeongheon.portfolio.domain.admin.domain.Admin;
-import com.choimyeongheon.portfolio.domain.profile.domain.ProfileType;
 import com.choimyeongheon.portfolio.domain.profile.service.ProfileService;
-import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileDeletionRequest;
-import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileResponse;
-import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileSaveRequest;
-import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileUpdateRequest;
+import com.choimyeongheon.portfolio.domain.profile.service.ProfileTypeService;
+import com.choimyeongheon.portfolio.web.admin.profile.dto.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,11 +21,12 @@ import java.util.List;
 public class ProfileController {
 
     private final ProfileService profileService;
+    private final ProfileTypeService profileTypeService;
 
     @GetMapping("/all")
     public String profiles(Model model) {
         List<ProfileResponse> profiles = profileService.findAll();
-        List<ProfileType> profileTypes = profileService.findAllProfileType();
+        List<ProfileTypeDto> profileTypes = profileTypeService.findAllDto();
 
         model.addAttribute("profiles", profiles);
         model.addAttribute("profileTypes", profileTypes);
@@ -37,20 +35,20 @@ public class ProfileController {
     }
 
     @GetMapping("/{profileType}")
-    public String profilesByType(Model model, @PathVariable(name = "profileType") String profileType) {
+    public String profilesByType(Model model, @PathVariable(name = "profileType") Long profileTypeId) {
 
-        List<ProfileResponse> profiles = profileService.findAllByProfileType(profileType);
-        List<ProfileType> profileTypes = profileService.findAllProfileType();
+        List<ProfileResponse> profiles = profileService.findAllByProfileTypeId(profileTypeId);
+        List<ProfileTypeDto> profileTypes = profileTypeService.findAllDto();
 
         model.addAttribute("profiles", profiles);
         model.addAttribute("profileTypes", profileTypes);
-        model.addAttribute("selectedType", profileType);
+        model.addAttribute("selectedType", profileTypeId);
         return "admin/profile/profiles";
     }
 
     @GetMapping("/save-form")
     public String createForm(Model model, ProfileSaveRequest request) {
-        List<ProfileType> profileTypes = profileService.findAllProfileType();
+        List<ProfileTypeDto> profileTypes = profileTypeService.findAllDto();
 
         model.addAttribute("profileTypes", profileTypes);
         model.addAttribute("request", request);
@@ -65,11 +63,11 @@ public class ProfileController {
         return "redirect:/admin/profile/all";
     }
 
-    // update 로직 수정해야 한다. - ProfileTypeE 를 찾고, 변경해주는 로직 추가해야 함
+    // update 로직 수정해야 한다. - ProfileType 를 찾고, 변경해주는 로직 추가해야 함
     @GetMapping("/update-form/{id}")
     public String updateForm(Model model, @PathVariable(name = "id") Long id) {
         ProfileUpdateRequest request = profileService.findProfileUpdateRequestById(id);
-        List<ProfileType> profileTypes = profileService.findAllProfileType();
+        List<ProfileTypeDto> profileTypes = profileTypeService.findAllDto();
 
         model.addAttribute("request", request);
         model.addAttribute("profileTypes", profileTypes);
@@ -88,7 +86,7 @@ public class ProfileController {
     @GetMapping("/delete-form/all")
     public String deleteForm(Model model, ProfileDeletionRequest request) {
 
-        List<ProfileType> profileTypes = profileService.findAllProfileType();
+        List<ProfileTypeDto> profileTypes = profileTypeService.findAllDto();
         request.setProfileDeletionDtoList(profileService.findAllDeletionDto());
         model.addAttribute("profileTypes", profileTypes);
         model.addAttribute("request", request);
@@ -98,20 +96,21 @@ public class ProfileController {
 
     @GetMapping("/delete-form/{profileType}")
     public String deleteFormByProfileType(Model model, ProfileDeletionRequest request,
-                                          @PathVariable(name = "profileType") String profileType) {
+                                          @PathVariable(name = "profileType") Long profileTypeId) {
 
-        List<ProfileType> profileTypes = profileService.findAllProfileType();
-        request.setProfileDeletionDtoList(profileService.findAllDeletionDtoByProfileType(profileType));
+        List<ProfileTypeDto> profileTypes = profileTypeService.findAllDto();
+        request.setProfileDeletionDtoList(profileService.findAllDeletionDtoByProfileTypeId(profileTypeId));
         model.addAttribute("profileTypes", profileTypes);
         model.addAttribute("request", request);
-        model.addAttribute("selectedType", profileType);
+        model.addAttribute("selectedType", profileTypeId);
         return "admin/profile/delete";
     }
 
     @DeleteMapping
-    public String delete(@ModelAttribute("request") ProfileDeletionRequest request) {
+    public String delete(@ModelAttribute("request") ProfileDeletionRequest request,
+                         @AuthenticationPrincipal Admin admin) {
         // to-do : DEL_YN 일관성 추가
-        profileService.deleteAllByIds(request.getProfileDeletionDtoList());
+        profileService.deleteAllByIds(request.getProfileDeletionDtoList(), admin);
         return "redirect:/admin/profile/all";
     }
 

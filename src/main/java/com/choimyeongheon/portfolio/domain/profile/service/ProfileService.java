@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,10 +27,14 @@ import java.util.stream.Collectors;
 public class ProfileService {
 
     private final ProfileRepository profileRepository;
+    private final ProfileTypeService profileTypeService;
 
     @Transactional
     public void create(ProfileSaveRequest request, Admin admin) {
-        Profile profile = request.toEntity(admin);
+
+        ProfileType findProfileType = profileTypeService.findById(request.getProfileTypeId());
+
+        Profile profile = request.toEntity(admin, findProfileType);
         profileRepository.save(profile);
     }
 
@@ -40,7 +43,10 @@ public class ProfileService {
         Profile findProfile = profileRepository.findById(request.getId())
                 .orElseThrow(() -> new CustomException(ErrorType.PROFILE_NOT_FOUND));
 
-        findProfile.update(request, admin);
+        ProfileType beforeProfileType = profileTypeService.findById(findProfile.getProfileType().getId());
+        ProfileType afterProfileType = profileTypeService.findById(request.getProfileType());
+
+        findProfile.update(request, beforeProfileType, afterProfileType, admin);
     }
 
     public ProfileUpdateRequest findProfileUpdateRequestById(Long id) {
@@ -64,8 +70,11 @@ public class ProfileService {
                 .collect(Collectors.toList());
     }
 
-    public List<ProfileResponse> findAllByProfileType(String profileType) {
-        return profileRepository.findAllByProfileTypeOrderByYear(ProfileType.from(profileType))
+    public List<ProfileResponse> findAllByProfileTypeId(Long profileTypeId) {
+
+        ProfileType profileType = profileTypeService.findById(profileTypeId);
+
+        return profileRepository.findAllByProfileTypeOrderByYear(profileType)
                 .stream()
                 .map(ProfileResponse::new)
                 .collect(Collectors.toList());
@@ -80,7 +89,7 @@ public class ProfileService {
     }
 
     @Transactional
-    public void deleteAllByIds(List<ProfileDeletionDto> profileDeletionDtoList) {
+    public void deleteAllByIds(List<ProfileDeletionDto> profileDeletionDtoList, Admin admin) {
         List<Long> deletedProfileIdList = profileDeletionDtoList.stream()
                                             .filter(ProfileDeletionDto::getIsDeleted)
                                             .map(ProfileDeletionDto::getId)
@@ -90,7 +99,7 @@ public class ProfileService {
             throw new CustomException(ErrorType.EMPTY_PROFILE_DELETION_LIST);
         }
 
-        profileRepository.deleteAllByIds(deletedProfileIdList);
+        profileRepository.deleteAllByIds(deletedProfileIdList, admin);
     }
 
     public List<ProfileDeletionDto> findAllDeletionDto() {
@@ -101,16 +110,15 @@ public class ProfileService {
                 .collect(Collectors.toList());
     }
 
-    public List<ProfileDeletionDto> findAllDeletionDtoByProfileType(String profileType) {
-        return profileRepository.findAllByProfileTypeOrderByYear(ProfileType.from(profileType))
+    public List<ProfileDeletionDto> findAllDeletionDtoByProfileTypeId(Long profileTypeId) {
+
+        ProfileType profileType = profileTypeService.findById(profileTypeId);
+
+        return profileRepository.findAllByProfileTypeOrderByYear(profileType)
                 .stream()
                 .filter(Profile::isNotDeleted)
                 .map(ProfileDeletionDto::new)
                 .collect(Collectors.toList());
-    }
-
-    public List<ProfileType> findAllProfileType() {
-        return Arrays.stream(ProfileType.values()).toList();
     }
 
 }

@@ -23,6 +23,7 @@ public class ProfileType extends BaseEntity {
     private Long id;
 
     private String type;
+    private String typeEn;
 
     // profileType 으로 수정 필요
     // 수정, 삭제 시 Profile 에도 영향 주도록 설정
@@ -42,13 +43,14 @@ public class ProfileType extends BaseEntity {
     private DelYn delYn;
 
     @Builder
-    public ProfileType(String type, Admin createdBy) {
+    public ProfileType(String type, String typeEn, Admin createdBy) {
         this.type = type;
+        this.typeEn = typeEn;
         this.createdBy = createdBy;
         this.delYn = DelYn.N;
     }
 
-    public void update(String type, Admin updatedBy) {
+    public void update(String type, String typeEn, Admin updatedBy) {
         this.type = type;
         this.updatedBy = updatedBy;
     }

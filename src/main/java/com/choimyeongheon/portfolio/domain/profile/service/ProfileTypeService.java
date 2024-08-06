@@ -41,7 +41,7 @@ public class ProfileTypeService {
     @Transactional
     public void update(ProfileTypeDto dto, Admin updatedBy) {
         ProfileType findProfileType = this.findById(dto.getId());
-        findProfileType.update(dto.getType(), updatedBy);
+        findProfileType.update(dto.getType(), dto.getTypeEn(), updatedBy);
     }
 
     @Transactional

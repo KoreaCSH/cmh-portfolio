@@ -18,6 +18,8 @@
             <div class="profile-type-save-form">
                 <label for="profile-type" class="input-label">Type</label>
                 <input id="profile-type" type="text" th:field="*{profileTypeDtoList[0].type}" class="form-control" placeholder="Type" required>
+                <label for="profile-type-en" class="input-label type-en-label">Type (영어)</label>
+                <input id="profile-type-en" type="text" th:field="*{profileTypeDtoList[0].typeEn}" class="form-control type-en-input" placeholder="Type (영어)" required>
             </div>
             <div class="submit-btn-wrapper">
                 <a class="before-btn" href="/admin/profile-type">이전</a>

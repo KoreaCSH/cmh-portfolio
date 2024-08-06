@@ -13,11 +13,13 @@ public class ProfileTypeDto {
 
     private Long id;
     private String type;
+    private String typeEn;
     private Boolean isDeleted;
 
     public ProfileType toEntity(Admin createdBy) {
         return ProfileType.builder()
                 .type(this.type)
+                .typeEn(this.typeEn)
                 .createdBy(createdBy)
                 .build();
     }
@@ -25,6 +27,7 @@ public class ProfileTypeDto {
     public ProfileTypeDto(ProfileType profileType) {
         this.id = profileType.getId();
         this.type = profileType.getType();
+        this.typeEn = profileType.getTypeEn();
         this.isDeleted = false;
     }
 

@@ -24,12 +24,6 @@
     vertical-align: middle;
 }
 
-.divTableHeading .divTableRow .profile-type-header,
-.divTableHeading .divTableRow .profile-year-header
-{
-    width: 160px;
-}
-
 .divTableHeading .divTableRow .profile-content-header,
 .divTableHeading .divTableRow .profile-content-en-header {
     width: calc(50% - 338px);
@@ -38,7 +32,6 @@
 .divTableBody .divTableRow .profile-type,
 .divTableBody .divTableRow .profile-year {
     width: max-content;
-    max-width: 160px;
     word-break: break-all;
 }
 

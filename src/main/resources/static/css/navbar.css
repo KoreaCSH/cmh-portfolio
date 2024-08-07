@@ -66,6 +66,15 @@
     display: none;
 }
 
+.navbar-icons .li-fa-instagram .fa-instagram {
+    transition: 0.7s;
+}
+
+.navbar-icons .li-fa-instagram:hover .fa-instagram {
+    /*transform: rotateY(360deg);*/
+    color: #e4405f;
+}
+
 .fa-instagram {
     font-size: 24px;
 }

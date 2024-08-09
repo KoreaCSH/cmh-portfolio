@@ -5,12 +5,13 @@
         layout:decorate="~{layouts/default}">
 <head>
     <link rel="stylesheet" href="/css/works.css" />
+    <script src="/js/worksImage.js" defer></script>
 </head>
 <div layout:fragment="content">
     <div class="work-list-container">
         <ul class="row">
             <li class="cell" th:each="work : ${works}">
-                <div class="work-img-container"><img th:src="'/admin/works/display?fileName='+${work.fileName}" alt="" /></div>
+                <div class="work-img-container"><img class="work-img" th:src="'/admin/works/display?fileName='+${work.fileName}" alt="" loading="lazy" /></div>
                 <div class="work-info" th:text="${work.title}">info</div>
             </li>
         </ul>

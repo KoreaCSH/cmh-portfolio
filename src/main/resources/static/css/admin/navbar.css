@@ -3,11 +3,13 @@
     display: flex;
     border: 1px solid var(--admin-border-color);
     margin-top: 16px;
+    min-width: 1300px;
+    overflow-x: auto;
 }
 
 .admin-navbar {
-    width: 220px;
-    width: 15%;
+    width: 200px;
+    flex-shrink: 0;
     background-color: var(--admin-background-color);
     padding: 8px 12px;
     border-right: 1px solid var(--admin-border-color);
@@ -27,7 +29,7 @@
 
 .admin-content {
     padding: 8px 12px;
-    width: 85%;
+    width: 100%;
 }
 
 @media screen and (min-width: 1600px) {

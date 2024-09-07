@@ -6,69 +6,54 @@
 <head>
     <link rel="stylesheet" href="/css/profiles.css" />
 </head>
-<div layout:fragment="content">
-    <div class="profile-list-container">
+<div layout:fragment="content" class="container">
+    <div class="about-me-container"></div>
+    <div class="type-container">
+        <div class="type-header">Education</div>
         <div class="profile-container">
-            <div class="profile-kr">
-                <h2>최명헌</h2>
-                <div class="profile-wrapper" th:each="profile : ${response}" th:if="${profile.profileType == '약력'}">
-                    <div class="profile-year" th:text="${profile.year}"></div>
-                    <div class="profile-content" th:text="${profile.content}"></div>
+            <div class="profile-container-kr">
+                <div class="profile-content-container">
+                    <div class="profile-year"></div>
+                    <div class="profile-content"></div>
+                </div>
+                <div class="profile-content-container">
+                    <div class="profile-year"></div>
+                    <div class="profile-content"></div>
                 </div>
             </div>
-            <div class="profile-en">
-                <h2>Choi Myeong Heon</h2>
-                <div class="profile-wrapper" th:each="profile : ${response}" th:if="${profile.profileType == '약력'}">
-                    <div class="profile-year" th:text="${profile.year}"></div>
-                    <div class="profile-content" th:text="${profile.contentEn}"></div>
+            <div class="profile-container-en">
+                <div class="profile-content-container">
+                    <div class="profile-year"></div>
+                    <div class="profile-content"></div>
+                </div>
+                <div class="profile-content-container">
+                    <div class="profile-year"></div>
+                    <div class="profile-content"></div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="type-container">
+        <div class="type-header">Solo Exhibitions</div>
         <div class="profile-container">
-            <div class="profile-kr">
-                <h2>수상</h2>
-                <div class="profile-wrapper" th:each="profile : ${response}" th:if="${profile.profileType == '수상'}">
-                    <div class="profile-year" th:text="${profile.year}"></div>
-                    <div class="profile-content" th:text="${profile.content}"></div>
+            <div class="profile-container-kr">
+                <div class="profile-content-container">
+                    <div class="profile-year"></div>
+                    <div class="profile-content"></div>
+                </div>
+                <div class="profile-content-container">
+                    <div class="profile-year"></div>
+                    <div class="profile-content"></div>
                 </div>
             </div>
-            <div class="profile-en">
-                <h2>Awards</h2>
-                <div class="profile-wrapper" th:each="profile : ${response}" th:if="${profile.profileType == '수상'}">
-                    <div class="profile-year" th:text="${profile.year}"></div>
-                    <div class="profile-content" th:text="${profile.contentEn}"></div>
+            <div class="profile-container-en">
+                <div class="profile-content-container">
+                    <div class="profile-year"></div>
+                    <div class="profile-content"></div>
                 </div>
-            </div>
-        </div>
-        <div class="profile-container">
-            <div class="profile-kr">
-                <h2>개인전</h2>
-                <div class="profile-wrapper" th:each="profile : ${response}" th:if="${profile.profileType == '개인전'}">
-                    <div class="profile-year" th:text="${profile.year}"></div>
-                    <div class="profile-content" th:text="${profile.content}"></div>
-                </div>
-            </div>
-            <div class="profile-en">
-                <h2>Solo Exhibitions</h2>
-                <div class="profile-wrapper" th:each="profile : ${response}" th:if="${profile.profileType == '개인전'}">
-                    <div class="profile-year" th:text="${profile.year}"></div>
-                    <div class="profile-content" th:text="${profile.contentEn}"></div>
-                </div>
-            </div>
-        </div>
-        <div class="profile-container">
-            <div class="profile-kr">
-                <h2>단체전</h2>
-                <div class="profile-wrapper" th:each="profile : ${response}" th:if="${profile.profileType == '단체전'}">
-                    <div class="profile-year" th:text="${profile.year}"></div>
-                    <div class="profile-content" th:text="${profile.content}"></div>
-                </div>
-            </div>
-            <div class="profile-en">
-                <h2>Group Exhibitions</h2>
-                <div class="profile-wrapper" th:each="profile : ${response}" th:if="${profile.profileType == '단체전'}">
-                    <div class="profile-year" th:text="${profile.year}"></div>
-                    <div class="profile-content" th:text="${profile.contentEn}"></div>
+                <div class="profile-content-container">
+                    <div class="profile-year"></div>
+                    <div class="profile-content"></div>
                 </div>
             </div>
         </div>

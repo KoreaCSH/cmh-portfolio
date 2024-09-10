@@ -3,6 +3,7 @@ package com.choimyeongheon.portfolio.domain.profile.domain;
 import com.choimyeongheon.portfolio.domain.admin.domain.Admin;
 import com.choimyeongheon.portfolio.global.common.BaseEntity;
 import com.choimyeongheon.portfolio.global.common.DelYn;
+import com.choimyeongheon.portfolio.web.admin.profile.ProfileSprCd;
 import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileUpdateRequest;
 import jakarta.persistence.*;
 import lombok.*;
@@ -25,11 +26,21 @@ public class Profile extends BaseEntity {
     @Column(name = "year")
     private Integer year;
 
+    @Column(name = "from_year")
+    private Integer fromYear;
+
+    @Column(name = "to_year")
+    private Integer toYear;
+
     @Column(name = "content")
     private String content;
 
     @Column(name = "content_en")
     private String contentEn;
+
+    @Column(name = "profile_spr_cd", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ProfileSprCd profileSprCd;
 
     @ManyToOne
     @JoinColumn(name = "profile_type_id")
@@ -48,8 +59,10 @@ public class Profile extends BaseEntity {
     private DelYn delYn;
 
     @Builder
-    public Profile(Integer year, String content, String contentEn, ProfileType profileType, Admin createdBy) {
+    public Profile(Integer year, Integer fromYear, Integer toYear, String content, String contentEn, ProfileType profileType, Admin createdBy) {
         this.year = year;
+        this.fromYear = fromYear;
+        this.toYear = toYear;
         this.content = content;
         this.contentEn = contentEn;
         this.setProfileType(profileType);

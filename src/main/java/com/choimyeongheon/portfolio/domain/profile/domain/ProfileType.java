@@ -25,8 +25,8 @@ public class ProfileType extends BaseEntity {
     private String type;
     private String typeEn;
 
-    // profileType 으로 수정 필요
-    // 수정, 삭제 시 Profile 에도 영향 주도록 설정
+    // 우선순위 컬럼 추가
+
     @OneToMany(mappedBy = "profileType", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Profile> profiles = new ArrayList<>();
 

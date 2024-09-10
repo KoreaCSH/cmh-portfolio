@@ -63,6 +63,15 @@ public class ProfileController {
         return "redirect:/admin/profile/all";
     }
 
+    @GetMapping("/from-to/save-form")
+    public String createFromToForm(Model model, ProfileFromToSaveRequest request) {
+        List<ProfileTypeDto> profileTypes = profileTypeService.findAllDto();
+
+        model.addAttribute("profileTypes", profileTypes);
+        model.addAttribute("request", request);
+        return "admin/profile/from-to-save";
+    }
+
     // update 로직 수정해야 한다. - ProfileType 를 찾고, 변경해주는 로직 추가해야 함
     @GetMapping("/update-form/{id}")
     public String updateForm(Model model, @PathVariable(name = "id") Long id) {

@@ -6,10 +6,8 @@ import com.choimyeongheon.portfolio.domain.profile.domain.ProfileType;
 import com.choimyeongheon.portfolio.domain.profile.repository.ProfileRepository;
 import com.choimyeongheon.portfolio.global.exception.CustomException;
 import com.choimyeongheon.portfolio.global.exception.ErrorType;
-import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileDeletionDto;
-import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileResponse;
-import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileSaveRequest;
-import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileUpdateRequest;
+import com.choimyeongheon.portfolio.web.admin.profile.ProfileSprCd;
+import com.choimyeongheon.portfolio.web.admin.profile.dto.*;
 import com.choimyeongheon.portfolio.web.visitor.profile.dto.VisitorProfileResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +37,15 @@ public class ProfileService {
     }
 
     @Transactional
+    public void createFromTo(ProfileFromToSaveRequest request, Admin admin) {
+
+        ProfileType findProfileType = profileTypeService.findById(request.getProfileTypeId());
+
+        Profile profile = request.toEntity(admin, findProfileType);
+        profileRepository.save(profile);
+    }
+
+    @Transactional
     public void update(ProfileUpdateRequest request, Admin admin) {
         Profile findProfile = profileRepository.findById(request.getId())
                 .orElseThrow(() -> new CustomException(ErrorType.PROFILE_NOT_FOUND));
@@ -59,7 +66,7 @@ public class ProfileService {
     public List<ProfileResponse> findAll() {
         return profileRepository.findAllOrderByYear()
                 .stream()
-                .map(ProfileResponse::new)
+                .map(ProfileResponse::createProfileResponse)
                 .collect(Collectors.toList());
     }
 
@@ -76,7 +83,7 @@ public class ProfileService {
 
         return profileRepository.findAllByProfileTypeOrderByYear(profileType)
                 .stream()
-                .map(ProfileResponse::new)
+                .map(ProfileResponse::createProfileResponse)
                 .collect(Collectors.toList());
     }
 

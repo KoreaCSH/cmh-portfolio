@@ -59,12 +59,13 @@ public class Profile extends BaseEntity {
     private DelYn delYn;
 
     @Builder
-    public Profile(Integer year, Integer fromYear, Integer toYear, String content, String contentEn, ProfileType profileType, Admin createdBy) {
+    public Profile(Integer year, Integer fromYear, Integer toYear, String content, String contentEn, ProfileSprCd profileSprCd, ProfileType profileType, Admin createdBy) {
         this.year = year;
         this.fromYear = fromYear;
         this.toYear = toYear;
         this.content = content;
         this.contentEn = contentEn;
+        this.profileSprCd = profileSprCd;
         this.setProfileType(profileType);
         this.createdBy = createdBy;
         this.delYn = DelYn.N;

@@ -3,6 +3,7 @@ package com.choimyeongheon.portfolio.web.admin.profile.dto;
 import com.choimyeongheon.portfolio.domain.admin.domain.Admin;
 import com.choimyeongheon.portfolio.domain.profile.domain.Profile;
 import com.choimyeongheon.portfolio.domain.profile.domain.ProfileType;
+import com.choimyeongheon.portfolio.web.admin.profile.ProfileSprCd;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -38,8 +39,10 @@ public class ProfileFromToSaveRequest {
         return Profile.builder()
                 .fromYear(this.getFromYear())
                 .toYear(this.getToYear())
+                .year(this.getFromYear())
                 .content(this.getContent())
                 .contentEn(this.getContentEn())
+                .profileSprCd(ProfileSprCd.FROM_TO)
                 .profileType(profileType)
                 .createdBy(admin)
                 .build();

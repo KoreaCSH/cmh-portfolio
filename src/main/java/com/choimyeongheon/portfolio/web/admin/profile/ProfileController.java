@@ -55,7 +55,7 @@ public class ProfileController {
         return "admin/profile/save";
     }
 
-    @PostMapping
+    @PostMapping("/normal")
     public String create(@ModelAttribute("request") @Valid ProfileSaveRequest request,
                          @AuthenticationPrincipal Admin admin) {
         profileService.create(request, admin);
@@ -70,6 +70,14 @@ public class ProfileController {
         model.addAttribute("profileTypes", profileTypes);
         model.addAttribute("request", request);
         return "admin/profile/from-to-save";
+    }
+
+    @PostMapping("/from-to")
+    public String createFromTo(@ModelAttribute("request") @Valid ProfileFromToSaveRequest request,
+                               @AuthenticationPrincipal Admin admin) {
+        profileService.createFromTo(request, admin);
+
+        return "redirect:/admin/profile/all";
     }
 
     // update 로직 수정해야 한다. - ProfileType 를 찾고, 변경해주는 로직 추가해야 함

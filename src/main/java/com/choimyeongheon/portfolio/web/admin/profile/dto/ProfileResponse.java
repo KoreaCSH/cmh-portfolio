@@ -1,6 +1,7 @@
 package com.choimyeongheon.portfolio.web.admin.profile.dto;
 
 import com.choimyeongheon.portfolio.domain.profile.domain.Profile;
+import com.choimyeongheon.portfolio.web.admin.profile.ProfileSprCd;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,17 +11,36 @@ import lombok.NoArgsConstructor;
 public class ProfileResponse {
 
     private Long id;
-    private Integer year;
+    private String year;
     private String content;
     private String contentEn;
     private String profileType;
 
     public ProfileResponse(Profile profile) {
         this.id = profile.getId();
-        this.year = profile.getYear();
+        this.year = String.valueOf(profile.getYear());
         this.content = profile.getContent();
         this.contentEn = profile.getContentEn();
         this.profileType = profile.getProfileType().getType();
+    }
+
+    public static ProfileResponse createProfileResponse(Profile profile) {
+        ProfileResponse response = new ProfileResponse();
+        if (profile.getProfileSprCd() == ProfileSprCd.NORMAL) {
+            response.id = profile.getId();
+            response.year = String.valueOf(profile.getYear());
+            response.content = profile.getContent();
+            response.contentEn = profile.getContentEn();
+            response.profileType = profile.getProfileType().getType();
+        }
+        else {
+            response.id = profile.getId();
+            response.year = profile.getFromYear() + " - " + profile.getToYear();
+            response.content = profile.getContent();
+            response.contentEn = profile.getContentEn();
+            response.profileType = profile.getProfileType().getType();
+        }
+        return response;
     }
 
 }

@@ -80,7 +80,6 @@ public class ProfileController {
         return "redirect:/admin/profile/all";
     }
 
-    // update 로직 수정해야 한다. - ProfileType 를 찾고, 변경해주는 로직 추가해야 함
     @GetMapping("/update-form/{id}")
     public String updateForm(Model model, @PathVariable(name = "id") Long id) {
         ProfileUpdateRequest request = profileService.findProfileUpdateRequestById(id);
@@ -93,10 +92,30 @@ public class ProfileController {
         return "admin/profile/update";
     }
 
-    @PutMapping
+    @PutMapping("/normal")
     public String update(@ModelAttribute("request") @Valid ProfileUpdateRequest request,
                          @AuthenticationPrincipal Admin admin) {
         profileService.update(request, admin);
+        return "redirect:/admin/profile/all";
+    }
+
+    @GetMapping("/from-to/update-form/{id}")
+    public String updateFromToForm(Model model, @PathVariable(name = "id") Long id) {
+        ProfileFromToUpdateRequest request = profileService.findProfileFromToUpdateRequestById(id);
+        List<ProfileTypeDto> profileTypes = profileTypeService.findAllDto();
+
+        model.addAttribute("request", request);
+        model.addAttribute("profileTypes", profileTypes);
+        model.addAttribute("selectedType", request.getProfileType());
+        log.info("selectedType : " + request.getProfileType());
+        return "admin/profile/from-to-update";
+    }
+
+    @PutMapping("/from-to")
+    public String updateFromTo(@ModelAttribute("request") @Valid ProfileFromToUpdateRequest request,
+                               @AuthenticationPrincipal Admin admin) {
+        log.debug("FromToUpdateRequest : {}", request);
+        profileService.updateFromTo(request, admin);
         return "redirect:/admin/profile/all";
     }
 

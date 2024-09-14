@@ -8,17 +8,21 @@
   <link rel="stylesheet" href="/css/admin/profile/save.css" />
 </head>
 <div layout:fragment="admin-content">
-  <form th:action="@{/admin/profile/normal}" th:object="${request}" th:method="put">
+  <form th:action="@{/admin/profile/from-to}" th:object="${request}" method="post">
     <div class="profile-save-container">
       <div class="profile-save-form">
         <label for="profile-type" class="input-label">Type</label>
-        <select id="profile-type" class="form-select" th:field="*{profileType}">
-          <option th:each="pType : ${profileTypes}" th:value="${pType.id}" th:text="${pType.type}"></option>
+        <select id="profile-type" class="form-select" th:field="*{profileTypeId}">
+          <option th:each="pType : ${profileTypes}" th:value="${pType.id}" th:utext="${pType.type}"></option>
         </select>
       </div>
       <div class="profile-save-form">
-        <label for="profile-year" class="input-label">Year</label>
-        <input id="profile-year" type="number" min="2015" th:field="*{year}" class="form-control" placeholder="Year">
+        <label for="profile-from-year" class="input-label">From Year</label>
+        <input id="profile-from-year" type="number" min="2015" th:field="*{fromYear}" class="form-control" placeholder="From-Year">
+      </div>
+      <div class="profile-save-form">
+        <label for="profile-to-year" class="input-label">To Year</label>
+        <input id="profile-to-year" type="number" min="2015" th:field="*{toYear}" class="form-control" placeholder="To-Year">
       </div>
       <div class="profile-save-form">
         <label for="profile-content" class="input-label">Content</label>
@@ -27,11 +31,10 @@
       <div class="profile-save-form">
         <label for="profile-content-en" class="input-label">Content(En)</label>
         <input id="profile-content-en" type="text" class="form-control" th:field="*{contentEn}" placeholder="Content(En)">
-        <input type="hidden" th:field="*{id}">
       </div>
       <div class="submit-btn-wrapper">
         <a class="before-btn" href="/admin/profile/all">이전</a>
-        <button type="submit" class="submit-btn">수정</button>
+        <button type="submit" class="submit-btn">저장</button>
       </div>
     </div>
   </form>

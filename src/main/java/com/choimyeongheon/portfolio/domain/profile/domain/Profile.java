@@ -3,7 +3,7 @@ package com.choimyeongheon.portfolio.domain.profile.domain;
 import com.choimyeongheon.portfolio.domain.admin.domain.Admin;
 import com.choimyeongheon.portfolio.global.common.BaseEntity;
 import com.choimyeongheon.portfolio.global.common.DelYn;
-import com.choimyeongheon.portfolio.web.admin.profile.ProfileSprCd;
+import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileFromToUpdateRequest;
 import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileUpdateRequest;
 import jakarta.persistence.*;
 import lombok.*;
@@ -91,6 +91,16 @@ public class Profile extends BaseEntity {
 
     public void update(ProfileUpdateRequest request, ProfileType beforeProfileType, ProfileType afterProfileType, Admin updatedBy) {
         this.year = request.getYear();
+        this.content = request.getContent();
+        this.contentEn = request.getContentEn();
+        this.updateProfileTypeE(beforeProfileType, afterProfileType);
+        this.updatedBy = updatedBy;
+    }
+
+    public void updateFromTo(ProfileFromToUpdateRequest request, ProfileType beforeProfileType, ProfileType afterProfileType, Admin updatedBy) {
+        this.year = request.getYear();
+        this.fromYear = request.getFromYear();
+        this.toYear = request.getToYear();
         this.content = request.getContent();
         this.contentEn = request.getContentEn();
         this.updateProfileTypeE(beforeProfileType, afterProfileType);

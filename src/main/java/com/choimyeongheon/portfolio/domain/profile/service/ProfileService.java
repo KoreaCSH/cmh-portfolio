@@ -6,7 +6,6 @@ import com.choimyeongheon.portfolio.domain.profile.domain.ProfileType;
 import com.choimyeongheon.portfolio.domain.profile.repository.ProfileRepository;
 import com.choimyeongheon.portfolio.global.exception.CustomException;
 import com.choimyeongheon.portfolio.global.exception.ErrorType;
-import com.choimyeongheon.portfolio.web.admin.profile.ProfileSprCd;
 import com.choimyeongheon.portfolio.web.admin.profile.dto.*;
 import com.choimyeongheon.portfolio.web.visitor.profile.dto.VisitorProfileResponse;
 import lombok.RequiredArgsConstructor;
@@ -56,11 +55,30 @@ public class ProfileService {
         findProfile.update(request, beforeProfileType, afterProfileType, admin);
     }
 
+    @Transactional
+    public void updateFromTo(ProfileFromToUpdateRequest request, Admin admin) {
+        Profile findProfile = profileRepository.findById(request.getId())
+                .orElseThrow(() -> new CustomException(ErrorType.PROFILE_NOT_FOUND));
+
+        request.setYear(request.getFromYear());
+        ProfileType beforeProfileType = profileTypeService.findById(findProfile.getProfileType().getId());
+        ProfileType afterProfileType = profileTypeService.findById(request.getProfileType());
+
+        findProfile.updateFromTo(request, beforeProfileType, afterProfileType, admin);
+    }
+
     public ProfileUpdateRequest findProfileUpdateRequestById(Long id) {
         Profile findProfile = profileRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorType.PROFILE_NOT_FOUND));
 
         return new ProfileUpdateRequest(findProfile);
+    }
+
+    public ProfileFromToUpdateRequest findProfileFromToUpdateRequestById(Long id) {
+        Profile findProfile = profileRepository.findById(id)
+                .orElseThrow(() -> new CustomException(ErrorType.PROFILE_NOT_FOUND));
+
+        return new ProfileFromToUpdateRequest(findProfile);
     }
 
     public List<ProfileResponse> findAll() {

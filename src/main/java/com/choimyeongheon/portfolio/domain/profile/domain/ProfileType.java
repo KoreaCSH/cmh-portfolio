@@ -52,6 +52,7 @@ public class ProfileType extends BaseEntity {
 
     public void update(String type, String typeEn, Admin updatedBy) {
         this.type = type;
+        this.typeEn = typeEn;
         this.updatedBy = updatedBy;
     }
 

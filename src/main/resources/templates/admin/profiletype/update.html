@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/admin-default}">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="/css/admin/common.css" />
+    <link rel="stylesheet" href="/css/admin/profile/profileType.css" />
 </head>
-<body>
-
-</body>
+<div layout:fragment="admin-content">
+    <form th:action="@{/admin/profile-type}" th:object="${request}" th:method="put">
+        <div class="profile-type-save-container" id="profile-type-save-container">
+            <div class="profile-type-update-form">
+                <label for="profile-type" class="input-label">Type</label>
+                <input id="profile-type" type="text" th:field="*{type}" class="form-control" placeholder="Type" required>
+                <label for="profile-type-en" class="input-label type-en-label">Type (영어)</label>
+                <input id="profile-type-en" type="text" th:field="*{typeEn}" class="form-control type-en-input" placeholder="Type (영어)" required>
+                <input type="hidden" th:field="*{id}">
+            </div>
+            <div class="submit-btn-wrapper">
+                <a class="before-btn" href="/admin/profile-type">이전</a>
+                <button type="submit" class="submit-btn">저장</button>
+            </div>
+        </div>
+    </form>
+</div>
 </html>

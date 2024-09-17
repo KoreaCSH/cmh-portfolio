@@ -52,7 +52,7 @@ public class ProfileTypeController {
                          @AuthenticationPrincipal Admin admin) {
 
         profileTypeService.update(request, admin);
-        return "";
+        return "redirect:/admin/profile-type";
     }
 
     @GetMapping("/delete-form")

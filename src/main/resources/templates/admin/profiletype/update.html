@@ -14,7 +14,9 @@
                 <label for="profile-type" class="input-label">Type</label>
                 <input id="profile-type" type="text" th:field="*{type}" class="form-control" placeholder="Type" required>
                 <label for="profile-type-en" class="input-label type-en-label">Type (영어)</label>
-                <input id="profile-type-en" type="text" th:field="*{typeEn}" class="form-control type-en-input" placeholder="Type (영어)" required>
+                <input id="profile-type-en" type="text" th:field="*{typeEn}" class="form-control" placeholder="Type (영어)" required>
+                <label for="Priority" class="input-label type-en-label">우선순위</label>
+                <input id="Priority" type="number" min="1" th:field="*{priority}" class="form-control" placeholder="우선순위" required>
                 <input type="hidden" th:field="*{id}">
             </div>
             <div class="submit-btn-wrapper">

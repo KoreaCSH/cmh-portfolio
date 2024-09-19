@@ -41,7 +41,7 @@ public class ProfileTypeService {
     @Transactional
     public void update(ProfileTypeDto dto, Admin updatedBy) {
         ProfileType findProfileType = this.findById(dto.getId());
-        findProfileType.update(dto.getType(), dto.getTypeEn(), updatedBy);
+        findProfileType.update(dto.getType(), dto.getTypeEn(), dto.getPriority(), updatedBy);
     }
 
     @Transactional
@@ -63,7 +63,6 @@ public class ProfileTypeService {
     public List<ProfileTypeDto> findAllDto() {
         return this.findAll()
                 .stream()
-                .filter(ProfileType::isDeleted)
                 .map(ProfileTypeDto::new)
                 .collect(Collectors.toList());
     }
@@ -74,7 +73,10 @@ public class ProfileTypeService {
     }
 
     private List<ProfileType> findAll() {
-        return profileTypeRepository.findAll();
+        return profileTypeRepository.findAllByOrderByPriority()
+                .stream()
+                .filter(ProfileType::isDeleted)
+                .collect(Collectors.toList());
     }
 
     public ProfileType findById(Long id) {

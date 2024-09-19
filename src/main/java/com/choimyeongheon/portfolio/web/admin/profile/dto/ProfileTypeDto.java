@@ -14,6 +14,7 @@ public class ProfileTypeDto {
     private Long id;
     private String type;
     private String typeEn;
+    private Integer priority;
     private Boolean isDeleted;
 
     public ProfileType toEntity(Admin createdBy) {
@@ -28,6 +29,7 @@ public class ProfileTypeDto {
         this.id = profileType.getId();
         this.type = profileType.getType();
         this.typeEn = profileType.getTypeEn();
+        this.priority = profileType.getPriority();
         this.isDeleted = false;
     }
 

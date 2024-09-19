@@ -21,6 +21,7 @@
                 <div class="divTableHead update-btn-header">수정</div>
                 <div class="divTableHead profile-type-header">Type</div>
                 <div class="divTableHead profile-type-en-header">Type-En</div>
+                <div class="divTableHead profile-type-priority-header">우선순위</div>
             </div>
         </div>
         <div class="divTableBody">
@@ -28,6 +29,7 @@
                 <div class="divTableCell update-btn-wrapper"><a class="update-btn" th:href="@{/admin/profile-type/update-form/{id}(id=${profileType.id})}">수정</a></div>
                 <div class="divTableCell profile-type" th:text="${profileType.type}"></div>
                 <div class="divTableCell profile-type-en" th:text="${profileType.typeEn}"></div>
+                <div class="divTableCell profile-priority" th:text="${profileType.priority}"></div>
             </div>
         </div>
     </div>

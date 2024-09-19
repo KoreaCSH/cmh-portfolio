@@ -41,6 +41,10 @@
     word-break: break-all;
 }
 
+.divTableBody .divTableRow .profile-priority {
+    width: 80px;
+}
+
 .profile-type-before-btn {
     margin-left: 10px;
 }

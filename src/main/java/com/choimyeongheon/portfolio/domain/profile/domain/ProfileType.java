@@ -24,8 +24,7 @@ public class ProfileType extends BaseEntity {
 
     private String type;
     private String typeEn;
-
-    // 우선순위 컬럼 추가
+    private Integer priority;
 
     @OneToMany(mappedBy = "profileType", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Profile> profiles = new ArrayList<>();
@@ -46,13 +45,15 @@ public class ProfileType extends BaseEntity {
     public ProfileType(String type, String typeEn, Admin createdBy) {
         this.type = type;
         this.typeEn = typeEn;
+        this.priority = 1;
         this.createdBy = createdBy;
         this.delYn = DelYn.N;
     }
 
-    public void update(String type, String typeEn, Admin updatedBy) {
+    public void update(String type, String typeEn, Integer priority, Admin updatedBy) {
         this.type = type;
         this.typeEn = typeEn;
+        this.priority = priority;
         this.updatedBy = updatedBy;
     }
 

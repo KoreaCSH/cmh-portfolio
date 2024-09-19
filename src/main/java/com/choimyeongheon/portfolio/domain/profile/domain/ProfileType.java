@@ -62,4 +62,11 @@ public class ProfileType extends BaseEntity {
         this.updatedBy = updatedBy;
     }
 
+    public boolean isDeleted() {
+        if (this.delYn == DelYn.N) {
+            return true;
+        }
+        return false;
+    }
+
 }

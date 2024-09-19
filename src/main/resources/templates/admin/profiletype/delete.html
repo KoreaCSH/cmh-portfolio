@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html   lang="ko"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/admin-default}">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="/css/admin/common.css" />
+    <link rel="stylesheet" href="/css/admin/profile/profiles.css" />
+    <script src="/js/profiles.js" defer></script>
 </head>
-<body>
-
-</body>
+<div layout:fragment="admin-content">
+    <form th:action="@{/admin/profile-type}" th:object="${request}" th:method="delete" onsubmit="return deleteHandler()">
+        <div class="admin-content-header">
+            <a class="before-btn delete-page-before-btn" href="/admin/profile-type">이전</a>
+            <button type="submit" class="admin-content-header-del-btn">삭제</button>
+        </div>
+        <div class="divTable minimalistBlack">
+            <div class="divTableHeading">
+                <div class="divTableRow">
+                    <div class="divTableHead del-chk-header"><input type="checkbox" onclick="toggleCheckbox(this)" /></div>
+                    <div class="divTableHead profile-type-header">Type</div>
+                    <div class="divTableHead profile-type-en-header">Type-En</div>
+                </div>
+            </div>
+            <div class="divTableBody">
+                <div class="divTableRow" th:each="profileType, itemStat : *{profileTypeDtoList}">
+                    <div class="divTableCell del-chk"><input type="checkbox" class="del-chk-box" th:field="*{profileTypeDtoList[__${itemStat.index}__].isDeleted}"></div>
+                    <div class="divTableCell profile-type" th:text="${profileType.type}"></div>
+                    <div class="divTableCell profile-type-en" th:text="${profileType.typeEn}"></div>
+                    <input type="hidden" th:field="*{profileTypeDtoList[__${itemStat.index}__].id}">
+                    <input type="hidden" th:field="*{profileTypeDtoList[__${itemStat.index}__].type}">
+                    <input type="hidden" th:field="*{profileTypeDtoList[__${itemStat.index}__].typeEn}">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 </html>

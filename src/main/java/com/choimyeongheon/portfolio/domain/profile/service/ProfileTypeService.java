@@ -63,6 +63,7 @@ public class ProfileTypeService {
     public List<ProfileTypeDto> findAllDto() {
         return this.findAll()
                 .stream()
+                .filter(ProfileType::isDeleted)
                 .map(ProfileTypeDto::new)
                 .collect(Collectors.toList());
     }

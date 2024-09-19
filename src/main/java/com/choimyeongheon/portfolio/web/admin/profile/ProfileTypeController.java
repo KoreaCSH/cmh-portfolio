@@ -59,7 +59,7 @@ public class ProfileTypeController {
     public String deleteForm(ProfileTypeRequest request, Model model) {
         request.setProfileTypeDtoList(profileTypeService.findAllDto());
         model.addAttribute("request", request);
-        return "";
+        return "admin/profiletype/delete";
     }
 
     @DeleteMapping
@@ -67,7 +67,7 @@ public class ProfileTypeController {
                          @AuthenticationPrincipal Admin admin) {
         // ProfileType delYn 처리 및 type 에 속한 profile 들도 모두 delYn 처리 - 테스트 필요
         profileTypeService.deleteAll(request, admin);
-        return "";
+        return "redirect:/admin/profile-type";
     }
 
 }

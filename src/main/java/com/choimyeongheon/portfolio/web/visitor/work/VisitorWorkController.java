@@ -22,6 +22,7 @@ public class VisitorWorkController {
     public String works(Model model) {
         List<VisitorWorkResponse> works = workService.findAllPublicWorkResponse();
         model.addAttribute("works", works);
+        model.addAttribute("selectedYear", "all");
         return "works";
     }
 
@@ -29,6 +30,7 @@ public class VisitorWorkController {
     public String worksByWorkYear(Model model, @PathVariable(name = "workYear") Integer workYear) {
         List<VisitorWorkResponse> works = workService.findPublicWorkResponseByWorkYear(workYear);
         model.addAttribute("works", works);
+        model.addAttribute("selectedYear", workYear);
         return "works";
     }
 

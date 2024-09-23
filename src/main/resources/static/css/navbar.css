@@ -79,6 +79,10 @@
     font-size: 24px;
 }
 
+.year-active {
+    color: var(--accent-color);
+}
+
 .logout-btn {
     display: inline-block;
     background: none;

@@ -8,9 +8,10 @@
             <li class="navbar-menu-works">
                 <a href="/works/all" class="nav-works">Works</a>
                 <ul class="navbar-dropdown-submenu">
-                    <li><a href="/works/all">All</a></li>
+                    <li><a href="/works/all" th:classappend="${selectedYear} == 'all' ? 'year-active' : ''">All</a></li>
                     <li class="navbar-dropdown-submenu-separator">|</li>
-                    <li th:each="wy : ${workYears}"><a th:href="@{/works/}" href="/works/2018" th:text="${wy.year}">2018</a></li>
+                    <li th:each="wy : ${workYears}"><a th:href="@{/works/{year}(year=${wy.year})}" href="/works/2018" th:text="${wy.year}"
+                        th:classappend="${wy.year} == ${selectedYear} ? 'year-active' : ''">2018</a></li>
                 </ul>
             </li>
             <li><a href="/profiles" class="nav-profiles">Profile</a></li>

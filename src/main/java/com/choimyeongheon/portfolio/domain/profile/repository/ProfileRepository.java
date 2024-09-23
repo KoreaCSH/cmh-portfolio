@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface ProfileRepository extends JpaRepository<Profile, Long> {
 
-    @Query("SELECT p FROM Profile p WHERE p.delYn = 'N' ORDER BY p.profileType.id, p.year")
+    @Query("SELECT p FROM Profile p WHERE p.delYn = 'N' ORDER BY p.profileType.priority, p.year")
     List<Profile> findAllOrderByYear();
 
     @Query("SELECT p FROM Profile p WHERE p.profileType = :profileType AND p.delYn = 'N' ORDER BY p.profileType.id, p.year")

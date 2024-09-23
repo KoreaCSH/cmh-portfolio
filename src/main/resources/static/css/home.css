@@ -25,6 +25,12 @@
     display: block;
     max-height: 100%;
     width: 100%; /* 비율을 유지하면서 높이에 맞게 조정 */
+    opacity: 0;
+    transition: opacity 0.7s ease-in-out;
+}
+
+.home-image-container > img.loaded {
+    opacity: 1;
 }
 
 .home-image-info {

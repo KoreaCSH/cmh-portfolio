@@ -91,7 +91,7 @@ public class ProfileService {
     public List<VisitorProfileResponse> findAllVisitorProfileResponse() {
         return profileRepository.findAllOrderByYear()
                 .stream()
-                .map(VisitorProfileResponse::new)
+                .map(VisitorProfileResponse::createVisitorProfileResponse)
                 .collect(Collectors.toList());
     }
 

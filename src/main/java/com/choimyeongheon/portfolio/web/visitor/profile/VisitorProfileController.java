@@ -1,6 +1,8 @@
 package com.choimyeongheon.portfolio.web.visitor.profile;
 
 import com.choimyeongheon.portfolio.domain.profile.service.ProfileService;
+import com.choimyeongheon.portfolio.domain.profile.service.ProfileTypeService;
+import com.choimyeongheon.portfolio.web.admin.profile.dto.ProfileTypeDto;
 import com.choimyeongheon.portfolio.web.visitor.profile.dto.VisitorProfileResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,11 +18,14 @@ import java.util.List;
 public class VisitorProfileController {
 
     private final ProfileService profileService;
+    private final ProfileTypeService profileTypeService;
 
     @GetMapping
     public String profiles(Model model) {
-        List<VisitorProfileResponse> response = profileService.findAllVisitorProfileResponse();
-        model.addAttribute("response", response);
+        List<VisitorProfileResponse> profiles = profileService.findAllVisitorProfileResponse();
+        List<ProfileTypeDto> profileTypes = profileTypeService.findAllDto();
+        model.addAttribute("profiles", profiles);
+        model.addAttribute("profileTypes", profileTypes);
         return "profiles";
     }
 

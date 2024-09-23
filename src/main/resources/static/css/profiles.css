@@ -1,7 +1,17 @@
-.container {
+/*.container {
     max-width: 1000px;
-    /*margin: 40px 40px 0 40px;*/
-    margin: 40px auto 0 auto;
+    !*margin: 40px 40px 0 40px;*!
+    margin: 60px auto 0 auto;
+    padding: 8px 24px;
+}*/
+
+.nav-profiles {
+    color: var(--accent-color);
+}
+
+.profile-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
     padding: 8px 24px;
 }
 

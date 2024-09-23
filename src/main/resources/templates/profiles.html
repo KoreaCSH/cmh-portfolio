@@ -6,54 +6,23 @@
 <head>
     <link rel="stylesheet" href="/css/profiles.css" />
 </head>
-<div layout:fragment="content" class="container">
-    <div class="about-me-container"></div>
-    <div class="type-container">
-        <div class="type-header">Education</div>
-        <div class="profile-container">
-            <div class="profile-container-kr">
-                <div class="profile-content-container">
-                    <div class="profile-year"></div>
-                    <div class="profile-content"></div>
+<div layout:fragment="content">
+    <div class="profile-wrapper">
+        <div class="about-me-container"></div>
+        <div class="type-container" th:each="profileType : ${profileTypes}">
+            <div class="type-header" th:text="${profileType.typeEn}">Education</div>
+            <div class="profile-container">
+                <div class="profile-container-kr">
+                    <div class="profile-content-container" th:each="profile : ${profiles}" th:if="${profile.profileType == profileType.type}">
+                        <div class="profile-year" th:text="${profile.year}"></div>
+                        <div class="profile-content" th:text="${profile.content}"></div>
+                    </div>
                 </div>
-                <div class="profile-content-container">
-                    <div class="profile-year"></div>
-                    <div class="profile-content"></div>
-                </div>
-            </div>
-            <div class="profile-container-en">
-                <div class="profile-content-container">
-                    <div class="profile-year"></div>
-                    <div class="profile-content"></div>
-                </div>
-                <div class="profile-content-container">
-                    <div class="profile-year"></div>
-                    <div class="profile-content"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="type-container">
-        <div class="type-header">Solo Exhibitions</div>
-        <div class="profile-container">
-            <div class="profile-container-kr">
-                <div class="profile-content-container">
-                    <div class="profile-year"></div>
-                    <div class="profile-content"></div>
-                </div>
-                <div class="profile-content-container">
-                    <div class="profile-year"></div>
-                    <div class="profile-content"></div>
-                </div>
-            </div>
-            <div class="profile-container-en">
-                <div class="profile-content-container">
-                    <div class="profile-year"></div>
-                    <div class="profile-content"></div>
-                </div>
-                <div class="profile-content-container">
-                    <div class="profile-year"></div>
-                    <div class="profile-content"></div>
+                <div class="profile-container-en">
+                    <div class="profile-content-container" th:each="profile : ${profiles}" th:if="${profile.profileType == profileType.type}">
+                        <div class="profile-year" th:text="${profile.year}"></div>
+                        <div class="profile-content" th:text="${profile.contentEn}"></div>
+                    </div>
                 </div>
             </div>
         </div>

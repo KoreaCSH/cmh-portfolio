@@ -12,10 +12,12 @@ public class VisitorWorkResponse {
 
     private String fileName;
     private String title;
+    private String year;
 
     public VisitorWorkResponse(Work work) {
         this.fileName = work.getFileName();
         this.title = work.getTitle();
+        this.year = String.valueOf(work.getWorkDate().getYear());
     }
 
 }

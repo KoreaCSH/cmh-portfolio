@@ -20,11 +20,11 @@
       </div>
       <div class="home-image-save-title home-image-save-form">
         <label for="home-image-title" class="input-label">제목</label>
-        <input id="home-image-title" type="text" th:field="*{title}" class="form-control" placeholder="Title">
+        <input id="home-image-title" type="text" th:field="*{title}" class="form-control" placeholder="Title" required>
       </div>
       <div class="home-image-save-work-date home-image-save-form">
         <label for="work-date" class="input-label">작업일자</label>
-        <input id="work-date" type="date" class="form-control" th:field="*{workDate}">
+        <input id="work-date" type="date" class="form-control" th:field="*{workDate}" required>
       </div>
       <div class="home-image-save-btn-wrapper">
         <a class="before-btn" href="/admin/works">이전</a>

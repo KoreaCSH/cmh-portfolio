@@ -54,6 +54,39 @@
     display: flex;
 }
 
+#work-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(255, 255, 255);
+}
+
+.work-modal-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.work-modal-content {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.work-modal-img-container {
+    height: 80vh;
+}
+
+.work-modal-img-container img {
+    max-height: 100%;
+    width: 100%;
+}
+
 @media screen and (max-width: 1150px) {
     .work-info {
         font-size: 0.9rem;

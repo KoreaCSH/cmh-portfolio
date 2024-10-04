@@ -122,4 +122,9 @@ public class WorkService {
                 .collect(Collectors.toList());
     }
 
+    // API 단건 조회
+    public VisitorWorkResponse findVisitorWorkResponseById(Long id) {
+        return new VisitorWorkResponse(findById(id));
+    }
+
 }

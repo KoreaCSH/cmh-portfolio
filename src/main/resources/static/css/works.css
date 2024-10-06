@@ -78,13 +78,50 @@
     margin-bottom: 10px;
 }
 
-.work-modal-img-container {
-    height: 80vh;
+.modal-close {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
-.work-modal-img-container img {
+.work-modal-img-container {
+    height: 80%;
+}
+
+.work-modal-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.work-modal-img img {
     max-height: 100%;
     width: 100%;
+    opacity: 0;
+    transition: opacity 0.7s ease-in-out;
+}
+
+.work-modal-img img.loaded {
+    opacity: 1;
+}
+
+.work-modal-info-container {
+    display: flex;
+    justify-content: center;
+    height: 10%;
+}
+
+.work-modal-info {
+    font-size: 1.1rem;
+    margin-top: 0.3rem;
+}
+
+.fa-xmark {
+    font-size: 2rem;
+    margin-right: 3rem;
 }
 
 @media screen and (max-width: 1150px) {

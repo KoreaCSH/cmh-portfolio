@@ -23,19 +23,30 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-document.addEventListener("DOMContentLoaded", function() {
+function closeModal() {
+    const workModal = document.getElementById('work-modal');
+    const workModalImg = document.querySelector('.work-modal-img-container img');
+
+    workModal.style.display = 'none';
+    document.body.style.overflow = 'visible';
+    workModalImg.classList.remove('loaded');
+
+    history.replaceState(null, "Modal Close", location.pathname);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
     const openModalImgAll = document.querySelectorAll('.work-img');
     const workModal = document.getElementById('work-modal');
     const workModalImg = document.querySelector('.work-modal-img-container img');
     const modalCloseBtn = document.getElementById('modal-close-btn');
 
     openModalImgAll.forEach(img => {
-        img.addEventListener('click', function() {
+        img.addEventListener('click', function () {
             const workId = img.getAttribute('data-id');
 
             fetch(`/api/works/${workId}`)
                 .then(response => {
-                    if(!response.ok) {
+                    if (!response.ok) {
                         throw new Error('Network response was not ok');
                     }
                     return response.json();
@@ -44,8 +55,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     workModalImg.src = `/admin/works/display?fileName=${data.fileName}`;
                     workModal.style.display = 'block';
                     document.body.style.overflow = 'hidden';
+                    history.pushState({modalOpen: true}, "Modal Open", "#detail");
 
-                    workModalImg.onload = function() {
+                    workModalImg.onload = function () {
                         workModalImg.classList.add('loaded');
                     }
                 })
@@ -53,10 +65,18 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    modalCloseBtn.addEventListener('click', function () {
-        workModal.style.display = 'none';
-        document.body.style.overflow = 'visible';
-        workModalImg.classList.remove('loaded');
-    });
+    modalCloseBtn.addEventListener('click', closeModal);
 });
 
+window.addEventListener('popstate', function (event) {
+    if(!event.state) {
+        closeModal();
+    }
+});
+
+// 페이지 reload 시 #detail 없애기
+window.addEventListener('load', function () {
+    if (location.hash === '#detail') {
+        history.replaceState(null, "Modal Close", location.pathname);
+    }
+});

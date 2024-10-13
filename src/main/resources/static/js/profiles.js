@@ -34,3 +34,8 @@ function sendDeleteFormRequest() {
 
     window.location.href = url;
 }
+
+window.addEventListener("load", function() {
+    const profileWrapper = document.querySelector('.profile-wrapper'); // 페이지의 모든 img 요소 선택
+    profileWrapper.classList.add('loaded');
+});

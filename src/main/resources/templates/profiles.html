@@ -5,12 +5,13 @@
         layout:decorate="~{layouts/default}">
 <head>
     <link rel="stylesheet" href="/css/profiles.css" />
+    <script src="/js/profiles.js" defer></script>
 </head>
 <div layout:fragment="content">
     <div class="profile-wrapper">
         <div class="about-me-container"></div>
         <div class="type-container" th:each="profileType : ${profileTypes}">
-            <div class="type-header" th:text="${profileType.typeEn}">Education</div>
+            <div class="type-header frank-ruhl-libre" th:text="${profileType.typeEn}">Education</div>
             <div class="profile-container">
                 <div class="profile-container-kr">
                     <div class="profile-content-container" th:each="profile : ${profiles}" th:if="${profile.profileType == profileType.type}">

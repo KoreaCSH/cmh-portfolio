@@ -5,6 +5,7 @@
         layout:decorate="~{layouts/default}">
 <head>
     <link rel="stylesheet" href="/css/home.css" />
+    <script src="/js/common.js" defer></script>
     <script src="/js/image.js" defer></script>
 </head>
 <div layout:fragment="content">
@@ -13,7 +14,7 @@
             <img th:src="'/admin/home-images/display?fileName='+${response.fileName}" onerror="this.src='images/test1.jpeg'" class="img-fluid home-image">
         </div>
         <div class="home-image-info">
-            <p class="img-explain" th:text="${response.title}"></p>
+            <p class="img-explain frank-ruhl-libre" th:text="${response.title}"></p>
         </div>
     </div>
 </div>

@@ -5,6 +5,7 @@
         layout:decorate="~{layouts/default}">
 <head>
   <link rel="stylesheet" href="/css/contact.css" />
+  <script src="/js/contacts.js" defer></script>
 </head>
 <div layout:fragment="content">
   <form th:action="@{/contact}" th:object="${request}" method="post">

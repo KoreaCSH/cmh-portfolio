@@ -12,7 +12,7 @@
         <ul class="row">
             <li class="cell" th:each="work : ${works}">
                 <div class="work-img-container"><img class="work-img" id="modal-open" th:src="'/admin/works/display?fileName='+${work.fileName}" alt="" loading="lazy" th:attr="data-id=${work.id}" /></div>
-                <div class="work-info" th:text="${work.title}">info</div>
+                <div class="work-info frank-ruhl-libre" th:text="${work.title}">info</div>
             </li>
         </ul>
     </div>
@@ -26,7 +26,7 @@
                 <div class="work-modal-img"><img src="" alt=""></div>
             </div>
             <div class="work-modal-info-container">
-                <div class="work-modal-info">Info</div>
+                <div class="work-modal-info frank-ruhl-libre">Info</div>
             </div>
         </div>
     </div>

@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const openModalImgAll = document.querySelectorAll('.work-img');
     const workModal = document.getElementById('work-modal');
     const workModalImg = document.querySelector('.work-modal-img-container img');
+    const workModalInfo = document.querySelector('.work-modal-info');
     const modalCloseBtn = document.getElementById('modal-close-btn');
 
     openModalImgAll.forEach(img => {
@@ -54,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(data => {
                     workModalImg.src = `/admin/works/display?fileName=${data.fileName}`;
                     workModal.style.display = 'block';
+                    workModalInfo.innerHTML = data.title;
                     document.body.style.overflow = 'hidden';
                     history.pushState({modalOpen: true}, "Modal Open", "#detail");
 

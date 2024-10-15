@@ -1,6 +1,7 @@
 package com.choimyeongheon.portfolio.domain.admin.domain;
 
 import com.choimyeongheon.portfolio.global.common.BaseEntity;
+import com.choimyeongheon.portfolio.global.common.DelYn;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -30,12 +31,25 @@ public class Admin extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @ManyToOne
+    @JoinColumn(name = "created_by")
+    private Admin createdBy;
+
+    @ManyToOne
+    @JoinColumn(name = "updated_by")
+    private Admin updatedBy;
+
+    @Column(name = "del_yn", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private DelYn delYn;
+
     @Builder
     public Admin(String userId, String userName, String password) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
         this.role = Role.ADMIN;
+        this.delYn = DelYn.N;
     }
 
 }

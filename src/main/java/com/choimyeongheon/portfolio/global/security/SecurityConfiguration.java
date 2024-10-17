@@ -1,6 +1,7 @@
 package com.choimyeongheon.portfolio.global.security;
 
 import com.choimyeongheon.portfolio.domain.admin.domain.Role;
+import com.choimyeongheon.portfolio.domain.admin.service.AdminService;
 import com.choimyeongheon.portfolio.global.security.handler.FormAccessDeniedHandler;
 import com.choimyeongheon.portfolio.global.security.handler.FormAuthenticationEntryPoint;
 import com.choimyeongheon.portfolio.global.security.handler.FormAuthenticationFailureHandler;
@@ -31,6 +32,7 @@ import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 @RequiredArgsConstructor
 public class SecurityConfiguration {
 
+    private final AdminService adminService;
     private final UserDetailsService userDetailsService;
 
     // Exception 처리하기
@@ -38,7 +40,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(csrf -> csrf.csrfTokenRepository(new HttpSessionCsrfTokenRepository())
-                                  .ignoringRequestMatchers("/sign-up"))
+                        .ignoringRequestMatchers("/sign-up"))
 
                 .formLogin(form ->
                         form.loginPage("/login/form")
@@ -61,9 +63,9 @@ public class SecurityConfiguration {
                 .exceptionHandling(configurer -> configurer.accessDeniedHandler(accessDeniedHandler()))
 
                 .authorizeHttpRequests(authorize -> authorize
-                                                             .requestMatchers("/error", "/css/**", "/js/**", "/images/**", "/admin/works/display", "/admin/home-images/display").permitAll()
-                                                             .requestMatchers("/admin/**").hasAnyAuthority(Role.ADMIN.getRole())
-                                                             .anyRequest().permitAll())
+                        .requestMatchers("/error", "/css/**", "/js/**", "/images/**", "/admin/works/display", "/admin/home-images/display").permitAll()
+                        .requestMatchers("/admin/**").hasAnyAuthority(Role.ADMIN.getRole())
+                        .anyRequest().permitAll())
 
                 .build();
     }
@@ -90,7 +92,7 @@ public class SecurityConfiguration {
 
     @Bean
     public AuthenticationSuccessHandler authenticationSuccessHandler() {
-        return new FormAuthenticationSuccessHandler();
+        return new FormAuthenticationSuccessHandler(adminService);
     }
 
     @Bean

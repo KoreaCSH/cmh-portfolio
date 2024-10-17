@@ -21,7 +21,9 @@ public enum ErrorType {
     EMPTY_PROFILE_TYPE_OR_DUPLICATED("타입을 입력하지 않았거나, 이미 저장된 타입입니다."),
     PROFILE_TYPE_NOT_FOUND("타입을 찾을 수 없습니다."),
 
-    DUPLICATED_ADMIN("가입할 수 없는 아이디입니다.");
+    DUPLICATED_ADMIN("가입할 수 없는 아이디입니다."),
+
+    ADMIN_NOT_FOUND("존재하지 않는 아이디입니다.");
 
     private String message;
 

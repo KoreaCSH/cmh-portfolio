@@ -6,7 +6,6 @@ import com.choimyeongheon.portfolio.global.exception.CustomException;
 import com.choimyeongheon.portfolio.global.exception.ErrorType;
 import com.choimyeongheon.portfolio.web.admin.admin.dto.SignUpRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,14 +15,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class AdminService {
 
     private final AdminRepository adminRepository;
-    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public Long signUp(SignUpRequest request) {
 
         validateDuplicatedUserId(request.getUserId());
 
-        String encodedPassword = passwordEncoder.encode(request.getPassword());
+        String encodedPassword = request.getPassword();
         Admin admin = Admin.builder()
                 .userId(request.getUserId())
                 .userName(request.getUserName())
@@ -32,6 +30,14 @@ public class AdminService {
 
         Admin savedAdmin = adminRepository.save(admin);
         return savedAdmin.getId();
+    }
+
+    @Transactional
+    public void updateLastLoginDate(Admin admin) {
+        Admin findAdmin = adminRepository.findByUserId(admin.getUserId())
+                .orElseThrow(() -> new CustomException(ErrorType.ADMIN_NOT_FOUND));
+
+        findAdmin.updateLastLoginDate();
     }
 
     private void validateDuplicatedUserId(String userId) {

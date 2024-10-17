@@ -1,6 +1,5 @@
 package com.choimyeongheon.portfolio.domain.admin.domain;
 
-import com.choimyeongheon.portfolio.global.common.BaseEntity;
 import com.choimyeongheon.portfolio.global.common.DelYn;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -8,17 +7,19 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Admin extends BaseEntity {
+public class Admin {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", unique = true, nullable = false)
     private String userId;
 
     @Column(name = "user_name")
@@ -31,13 +32,20 @@ public class Admin extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @ManyToOne
-    @JoinColumn(name = "created_by")
-    private Admin createdBy;
+    @Column(name = "accepted_by")
+    private String acceptedBy;
 
-    @ManyToOne
-    @JoinColumn(name = "updated_by")
-    private Admin updatedBy;
+    @Column(name = "updated_by")
+    private String updatedBy;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @Column(name = "last_login_date")
+    private LocalDateTime lastLoginDate;
 
     @Column(name = "del_yn", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -50,6 +58,10 @@ public class Admin extends BaseEntity {
         this.password = password;
         this.role = Role.ADMIN;
         this.delYn = DelYn.N;
+    }
+
+    public void updateLastLoginDate() {
+        this.lastLoginDate = LocalDateTime.now();
     }
 
 }

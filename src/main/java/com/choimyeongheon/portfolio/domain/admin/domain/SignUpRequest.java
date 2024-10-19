@@ -4,6 +4,7 @@ import com.choimyeongheon.portfolio.global.common.BaseEntity;
 import com.choimyeongheon.portfolio.global.common.DelYn;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -17,7 +18,7 @@ public class SignUpRequest extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     private String userId;
 
     @Column(name = "user_name")
@@ -33,5 +34,17 @@ public class SignUpRequest extends BaseEntity {
     @Column(name = "del_yn", nullable = false)
     @Enumerated(EnumType.STRING)
     private DelYn delYn;
+
+    @Builder
+    public SignUpRequest(String userId, String userName, String password) {
+        this.userId = userId;
+        this.userName = userName;
+        this.password = password;
+        this.delYn = DelYn.N;
+    }
+
+    public void updateAcceptedBy(Admin acceptedBy) {
+        this.acceptedBy = acceptedBy;
+    }
 
 }

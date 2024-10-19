@@ -52,10 +52,13 @@ public class Admin {
     private DelYn delYn;
 
     @Builder
-    public Admin(String userId, String userName, String password) {
+    public Admin(String userId, String userName, String password, Admin acceptedBy) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
+        this.acceptedBy = acceptedBy.getUserId();
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
         this.role = Role.ADMIN;
         this.delYn = DelYn.N;
     }

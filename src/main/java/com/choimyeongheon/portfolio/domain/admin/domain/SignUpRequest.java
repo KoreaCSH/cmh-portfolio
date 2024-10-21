@@ -31,20 +31,21 @@ public class SignUpRequest extends BaseEntity {
     @JoinColumn(name = "accepted_by")
     private Admin acceptedBy;
 
-    @Column(name = "del_yn", nullable = false)
+    @Column(name = "accept_yn", nullable = false)
     @Enumerated(EnumType.STRING)
-    private DelYn delYn;
+    private DelYn acceptYn;
 
     @Builder
     public SignUpRequest(String userId, String userName, String password) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
-        this.delYn = DelYn.N;
+        this.acceptYn = DelYn.N;
     }
 
-    public void updateAcceptedBy(Admin acceptedBy) {
+    public void updateAcceptedByAndAcceptYn(Admin acceptedBy) {
         this.acceptedBy = acceptedBy;
+        this.acceptYn = DelYn.Y;
     }
 
 }

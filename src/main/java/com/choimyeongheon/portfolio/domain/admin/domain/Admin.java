@@ -1,6 +1,7 @@
 package com.choimyeongheon.portfolio.domain.admin.domain;
 
 import com.choimyeongheon.portfolio.global.common.DelYn;
+import com.choimyeongheon.portfolio.web.admin.admin.dto.AdminDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -51,6 +52,10 @@ public class Admin {
     @Enumerated(EnumType.STRING)
     private DelYn delYn;
 
+    @Column(name = "super_admin_yn", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private DelYn superAdminYn;
+
     @Builder
     public Admin(String userId, String userName, String password, Admin acceptedBy) {
         this.userId = userId;
@@ -61,10 +66,22 @@ public class Admin {
         this.updatedAt = LocalDateTime.now();
         this.role = Role.ADMIN;
         this.delYn = DelYn.N;
+        this.superAdminYn = DelYn.N;
+    }
+
+    @Override
+    public String toString() {
+        return this.userId;
     }
 
     public void updateLastLoginDate() {
         this.lastLoginDate = LocalDateTime.now();
+    }
+
+    public void update(AdminDto request, String updatedBy) {
+        this.userName = request.getUserName();
+        this.role = Role.valueOf(request.getRole());
+        this.updatedBy = updatedBy;
     }
 
 }

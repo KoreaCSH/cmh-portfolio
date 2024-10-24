@@ -22,8 +22,9 @@ public enum ErrorType {
     PROFILE_TYPE_NOT_FOUND("타입을 찾을 수 없습니다."),
 
     DUPLICATED_ADMIN("가입할 수 없는 아이디입니다."),
-
-    ADMIN_NOT_FOUND("존재하지 않는 아이디입니다.");
+    ADMIN_NOT_FOUND("존재하지 않는 아이디입니다."),
+    WITHDRAW_FORBIDDEN("탈퇴 권한이 없습니다."),
+    WITHDRAW_IMPOSSIBLE("탈퇴할 수 없는 계정입니다.");
 
     private String message;
 

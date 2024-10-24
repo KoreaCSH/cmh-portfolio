@@ -1,10 +1,12 @@
 package com.choimyeongheon.portfolio.web.admin.admin;
 
 import com.choimyeongheon.portfolio.domain.admin.domain.Admin;
+import com.choimyeongheon.portfolio.domain.admin.domain.Role;
 import com.choimyeongheon.portfolio.domain.admin.service.AdminService;
 import com.choimyeongheon.portfolio.domain.admin.service.SignUpRequestService;
 import com.choimyeongheon.portfolio.web.admin.admin.dto.AdminDto;
 import com.choimyeongheon.portfolio.web.admin.admin.dto.SignUpRequestDto;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -33,6 +35,21 @@ public class AdminController {
         List<SignUpRequestDto> signUpRequestDtoList = signUpRequestService.findAll();
         model.addAttribute("signUpRequestList", signUpRequestDtoList);
         return "admin/user/request-list";
+    }
+
+    @GetMapping("/update-form/{id}")
+    public String updateForm(Model model, @PathVariable(name = "id") Long id) {
+        AdminDto request = adminService.findDtoById(id);
+        model.addAttribute("request", request);
+        model.addAttribute("roles", Role.getNames());
+        return "admin/user/update";
+    }
+
+    @PutMapping("/update")
+    public String update(@ModelAttribute("request") @Valid AdminDto request,
+                         @AuthenticationPrincipal Admin admin) {
+        adminService.update(request, admin);
+        return "redirect:/admin/user";
     }
 
     @PostMapping("/permit")

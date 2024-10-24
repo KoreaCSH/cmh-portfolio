@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/admin-default}">
+<head>
+    <link rel="stylesheet" href="/css/admin/common.css" />
+    <link rel="stylesheet" href="/css/admin/user/user.css" />
+</head>
+<div layout:fragment="admin-content">
+    <form th:action="@{/admin/user/update}" th:object="${request}" th:method="put">
+        <div class="user-save-container">
+            <div class="user-save-form">
+                <label for="user-role" class="input-label">Role</label>
+                <select id="user-role" class="form-select" th:field="*{role}">
+                    <option th:each="r : ${roles}" th:value="${r}" th:text="${r}"></option>
+                </select>
+            </div>
+            <div class="user-save-form">
+                <label for="user-id" class="input-label">User Id</label>
+                <input id="user-id" type="text" min="2015" th:field="*{userId}" class="form-control" readonly>
+            </div>
+            <div class="user-save-form">
+                <label for="user-name" class="input-label">User Name</label>
+                <input id="user-name" type="text" class="form-control" th:field="*{userName}" required>
+            </div>
+            <div class="user-save-form">
+                <label for="user-register-date" class="input-label">Register Date</label>
+                <input id="user-register-date" type="text" class="form-control" th:field="*{createdAt}" readonly>
+                <input type="hidden" th:field="*{id}">
+            </div>
+            <div class="submit-btn-wrapper">
+                <a class="before-btn" href="/admin/user">이전</a>
+                <button type="submit" class="submit-btn">수정</button>
+            </div>
+        </div>
+    </form>
+</div>
+</html>

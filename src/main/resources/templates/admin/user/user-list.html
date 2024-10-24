@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html   lang="ko"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/admin-default}">
+<head>
+    <link rel="stylesheet" href="/css/admin/common.css" />
+    <link rel="stylesheet" href="/css/admin/user/user.css" />
+    <script src="/js/user.js" defer></script>
+</head>
+<div layout:fragment="admin-content">
+    <div class="admin-content-header">
+        <a href="/admin/user/request-list" class="admin-content-header-save-btn">가입 요청</a>
+    </div>
+    <div class="divTable minimalistBlack">
+        <div class="divTableHeading">
+            <div class="divTableRow">
+                <div class="divTableHead update-btn-header">수정</div>
+                <div class="divTableHead update-btn-header">탈퇴</div>
+                <div class="divTableHead user-id-header">ID</div>
+                <div class="divTableHead user-name-header">Name</div>
+                <div class="divTableHead user-role-header">Role</div>
+            </div>
+        </div>
+        <div class="divTableBody">
+            <div class="divTableRow" th:each="user : ${userList}">
+                <div class="divTableCell update-btn-wrapper"><a class="update-btn" th:href="@{/admin/user/update-form/{id}(id=${user.id})}">수정</a></div>
+                <div class="divTableCell update-btn-wrapper">
+                    <form th:action="@{/admin/user/withdraw}" th:method="delete" onsubmit="return withdrawHandler()">
+                        <button type="submit" class="reject-btn">탈퇴</button>
+                        <input type="hidden" name="id" th:value="${user.id}">
+                    </form>
+                </div>
+                <div class="divTableCell user-id" th:text="${user.userId}"></div>
+                <div class="divTableCell user-name" th:text="${user.userName}"></div>
+                <div class="divTableCell user-role" th:text="${user.role}"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

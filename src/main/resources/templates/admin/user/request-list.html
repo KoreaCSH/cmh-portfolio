@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html   lang="ko"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/admin-default}">
+<head>
+    <link rel="stylesheet" href="/css/admin/common.css" />
+    <link rel="stylesheet" href="/css/admin/user/user.css" />
+    <script src="/js/user.js" defer></script>
+</head>
+<div layout:fragment="admin-content">
+    <div class="admin-content-header">
+        <a class="before-btn sign-up-request-before-btn" href="/admin/user">이전</a>
+    </div>
+    <div class="divTable minimalistBlack">
+        <div class="divTableHeading">
+            <div class="divTableRow">
+                <div class="divTableHead update-btn-header">허용</div>
+                <div class="divTableHead update-btn-header">거부</div>
+                <div class="divTableHead user-id-header">ID</div>
+                <div class="divTableHead user-name-header">Name</div>
+                <div class="divTableHead user-role-header">요청 일자</div>
+            </div>
+        </div>
+        <div class="divTableBody">
+            <div class="divTableRow" th:each="signUpRequest : ${signUpRequestList}">
+                <div class="divTableCell update-btn-wrapper">
+                    <form th:action="@{/admin/user/permit}" th:method="post" onsubmit="return permitHandler()">
+                        <button type="submit" class="submit-btn">허용</button>
+                        <input type="hidden" name="id" th:value="${signUpRequest.id}">
+                    </form>
+                </div>
+                <div class="divTableCell update-btn-wrapper">
+                    <form th:action="@{/admin/user/reject}" th:method="delete" onsubmit="return rejectHandler()">
+                        <button type="submit" class="reject-btn">거부</button>
+                        <input type="hidden" name="id" th:value="${signUpRequest.id}">
+                    </form>
+                </div>
+                <div class="divTableCell user-id" th:text="${signUpRequest.userId}"></div>
+                <div class="divTableCell user-name" th:text="${signUpRequest.userName}"></div>
+                <div class="divTableCell user-role" th:text="${signUpRequest.createdAt}"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

@@ -22,6 +22,7 @@
                     <button class="logout-btn">Logout</button>
                 </form>
             </li>
+            <li sec:authorize="isAuthenticated()"><span th:text="${#authentication.name}"></span></li>
         </ul>
         <ul class="navbar-icons">
             <li class="li-fa-instagram"><i class="fa-brands fa-instagram"></i></li>

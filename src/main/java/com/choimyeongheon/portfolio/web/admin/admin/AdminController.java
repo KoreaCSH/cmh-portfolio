@@ -5,6 +5,7 @@ import com.choimyeongheon.portfolio.domain.admin.domain.Role;
 import com.choimyeongheon.portfolio.domain.admin.service.AdminService;
 import com.choimyeongheon.portfolio.domain.admin.service.SignUpRequestService;
 import com.choimyeongheon.portfolio.web.admin.admin.dto.AdminDto;
+import com.choimyeongheon.portfolio.web.admin.admin.dto.PasswordUpdateRequest;
 import com.choimyeongheon.portfolio.web.admin.admin.dto.SignUpRequestDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -67,6 +68,19 @@ public class AdminController {
     @DeleteMapping("/withdraw")
     public String withdraw(@RequestParam("id") Long id, @AuthenticationPrincipal Admin admin) {
         adminService.withdraw(id, admin);
+        return "redirect:/admin/user";
+    }
+
+    @GetMapping("/update-form/password/{userId}")
+    public String updatePasswordForm(Model model, @PathVariable(name = "userId") String userId) {
+        PasswordUpdateRequest request= adminService.getPasswordUpdateRequest(userId);
+        model.addAttribute("request", request);
+        return "admin/user/password-update";
+    }
+
+    @PutMapping("/update/password")
+    public String updatePassword(@ModelAttribute @Valid PasswordUpdateRequest request) {
+        adminService.updatePassword(request);
         return "redirect:/admin/user";
     }
 

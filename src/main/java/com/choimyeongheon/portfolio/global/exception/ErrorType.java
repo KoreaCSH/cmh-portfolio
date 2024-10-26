@@ -24,7 +24,8 @@ public enum ErrorType {
     DUPLICATED_ADMIN("가입할 수 없는 아이디입니다."),
     ADMIN_NOT_FOUND("존재하지 않는 아이디입니다."),
     WITHDRAW_FORBIDDEN("탈퇴 권한이 없습니다."),
-    WITHDRAW_IMPOSSIBLE("탈퇴할 수 없는 계정입니다.");
+    WITHDRAW_IMPOSSIBLE("탈퇴할 수 없는 계정입니다."),
+    PREV_PASSWORD_NOT_MATCHED("기존 비밀번호가 올바르지 않습니다.");
 
     private String message;
 

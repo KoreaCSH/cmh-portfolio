@@ -8,8 +8,10 @@ import com.choimyeongheon.portfolio.global.common.DelYn;
 import com.choimyeongheon.portfolio.global.exception.CustomException;
 import com.choimyeongheon.portfolio.global.exception.ErrorType;
 import com.choimyeongheon.portfolio.web.admin.admin.dto.AdminDto;
+import com.choimyeongheon.portfolio.web.admin.admin.dto.PasswordUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +26,7 @@ public class AdminService {
 
     private final AdminRepository adminRepository;
     private final SignUpRequestRepository signUpRequestRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public Long permitSignUp(Long id, Admin acceptedBy) {
@@ -72,6 +75,16 @@ public class AdminService {
         signUpRequestRepository.delete(findSignUpRequest);
     }
 
+    @Transactional
+    public void updatePassword(PasswordUpdateRequest request) {
+        Admin findAdmin = adminRepository.findById(request.getId())
+                .orElseThrow(() -> new CustomException(ErrorType.ADMIN_NOT_FOUND));
+
+        validatePasswordUpdate(findAdmin.getPassword(), request.getPrevPassword());
+
+        findAdmin.updatePassword(passwordEncoder.encode(request.getNewPassword()));
+    }
+
     public AdminDto findDtoById(Long id) {
         Admin admin = adminRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorType.ADMIN_NOT_FOUND));
@@ -85,6 +98,13 @@ public class AdminService {
                     .filter(admin -> admin.getDelYn() == DelYn.N)
                     .map(AdminDto::new)
                     .collect(Collectors.toList());
+    }
+
+    public PasswordUpdateRequest getPasswordUpdateRequest(String userId) {
+        Admin admin = adminRepository.findByUserId(userId)
+                .orElseThrow(() -> new CustomException(ErrorType.ADMIN_NOT_FOUND));
+
+        return new PasswordUpdateRequest(admin.getId());
     }
 
     private void validateDuplicatedUserId(String userId) {
@@ -104,6 +124,12 @@ public class AdminService {
         }
         if (findAdmin.getSuperAdminYn() == DelYn.Y) {
             throw new CustomException(ErrorType.WITHDRAW_IMPOSSIBLE);
+        }
+    }
+
+    private void validatePasswordUpdate(String prevPassword, String inputPrevPassword) {
+        if (!passwordEncoder.matches(inputPrevPassword, prevPassword)) {
+            throw new CustomException(ErrorType.PREV_PASSWORD_NOT_MATCHED);
         }
     }
 

@@ -22,7 +22,9 @@
                     <button class="logout-btn">Logout</button>
                 </form>
             </li>
-            <li sec:authorize="isAuthenticated()"><span th:text="${#authentication.name}"></span></li>
+            <li sec:authorize="isAuthenticated()">
+                <a th:href="@{/admin/user/update-form/password/{userId}(userId=${#authentication.name})}" th:text="${#authentication.name}">UserId</a>
+            </li>
         </ul>
         <ul class="navbar-icons">
             <li class="li-fa-instagram"><i class="fa-brands fa-instagram"></i></li>

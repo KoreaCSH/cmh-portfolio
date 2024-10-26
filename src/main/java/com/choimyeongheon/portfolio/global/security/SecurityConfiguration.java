@@ -34,6 +34,7 @@ public class SecurityConfiguration {
 
     private final AdminService adminService;
     private final UserDetailsService userDetailsService;
+    private final PasswordEncoder passwordEncoder;
 
     // Exception 처리하기
     @Bean
@@ -77,7 +78,7 @@ public class SecurityConfiguration {
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
-        return new FormAuthenticationProvider(userDetailsService, passwordEncoder());
+        return new FormAuthenticationProvider(userDetailsService, passwordEncoder);
     }
 
     @Bean
@@ -98,11 +99,6 @@ public class SecurityConfiguration {
     @Bean
     public AuthenticationFailureHandler authenticationFailureHandler() {
         return new FormAuthenticationFailureHandler();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 
     // css, image, js 파일 등은 security filter 를 거치지 않도록 설정하는 스프링 빈

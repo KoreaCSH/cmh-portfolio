@@ -84,4 +84,8 @@ public class Admin {
         this.updatedBy = updatedBy;
     }
 
+    public void updatePassword(String password) {
+        this.password = password;
+    }
+
 }

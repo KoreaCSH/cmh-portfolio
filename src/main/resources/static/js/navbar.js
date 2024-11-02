@@ -1,10 +1,15 @@
-const toggleBtn = document.querySelector(".navbar-toogleBtn");
+const toggleBtn = document.querySelector("#trigger");
 const menu = document.querySelector(".navbar-menu");
 const icons = document.querySelector(".navbar-icons");
 
-toggleBtn.addEventListener("click", () => {
-    menu.classList.toggle("active");
-    icons.classList.toggle("active");
+toggleBtn.addEventListener("change", () => {
+    if (toggleBtn.checked) {
+        menu.classList.toggle("active");
+        icons.classList.toggle("active");
+    } else {
+        menu.classList.remove("active");
+        icons.classList.remove("active");
+    }
 });
 
 function logoutHandler() {

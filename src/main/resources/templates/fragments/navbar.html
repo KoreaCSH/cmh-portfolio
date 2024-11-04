@@ -24,6 +24,17 @@
                         th:classappend="${wy.year} == ${selectedYear} ? 'year-active' : ''">2018</a></li>
                 </ul>
             </li>
+            <li class="mobile-navbar-menu-works">
+                <input type="checkbox" id="mobile-nav-works">
+                <label for="mobile-nav-works">
+                    <span>Works</span>
+                </label>
+                <ul class="mobile-navbar-dropdown-submenu">
+                    <li><a href="/works/all" th:classappend="${selectedYear} == 'all' ? 'year-active' : ''">All</a></li>
+                    <li th:each="wy : ${workYears}"><a th:href="@{/works/{year}(year=${wy.year})}" href="/works/2018" th:text="${wy.year}"
+                                                       th:classappend="${wy.year} == ${selectedYear} ? 'year-active' : ''">2018</a></li>
+                </ul>
+            </li>
             <li><a href="/profiles" class="nav-profiles">Profile</a></li>
             <li><a href="/contact" class="nav-contact">Contact</a></li>
             <li sec:authorize="isAuthenticated()"><a href="/admin/home-images" style="color: dodgerblue">Admin</a></li>
@@ -33,7 +44,7 @@
                 </form>
             </li>
             <li sec:authorize="isAuthenticated()">
-                <a th:href="@{/admin/user/update-form/password/{userId}(userId=${#authentication.name})}" th:text="${#authentication.name}">UserId</a>
+                <a th:href="@{/admin/user/update-form/password/{userId}(userId=${#authentication.name})}" th:text="${#authentication.name}" style="color: #e4405f">UserId</a>
             </li>
         </ul>
         <ul class="navbar-icons">

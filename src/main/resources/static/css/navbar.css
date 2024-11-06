@@ -192,10 +192,24 @@ span:nth-child(3) {
     }
 
     .navbar-menu {
-        display: none;
+        height: 100vh;
+        width: 100vw;
+        transform: translateX(-100%); /* 위에서 시작 */
+        background-color: #FFFFFF;
+        position: fixed;
+        top: 52.5px;
+        left: 0;
+        margin: 5px 0 0 0;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.5s ease-in-out;
     }
 
-    .navbar-menu li {
+    .navbar-menu.active {
+        transform: translateX(0); /* 슬라이드 내려오기 */
+    }
+
+    .navbar-menu > li {
         width: 100%;
         padding: 0 0 12px 32px;
     }
@@ -223,18 +237,6 @@ span:nth-child(3) {
         align-items: center;
     }
 
-    .navbar-menu.active {
-        display: flex;
-        flex-direction: column;
-        position: fixed;
-        top: 52.5px;
-        left: 0;
-        margin: 5px 0 0 0;
-        height: 100vh;
-        width: 100vw;
-        background-color: rgb(255, 255, 255);
-    }
-
     .navbar-menu-works {
         display: none;
     }
@@ -250,11 +252,11 @@ span:nth-child(3) {
 
     .mobile-navbar-dropdown-submenu {
         display: none;
+        padding: 10px 0 0 10px;
     }
 
     .mobile-navbar-dropdown-submenu.active {
         display: block;
-        padding: 10px 0 0 10px;
     }
 
     .mobile-navbar-dropdown-submenu li {

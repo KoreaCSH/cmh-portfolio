@@ -37,6 +37,7 @@
             </li>
             <li><a href="/profiles" class="nav-profiles">Profile</a></li>
             <li><a href="/contact" class="nav-contact">Contact</a></li>
+            <li class="nav-instagram"><a href="#none">Instagram</a></li>
             <li sec:authorize="isAuthenticated()"><a href="/admin/home-images" style="color: dodgerblue">Admin</a></li>
             <li sec:authorize="isAuthenticated()">
                 <form th:action="@{/logout}" th:method="post" onsubmit="return logoutHandler()">

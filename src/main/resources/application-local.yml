@@ -1,0 +1,55 @@
+server:
+  port: 8080
+
+spring:
+  config:
+    import: application-db.yml
+
+  # JPA 설정
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+
+  # HTML, CSS, JS 수정 시 서버를 재시작 하지 않아도 새로고침 할 수 있는 설정
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+  thymeleaf:
+    cache: false
+
+  # form 태그에서 put, delete 등의 요청이 가능하도록 설정
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+  # db 설정
+  datasource:
+    url: ${local.db.url}
+    username: ${local.db.username}
+    password: ${local.db.password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  servlet:
+    multipart:
+      enabled: true
+      location: ${local.multipart.location}
+      max-file-size: ${local.multipart.max-file-size}
+      max-request-size: ${local.multipart.max-request-size}
+
+# JPA query parameter log
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.orm.jdbc.bind: trace
+
+portfolio:
+  upload:
+    path: ${local.upload-path}
+

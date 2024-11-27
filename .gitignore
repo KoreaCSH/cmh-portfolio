@@ -39,3 +39,5 @@ out/
 src/main/resources/static/images
 src/main/resources/application-db.yml
 src/test/resources/application.yml
+
+docker-compose.yml

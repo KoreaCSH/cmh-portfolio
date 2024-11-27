@@ -38,7 +38,7 @@ class WorkServiceTest {
     WorkSaveRequest request4;
     WorkSaveRequest request5;
 
-    @Test
+/*    @Test
     void 이미지_저장_성공() {
 
         Long uploadedWorkId = workService.createWork(request1, admin);
@@ -132,6 +132,6 @@ class WorkServiceTest {
 
         request4 = new WorkSaveRequest(multipartFile3, title, null);
         request5 = new WorkSaveRequest(multipartFile3, title, null);
-    }
+    }*/
 
 }

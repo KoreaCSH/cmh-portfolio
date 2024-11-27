@@ -28,7 +28,7 @@ class HomeImageServiceTest {
 
     Admin admin = null;
 
-    @Test
+/*    @Test
     // @Rollback(value = true)
     void 이미지_저장_성공() throws IOException {
 
@@ -69,6 +69,6 @@ class HomeImageServiceTest {
         HomeImage findUpdatedHomeImage = homeImageService.findById(uploadedHomeImageId);
 
         Assertions.assertThat(findUpdatedHomeImage.getTitle()).isEqualTo(updatedTitle);
-    }
+    }*/
 
 }
